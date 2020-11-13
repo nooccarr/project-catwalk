@@ -1,4 +1,6 @@
 import React from 'react';
+import _ from 'underscore';
+import ProductItem from './ProductItem';
 
 class Related extends React.Component {
 
@@ -9,8 +11,18 @@ class Related extends React.Component {
 
     render() {
         return (
-            <div>Related Products
+            <div className="related">
+                <div className="related-title">RELATED PRODUCTS
+                aaaeregrdgsfhvsiuhrgsileruhgslidfughsdfkjbvndfibunfdsjvndflvuisdfbnglsekjrgbskjrbgdfksjs</div>
+                <ul>
+                {_.map(this.props.products, (product) => {
+                    return <li key={product}  style={{float: 'left'}}>
+                        {/* <ProductItem product={product}/> */}
+                        </li>;
+                })}
+                </ul>
             </div>
+
         );
     }
 }
