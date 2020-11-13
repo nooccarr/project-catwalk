@@ -1,6 +1,8 @@
 import React from 'react';
+import NewReview from './NewReview.jsx';
+import ReviewList from './ReviewList.jsx';
 
-class Review extends React.Component {
+class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -8,9 +10,14 @@ class Review extends React.Component {
 
   render() {
     return (
-      <div>Ratings and Reviews</div>
+      <div>
+        <hr />
+        <span>Reviews</span>
+        <NewReview />
+        <ReviewList />
+      </div>
     );
   }
 }
 
-export default Review;
+export default Reviews;
