@@ -9,7 +9,11 @@ class Related extends React.Component {
 
     render() {
         return (
-            <div>Related Products</div>
+            <div>Related Products
+                <div>
+                    This is a change
+                </div>
+            </div>
         );
     }
 }
