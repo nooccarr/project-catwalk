@@ -1,5 +1,8 @@
 import React from 'react';
 import Sample from './components/sample.jsx';
+import Overview from './components/Overview';
+import Reviews from './components/Reviews';
+import Related from './components/Related';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +14,9 @@ class App extends React.Component {
     return (
       <div>
         <Sample />
+        <Overview/>
+        <Related/>
+        <Reviews/>
       </div>
     )
   }
