@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Sample />
+        <Sample/>
         <Overview/>
         <Related/>
         <Reviews/>
