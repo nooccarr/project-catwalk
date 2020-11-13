@@ -12,12 +12,11 @@ class Related extends React.Component {
     render() {
         return (
             <div className="related">
-                <div className="related-title">RELATED PRODUCTS
-                aaaeregrdgsfhvsiuhrgsileruhgslidfughsdfkjbvndfibunfdsjvndflvuisdfbnglsekjrgbskjrbgdfksjs</div>
+                <div className="related-title">RELATED PRODUCTS</div>
                 <ul>
                 {_.map(this.props.products, (product) => {
                     return <li key={product}  style={{float: 'left'}}>
-                        {/* <ProductItem product={product}/> */}
+                        <ProductItem product={product}/>
                         </li>;
                 })}
                 </ul>
