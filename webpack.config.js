@@ -1,8 +1,8 @@
-var webpack = require ("webpack");
-var path = require("path");
+const webpack = require ('webpack');
+const path = require('path');
 
 module.exports = {
-    entry: path.resolve(__dirname, './src/index.js'),
+    entry: path.resolve(__dirname, './src/index.jsx'),
     module: {
         rules: [
             {
@@ -16,7 +16,7 @@ module.exports = {
         extensions: ['*', '.js', '.jsx']        //here also indicates react and js files to be run through babel loader
     },
     output: {
-        path: path.resolve(__dirname),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
 
