@@ -1,7 +1,7 @@
 import React from 'react';
 import Sample from './components/sample.jsx';
 import Overview from './components/Overview';
-import Reviews from './components/Reviews';
+import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/Related';
 
 class App extends React.Component {
@@ -16,7 +16,7 @@ class App extends React.Component {
         <Sample />
         <Overview/>
         <Related/>
-        <Reviews/>
+        <RatingAndReviews/>
       </div>
     )
   }
