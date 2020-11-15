@@ -1,0 +1,33 @@
+
+body {
+  background-color: whitesmoke;
+  margin: 0px;
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav {
+  background-color: #d34788;
+  margin: 0px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.logo {
+  font-weight: bold;
+  font-size: 1.9em;
+  margin-right: auto;
+  margin-left: 10px;
+  color: #ffffff;
+}
+.overview {
+  max-width: 600px;
+}
+.related {
+  max-width: 600px;
+}
+.reviews {
+  max-width: 600px;
+
+}
