@@ -7,9 +7,9 @@ class NewReview extends React.Component {
   }
 
   render() {
-    const { showReview, toggleReview } = this.props;
+    const { show, hideReview } = this.props;
 
-    if (!showReview) {
+    if (!show) {
       return null;
     }
     return (
@@ -17,7 +17,7 @@ class NewReview extends React.Component {
         <h5>New Review Form</h5>
         <div></div>
         <div>
-          <button onClick={toggleReview}>Close</button>
+          <button onClick={hideReview}>Close</button>
         </div>
       </div>
     );
