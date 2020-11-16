@@ -18,7 +18,7 @@ class App extends React.Component {
         </div>
           <div className="app">
         <Overview/>
-        <Related products={[1,2,3,4,5]}/>
+        <Related products={[1,2,3,4,5,6]}/>
         <Reviews/>
         </div>
       </div>
