@@ -13,7 +13,7 @@ class Related extends React.Component {
         return (
             <div className="related">
                 <div className="related-title">RELATED PRODUCTS</div>
-                <ul>
+                <ul className = 'related-list'>
                 {_.map(this.props.products, (product) => {
                     return <li key={product}  style={{float: 'left'}}>
                         <ProductItem product={product}/>

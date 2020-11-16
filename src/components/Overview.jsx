@@ -138,7 +138,7 @@ class Gallery extends React.Component {
         <div>
            <img src = {this.props.currentStyle.photos[0].url} id = 'galleryImage'/>
            <div id = 'galleryThumbnailColumn'> 
-           <ul> 
+           <ul className = 'overviewThumbnail'> 
             {this.props.currentStyle.photos.map((x) => (
             <li>
               <span id = 'galleryThumbnailContainer'> 

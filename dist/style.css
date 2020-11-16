@@ -103,7 +103,7 @@ li {
   margin-top: 40px;
 }
 
-ul {
+ul .overviewThumbnail {
   padding-inline-start: 0px;
 }
 
@@ -140,11 +140,12 @@ ul {
 .grid-item6 {
   /* background-color:#fff2c9; */
 
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
-ul {
+
+ ul .related-list{
   list-style-type: none;
-}
+} 
 .app {
   margin-left: 30px;
   margin-right: 30px;
