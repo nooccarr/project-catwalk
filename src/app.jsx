@@ -1,5 +1,5 @@
 import React from 'react';
-import Sample from './components/sample.jsx';
+// import Sample from './components/sample.jsx';
 import Overview from './components/Overview';
 import Reviews from './components/Reviews';
 import Related from './components/Related';
@@ -13,10 +13,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Sample/>
+        <div className="nav">
+          <span className="logo">Donauwelle</span>
+        </div>
+          <div className="app">
         <Overview/>
-        <Related/>
+        <Related products={[1,2,3,4,5]}/>
         <Reviews/>
+        </div>
       </div>
     )
   }
