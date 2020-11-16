@@ -103,8 +103,21 @@ li {
   margin-top: 40px;
 }
 
-ul .overviewThumbnail {
+.overviewThumbnailUL {
   padding-inline-start: 0px;
+}
+
+/* .overviewThumbnailLI {
+  padding-inline-start: 0px;
+} */
+
+.galleryThumbnailUp {
+  position: absolute;
+}
+
+.galleryThumbnailDown {
+  /* position: absolute; */
+  margin-top: 30px;
 }
 
 
@@ -143,7 +156,7 @@ ul .overviewThumbnail {
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 
- ul .related-list{
+.related-list{
   list-style-type: none;
 } 
 .app {
