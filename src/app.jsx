@@ -1,7 +1,7 @@
 import React from 'react';
-import Sample from './components/sample.jsx';
+// import Sample from './components/sample.jsx';
 import Overview from './components/Overview';
-import Reviews from './components/Reviews';
+import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/Related';
 
 class App extends React.Component {
@@ -13,10 +13,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Sample />
-        <Overview/>
-        <Related/>
-        <Reviews/>
+        <div className="nav">
+          <span className="logo">Donauwelle</span>
+        </div>
+        <Overview className="overview"/>
+        <Related className="related"/>
+        <RatingAndReviews className="ratingAndReviews"/>
       </div>
     )
   }
