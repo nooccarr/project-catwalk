@@ -13,11 +13,11 @@ class RatingAndReviews extends React.Component {
     return (
       <div>
         <hr />
-        <span>Rating and Reviews</span>
-        <NewReview />
+        <Rating />
+        <hr />
         <ReviewList />
         <hr />
-        <Rating />
+        <NewReview />
       </div>
     );
   }

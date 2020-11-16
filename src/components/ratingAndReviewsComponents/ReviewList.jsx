@@ -1,7 +1,12 @@
 import React from 'react';
 
 const ReviewList = (props) => (
-  <ReviewListEntry />
+  <div>
+    <span>Review List</span>
+    <ul>
+      <ReviewListEntry />
+    </ul>
+  </div>
 );
 
 const ReviewListEntry = (props) => (
