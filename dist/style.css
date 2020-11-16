@@ -67,5 +67,11 @@ ul {
   rgba(255,255,255,0),rgba(255,255,255,0),rgba(255,255,255,0));
   pointer-events: none;
 }
+<<<<<<< HEAD
 .reviews {
+=======
+.ratingAndReviews {
+  max-width: 600px;
+
+>>>>>>> 199cec54b1b7096ebdae3bd6017fa1418ca31d91
 }
