@@ -16,9 +16,11 @@ class App extends React.Component {
         <div className="nav">
           <span className="logo">Donauwelle</span>
         </div>
-        <Overview className="overview"/>
-        <Related className="related"/>
-        <Reviews className="reviews"/>
+          <div className="app">
+        <Overview/>
+        <Related products={[1,2,3,4,5]}/>
+        <Reviews/>
+        </div>
       </div>
     )
   }
