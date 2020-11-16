@@ -1,11 +1,17 @@
 
 body {
-  background-color: whitesmoke;
+  background-color: white;
   margin: 0px;
   font-size: larger;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+ul {
+  list-style-type: none;
+}
+.app {
+  margin-left: 30px;
+  margin-right: 30px;
+}
 .nav {
   background-color: #d34788;
   margin: 0px;
@@ -22,12 +28,46 @@ body {
   color: #ffffff;
 }
 .overview {
-  max-width: 600px;
 }
 .related {
-  max-width: 600px;
+  min-width: 600px;
+  max-height: 250px;
+  overflow: hidden;
+  border: 2px solid red;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 80px;
+  position: relative;
 }
+.related-title {
+  font-size: medium;
+  font-family: Arial, Helvetica, sans-serif;
+  color: gray;
+  margin: 0px;
+}
+.related-item {
+  overflow: hidden;
+  width: 150px;
+  height: 200px;
+  border: 2px solid greenyellow;
+  background-color: #d34788;
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+.related:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  content: "";
+  background: linear-gradient(to left,rgba(255,255,255,1)10%,
+  rgba(255,255,255,0),rgba(255,255,255,0),rgba(255,255,255,0));
+  pointer-events: none;
+}
+
 .ratingAndReviews {
   max-width: 600px;
-
 }
