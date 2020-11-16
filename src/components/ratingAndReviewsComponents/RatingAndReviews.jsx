@@ -8,22 +8,24 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: '',
-      reviews: []
+      reviews: [],
+      sort: 'relevant'
     };
     this.getAllReviews = this.getAllReviews.bind(this);
+    this.handleSortByChange = this.handleSortByChange.bind(this);
   }
 
+  // requires this.props.productId
   componentDidMount() {
-    this.getAllReviews('5', 'relevant');
+    this.getAllReviews('5', this.state.sort);
   }
 
-  getAllReviews(productId, sortBy) {
+  getAllReviews(productId, sort) {
     return axios
       .get('http://3.21.164.220/reviews', {
         params: {
           product_id: productId,
-          sort: sortBy
+          sort: sort
         }
       })
       .then(({ data }) => {
@@ -34,13 +36,28 @@ class RatingAndReviews extends React.Component {
       .catch(err => console.log(err));
   }
 
+  handleSortByChange(e) {
+    const sort = e.target.value;
+    this.setState({
+      sort: sort
+    });
+    this.getAllReviews('5', sort);
+  }
+
   render() {
     return (
       <div>
-        {console.log(this.state.reviews)}
+        {/* {console.log(this.state)} */}
         <hr />
         <Rating />
         <hr />
+        <span>{`${this.state.reviews.length} reviews, sorted by `}
+          <select onChange={(e) => this.handleSortByChange(e)}>
+            <option value="relevant">Relevance</option>
+            <option value="helpful">Helpfulness</option>
+            <option value="newest">Newest</option>
+          </select>
+        </span>
         <ReviewList reviews={this.state.reviews}/>
         <hr />
         <NewReview />
