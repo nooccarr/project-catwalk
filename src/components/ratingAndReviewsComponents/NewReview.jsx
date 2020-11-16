@@ -13,10 +13,12 @@ class NewReview extends React.Component {
       return null;
     }
     return (
-      <div>
-        <hr />
-        <div>New Review Form</div>
-        <button onClick={toggleReview}>Close</button>
+      <div className="newReview">
+        <h5>New Review Form</h5>
+        <div></div>
+        <div>
+          <button onClick={toggleReview}>Close</button>
+        </div>
       </div>
     );
   }
