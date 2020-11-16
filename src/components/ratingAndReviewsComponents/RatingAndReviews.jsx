@@ -8,6 +8,8 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productId: 6, // requires this.props.productId
+      product: 'Pumped Up Kicks', // requires this.props.name
       reviews: [],
       sort: 'relevant',
       show: false
@@ -20,7 +22,7 @@ class RatingAndReviews extends React.Component {
 
   componentDidMount() {
     // requires this.props.productId
-    this.getAllReviews('6', this.state.sort);
+    this.getAllReviews(this.state.productId, this.state.sort);
   }
 
   getAllReviews(productId, sort) {
@@ -45,7 +47,7 @@ class RatingAndReviews extends React.Component {
       sort: sort
     });
     // requires this.props.productId
-    this.getAllReviews('6', sort);
+    this.getAllReviews(this.state.productId, sort);
   }
 
   showReview() {
@@ -75,8 +77,12 @@ class RatingAndReviews extends React.Component {
           </select>
         </form>
         <ReviewList reviews={this.state.reviews}/>
-        <button onClick={this.showReview}>Write Your Review</button>
-        <NewReview show={this.state.show} hideReview={this.hideReview}/>
+        <button onClick={this.showReview}>Write New Review</button>
+        <NewReview
+          show={this.state.show}
+          hideReview={this.hideReview}
+          product={this.state.product}
+        />
       </div>
     );
   }

@@ -7,15 +7,18 @@ class NewReview extends React.Component {
   }
 
   render() {
-    const { show, hideReview } = this.props;
+    const { show, hideReview, product } = this.props;
 
     if (!show) {
       return null;
     }
     return (
       <div className="newReview">
-        <h5>New Review Form</h5>
-        <div></div>
+        <h1>Write Your Review</h1>
+        <h2>About the {product}</h2>
+        <div>
+          <h3>*Overall rating</h3>
+        </div>
         <div>
           <button onClick={hideReview}>Close</button>
         </div>
