@@ -9,10 +9,12 @@ class RatingAndReviews extends React.Component {
     super(props);
     this.state = {
       reviews: [],
-      sort: 'relevant'
+      sort: 'relevant',
+      showReview: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.handleSortByChange = this.handleSortByChange.bind(this);
+    this.toggleReview = this.toggleReview.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +47,12 @@ class RatingAndReviews extends React.Component {
     this.getAllReviews('6', sort);
   }
 
+  toggleReview() {
+    this.setState({
+      showReview: !this.state.showReview
+    });
+  }
+
   render() {
     return (
       <div>
@@ -60,8 +68,8 @@ class RatingAndReviews extends React.Component {
           </select>
         </form>
         <ReviewList reviews={this.state.reviews}/>
-        <button>Write Your Review</button>
-        <NewReview />
+        <button onClick={this.toggleReview}>Write Your Review</button>
+        <NewReview showReview={this.state.showReview} toggleReview={this.toggleReview}/>
       </div>
     );
   }
