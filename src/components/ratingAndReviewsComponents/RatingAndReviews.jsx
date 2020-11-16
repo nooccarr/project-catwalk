@@ -26,7 +26,7 @@ class RatingAndReviews extends React.Component {
           sort: sortBy
         }
       })
-      .then(({data}) => {
+      .then(({ data }) => {
         this.setState({
           reviews: data.results
         })
@@ -37,11 +37,11 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
+        {console.log(this.state.reviews)}
         <hr />
         <Rating />
         <hr />
-        <ReviewList />
+        <ReviewList reviews={this.state.reviews}/>
         <hr />
         <NewReview />
       </div>
