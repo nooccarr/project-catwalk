@@ -15,9 +15,9 @@ class RatingAndReviews extends React.Component {
     this.handleSortByChange = this.handleSortByChange.bind(this);
   }
 
-  // requires this.props.productId
   componentDidMount() {
-    this.getAllReviews('5', this.state.sort);
+    // requires this.props.productId
+    this.getAllReviews('7', this.state.sort);
   }
 
   getAllReviews(productId, sort) {
@@ -41,7 +41,8 @@ class RatingAndReviews extends React.Component {
     this.setState({
       sort: sort
     });
-    this.getAllReviews('5', sort);
+    // requires this.props.productId
+    this.getAllReviews('7', sort);
   }
 
   render() {
@@ -51,13 +52,14 @@ class RatingAndReviews extends React.Component {
         <hr />
         <Rating />
         <hr />
-        <span>{`${this.state.reviews.length} reviews, sorted by `}
+        <form>
+          <label>Sort on </label>
           <select onChange={(e) => this.handleSortByChange(e)}>
-            <option value="relevant">Relevance</option>
-            <option value="helpful">Helpfulness</option>
+            <option value="relevant">Relevant</option>
+            <option value="helpful">Helpful</option>
             <option value="newest">Newest</option>
           </select>
-        </span>
+        </form>
         <ReviewList reviews={this.state.reviews}/>
         <hr />
         <NewReview />

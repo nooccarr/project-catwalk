@@ -2,7 +2,6 @@ import React from 'react';
 
 const ReviewList = ({ reviews }) => (
   <div>
-    <span>Review List</span>
     <ul>
       {reviews.map((review, idx) => {
         return <ReviewListEntry review={review} key={idx}/>
