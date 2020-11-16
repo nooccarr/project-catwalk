@@ -11,7 +11,6 @@ class Rating extends React.Component {
   render() {
     return (
       <div>
-        <span>Rating</span>
         <RatingBreakdown />
         <ProductBreakdown />
       </div>

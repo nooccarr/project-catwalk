@@ -10,7 +10,7 @@ class NewReview extends React.Component {
 
   render() {
     return (
-      <div>New Review</div>
+      <div></div>
     );
   }
 }
