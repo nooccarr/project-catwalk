@@ -176,6 +176,24 @@ ul .overviewThumbnail {
   margin-left: 50px;
   position: relative;
 }
+.related-item-container {
+  position: absolute;
+  left: 0;
+}
+.related-animation-right {
+  animation: related-carousel-right 0.5s forwards;
+}
+.related-animation-left {
+  animation: related-carousel-left 0.5s forwards;
+}
+@keyframes related-carousel-right {
+  from {left: 0px;}
+  to {left: -162px;}
+}
+@keyframes related-carousel-left {
+  from {left: 0px;}
+  to {left: 162px;}
+}
 .related-list{
   list-style-type: none;
   margin: 0px;

@@ -6,7 +6,7 @@ const ProductItem = ({product, pyro}) => {
             <div>
             <img className="related-item-image" src={product.img}/>
             <div className="related-item-faveX">
-                <img className="related-item-star"
+                <img id="star" className="related-item-star"
                     src={`../../../dist/images/${pyro === 0 ?
                         'full-star' : 'x'}.png`}/>
                 </div>
