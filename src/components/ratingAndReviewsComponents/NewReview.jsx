@@ -15,6 +15,7 @@ class NewReview extends React.Component {
       quality: null,
       length: null,
       fit: null,
+      summary: '',
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -38,7 +39,7 @@ class NewReview extends React.Component {
       <div className="newReview">
         {console.log(this.state)}
         <h1>Write Your Review</h1>
-        <h2>About the {product}</h2>
+        <h3>About the {product}</h3>
         <div>
           <h3>*Overall rating</h3>
           <Rating
@@ -75,6 +76,17 @@ class NewReview extends React.Component {
           })}
         </div>
         <div>
+          <h3>Review summary</h3>
+          <input
+            name="summary"
+            type="text"
+            value={this.state.summary}
+            maxLength="60"
+            onChange={(e) => this.handleSelect(e)}
+          />
+        </div>
+          <h3></h3>
+        <div>
           <button onClick={hideReview}>Close</button>
         </div>
       </div>
@@ -85,7 +97,7 @@ class NewReview extends React.Component {
 const CharacteristicEntry = ({ state, property, handleSelect }) => {
   return (
     <div>
-      <h2>{capitalize(property)}</h2>
+      <h3>{capitalize(property)}</h3>
       {state ? <h3>
         {getLabel(property, state)}
       </h3> : <h3>none selected</h3>}
