@@ -1,6 +1,7 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
+import InputEntry from './InputEntry.jsx';
 import getLabel from '../../../utils/getLabel.js';
 import capitalize from '../../../utils/capitalize.js';
 import counter from '../../../utils/counter.js';
@@ -21,6 +22,7 @@ class NewReview extends React.Component {
       body: '',
       // photos: ,
       nickname: '',
+      email: '',
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -71,58 +73,55 @@ class NewReview extends React.Component {
         </div>
         <div>
           <h3>*Characteristics</h3>
-          {characteristics.map((property, idx) => {
+          {characteristics.map((name, idx) => {
             return (<CharacteristicEntry
-              state={this.state[property]}
-              property={property}
+              state={this.state[name]}
+              name={name}
               handleSelect={this.handleSelect}
               key={idx}
             />);
           })}
         </div>
-        <div>
-          <h3>Review summary</h3>
-          <input
-            name="summary"
-            type="text"
-            value={this.state.summary}
-            maxLength="60"
-            placeholder="Example: Best purchase ever!"
-            onChange={(e) => this.handleSelect(e)}
-          />
-        </div>
-        <div>
-          <h3>*Review body</h3>
-          <input
-            name="body"
-            type="text"
-            value={this.state.body}
-            minLength="50"
-            maxLength="1000"
-            placeholder="Why did you like the product or not?"
-            onChange={(e) => this.handleSelect(e)}
-          />
-          <h4>{counter(this.state.body)}</h4>
-        </div>
+        <InputEntry
+          subtitle={'Review summary'}
+          name={'summary'}
+          value={this.state.summary}
+          maxLength={'60'}
+          placeholder={'Example: Best purchase ever!'}
+          handleSelect={this.handleSelect}
+        />
+        <InputEntry
+          subtitle={'*Review body'}
+          name={'body'}
+          value={this.state.body}
+          minLength={'50'}
+          maxLength={'1000'}
+          placeholder={'Why did you like the product or not?'}
+          handleSelect={this.handleSelect}
+          text={counter(this.state.body)}
+        />
         {/* <div>
           <h3>Upload your photos</h3>
           <button>Upload upto 5 photos</button>
         </div> */}
-        <div>
-          <h3>*What is your nickname</h3>
-          <input
-            name="nickname"
-            type="text"
-            value={this.state.nickname}
-            maxLength="60"
-            placeholder="Example: jackson11!"
-            onChange={(e) => this.handleSelect(e)}
-          />
-          <h4>For privacy reasons, do not use your full name or email address</h4>
-        </div>
-        <div>
-          <h3>*Your email</h3>
-        </div>
+        <InputEntry
+          subtitle={'*What is your nickname'}
+          name={'nickname'}
+          value={this.state.nickname}
+          maxLength={'60'}
+          placeholder={'Example: jackson11!'}
+          handleSelect={this.handleSelect}
+          text={'For privacy reasons, do not use your full name or email address'}
+        />
+        <InputEntry
+          subtitle={'*Your email'}
+          name={'email'}
+          value={this.state.email}
+          maxLength={'60'}
+          placeholder={'Example: jackson11@email.com'}
+          handleSelect={this.handleSelect}
+          text={'For authentication reasons, you will not be emailed'}
+        />
         <div>
           <button onClick={hideReview}>Close</button>
         </div>
