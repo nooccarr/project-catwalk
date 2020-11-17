@@ -1,8 +1,7 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
-import getStarLabel from '../../../utils/getStarLabel.js';
-import getSizeLabel from '../../../utils/getSizeLabel.js';
-import getWidthLabel from '../../../utils/getWidthLabel.js';
+import getLabel from '../../../utils/getLabel.js';
+import capitalize from '../../../utils/capitalize.js';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -27,6 +26,9 @@ class NewReview extends React.Component {
   }
 
   render() {
+    const characteristics = [
+      'size', 'width', 'comfort', 'quality', 'length', 'fit'
+    ];
     const { show, hideReview, product } = this.props;
 
     if (!show) {
@@ -44,45 +46,33 @@ class NewReview extends React.Component {
             value={this.state.value}
             onChange={(e) => this.handleSelect(e)}
           />
-          {this.state.rating ? <span>{getStarLabel(this.state.rating)}</span>: null}
+          {this.state.rating ? <span>
+            {getLabel('rating', this.state.rating)}
+          </span>: null}
         </div>
         <div>
           <h3>*Do you recommend this product?</h3>
-          <input type="radio" name="recommend" value="yes" onClick={(e) => this.handleSelect(e)} />
-          <label>Yes</label>
-          <input type="radio" name="recommend" value="no" onClick={(e) => this.handleSelect(e)} />
-          <label>No</label>
+          {['yes', 'no'].map((value, idx) => {
+            return (<span key={idx}>
+              <input
+                type="radio"
+                name="recommend"
+                value={value}
+                onClick={(e) => this.handleSelect(e)} />
+              <label>{capitalize(value)}</label>
+            </span>);
+          })}
         </div>
         <div>
           <h3>*Characteristics</h3>
-          <div>
-            <h2>Size</h2>
-            {this.state.size ? <h3>{getSizeLabel(this.state.size)}</h3> : <h3>none selected</h3>}
-            <input type="radio" name="size" value="1" onClick={(e) => this.handleSelect(e)} />
-            <label>1</label>
-            <input type="radio" name="size" value="2" onClick={(e) => this.handleSelect(e)} />
-            <label>2</label>
-            <input type="radio" name="size" value="3" onClick={(e) => this.handleSelect(e)} />
-            <label>3</label>
-            <input type="radio" name="size" value="4" onClick={(e) => this.handleSelect(e)} />
-            <label>4</label>
-            <input type="radio" name="size" value="5" onClick={(e) => this.handleSelect(e)} />
-            <label>5</label>
-          </div>
-          <div>
-            <h2>Width</h2>
-            {this.state.width ? <h3>{getWidthLabel(this.state.width)}</h3> : <h3>none selected</h3>}
-            <input type="radio" name="width" value="1" onClick={(e) => this.handleSelect(e)} />
-            <label>1</label>
-            <input type="radio" name="width" value="2" onClick={(e) => this.handleSelect(e)} />
-            <label>2</label>
-            <input type="radio" name="width" value="3" onClick={(e) => this.handleSelect(e)} />
-            <label>3</label>
-            <input type="radio" name="width" value="4" onClick={(e) => this.handleSelect(e)} />
-            <label>4</label>
-            <input type="radio" name="width" value="5" onClick={(e) => this.handleSelect(e)} />
-            <label>5</label>
-          </div>
+          {characteristics.map((property, idx) => {
+            return (<CharacteristicEntry
+              state={this.state[property]}
+              property={property}
+              handleSelect={this.handleSelect}
+              key={idx}
+            />);
+          })}
         </div>
         <div>
           <button onClick={hideReview}>Close</button>
@@ -91,5 +81,29 @@ class NewReview extends React.Component {
     );
   }
 }
+
+const CharacteristicEntry = ({ state, property, handleSelect }) => {
+  return (
+    <div>
+      <h2>{capitalize(property)}</h2>
+      {state ? <h3>
+        {getLabel(property, state)}
+      </h3> : <h3>none selected</h3>}
+      {[1, 2, 3, 4, 5].map((value, idx) => {
+        return (<span key={idx}>
+          <input
+            type="radio"
+            name={property}
+            value={value}
+            onClick={(e) => handleSelect(e)}
+          />
+          <label>{value}</label>
+        </span>);
+      })}
+    </div>
+  );
+}
+
+
 
 export default NewReview;
