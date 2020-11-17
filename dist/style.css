@@ -208,6 +208,7 @@ ul .overviewThumbnail {
 }
 
 .newReview {
+  overflow: scroll;
   position: fixed;
   left: 5%;
   top: 5%;
