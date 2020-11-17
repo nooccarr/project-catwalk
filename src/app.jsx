@@ -11,6 +11,12 @@ class App extends React.Component {
   }
 
   render() {
+    var fish = ['Goldfish', 'Catfish', 'Butterfish', 'Kangaroo', 'Bazooka', 'Orange', 'Santa Claus', 'Charlie', 'Toby', 'Marina'];
+    var fakeItems = [];
+    for (var i=0; i<10;i++) {
+      fakeItems.push({id: i, name: fish[i],
+      img: 'https://image.shutterstock.com/image-photo/gold-fish-isolated-on-white-260nw-580306465.jpg'});
+    }
     return (
       <div>
         <div className="nav">
@@ -18,7 +24,10 @@ class App extends React.Component {
         </div>
           <div className="app">
         <Overview/>
-        <Related products={[1,2,3,4,5]}/>
+        <div className="listies">
+          <Related pyro={0} products={fakeItems}/>
+          <Related pyro={1} products={fakeItems}/>
+        </div>
         <RatingAndReviews className="ratingAndReviews"/>
         </div>
       </div>
