@@ -1,5 +1,5 @@
 import React from 'react';
-// import Sample from './components/sample.jsx';
+import axios from 'axios';
 import Overview from './components/Overview';
 import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/relatedProducts/Related.jsx';
@@ -8,8 +8,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleRelatedClick = this.handleRelatedClick.bind(this);
+    this.handleOutfitClick = this.handleOutfitClick.bind(this);
   }
-
+  handleRelatedClick(e) {
+    var id = e.target.id;
+    if (id) {
+      if (e.target.className === 'related-item-star') {
+        console.log('Add',id,'to outfit');
+      } else {
+        console.log('Redirect to id:',id);
+      }
+    }
+  }
+  handleOutfitClick(e) {
+    var id = e.target.id;
+    if (id) {
+      if (e.target.className === 'related-item-star') {
+        console.log('Remove',id,'from outfit');
+      } else {
+        console.log('Redirect to id:',id);
+      }
+    }
+  }
   render() {
     var fish = ['Goldfish', 'Catfish', 'Butterfish', 'Kangaroo', 'Bazooka', 'Orange', 'Santa Claus', 'Charlie', 'Toby', 'Marina'];
     var fakeItems = [];
@@ -25,8 +46,10 @@ class App extends React.Component {
           <div className="app">
         <Overview/>
         <div className="listies">
-          <Related pyro={0} products={fakeItems}/>
-          <Related pyro={1} products={fakeItems}/>
+          <Related overviewId="1" handleClick={this.handleRelatedClick}
+          pyro={0} products={fakeItems}/>
+          <Related overviewId="1" handleClick={this.handleOutfitClick}
+          pyro={1} products={fakeItems}/>
         </div>
         <RatingAndReviews className="ratingAndReviews"/>
         </div>

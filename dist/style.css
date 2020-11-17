@@ -250,28 +250,43 @@ ul .overviewThumbnail {
   color: black;
   margin: 5px;
 }
-.related:after {
+.arrowdiv-left{
   position: absolute;
-  left: 0;
   top: 0;
-  height: 100%;
-  width: 100%;
-  content: "";
-  background: linear-gradient(to left,rgba(255,255,255,1)10%,
-  rgba(255,255,255,0),rgba(255,255,255,0),rgba(255,255,255,0));
-  pointer-events: none;
+  right: 0px;
+  width: 220px;
+  height: 295px;
+  background: linear-gradient(to left,rgba(255,255,255,1)60%,
+  rgba(255,255,255,0));
+}
+.arrowdiv-right {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  width: 40px;
+  height: 295px;
+  background-color: white;
 }
 .related-right {
   position: absolute;
-  top: 130px;
+  top: 120px;
   left: 0px;
   height: 50px;
 }
 .related-left {
   position: absolute;
-  top: 130px;
-  right: 100px;
+  top: 140px;
+  left: 30px;
   height: 50px;
+}
+.comparison {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 350px;
+  height: 250px;
+  background-color: white;
+  box-shadow: 0px 0px 5px 5px grey;
 }
 .ratingAndReviews {
   max-width: 600px;
