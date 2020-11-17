@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
+import CharacteristicEntry from './CharacteristicEntry.jsx';
 import getLabel from '../../../utils/getLabel.js';
 import capitalize from '../../../utils/capitalize.js';
 import counter from '../../../utils/counter.js';
@@ -18,6 +19,8 @@ class NewReview extends React.Component {
       fit: null,
       summary: '',
       body: '',
+      // photos: ,
+      nickname: '',
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -88,6 +91,7 @@ class NewReview extends React.Component {
             onChange={(e) => this.handleSelect(e)}
           />
         </div>
+        <div>
           <h3>*Review body</h3>
           <input
             name="body"
@@ -99,6 +103,26 @@ class NewReview extends React.Component {
             onChange={(e) => this.handleSelect(e)}
           />
           <h4>{counter(this.state.body)}</h4>
+        </div>
+        {/* <div>
+          <h3>Upload your photos</h3>
+          <button>Upload upto 5 photos</button>
+        </div> */}
+        <div>
+          <h3>*What is your nickname</h3>
+          <input
+            name="nickname"
+            type="text"
+            value={this.state.nickname}
+            maxLength="60"
+            placeholder="Example: jackson11!"
+            onChange={(e) => this.handleSelect(e)}
+          />
+          <h4>For privacy reasons, do not use your full name or email address</h4>
+        </div>
+        <div>
+          <h3>*Your email</h3>
+        </div>
         <div>
           <button onClick={hideReview}>Close</button>
         </div>
@@ -106,29 +130,5 @@ class NewReview extends React.Component {
     );
   }
 }
-
-const CharacteristicEntry = ({ state, property, handleSelect }) => {
-  return (
-    <div>
-      <h3>{capitalize(property)}</h3>
-      {state ? <h3>
-        {getLabel(property, state)}
-      </h3> : <h3>none selected</h3>}
-      {[1, 2, 3, 4, 5].map((value, idx) => {
-        return (<span key={idx}>
-          <input
-            type="radio"
-            name={property}
-            value={value}
-            onClick={(e) => handleSelect(e)}
-          />
-          <label>{value}</label>
-        </span>);
-      })}
-    </div>
-  );
-}
-
-
 
 export default NewReview;
