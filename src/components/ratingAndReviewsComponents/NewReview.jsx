@@ -2,6 +2,7 @@ import React from 'react';
 import { Rating } from '@material-ui/lab';
 import getLabel from '../../../utils/getLabel.js';
 import capitalize from '../../../utils/capitalize.js';
+import counter from '../../../utils/counter.js';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class NewReview extends React.Component {
       length: null,
       fit: null,
       summary: '',
+      body: '',
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -82,10 +84,21 @@ class NewReview extends React.Component {
             type="text"
             value={this.state.summary}
             maxLength="60"
+            placeholder="Example: Best purchase ever!"
             onChange={(e) => this.handleSelect(e)}
           />
         </div>
-          <h3></h3>
+          <h3>*Review body</h3>
+          <input
+            name="body"
+            type="text"
+            value={this.state.body}
+            minLength="50"
+            maxLength="1000"
+            placeholder="Why did you like the product or not?"
+            onChange={(e) => this.handleSelect(e)}
+          />
+          <h4>{counter(this.state.body)}</h4>
         <div>
           <button onClick={hideReview}>Close</button>
         </div>
