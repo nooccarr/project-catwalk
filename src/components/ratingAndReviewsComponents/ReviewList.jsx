@@ -72,11 +72,11 @@ class ReviewListEntry extends React.Component {
 };
 
 const ReviewsPhoto = ({ url, hidePhoto }) => (
-    <img
-      className="reviewsPhoto"
-      src={url}
-      onClick={hidePhoto}
-    />
+  <img
+    className="reviewsPhoto"
+    src={url}
+    onClick={hidePhoto}
+  />
 );
 
 export default ReviewList;
