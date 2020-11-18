@@ -18,6 +18,11 @@ class Related extends React.Component {
         this.hoverHandler = this.hoverHandler.bind(this);
         this.comparison = this.comparison.bind(this);
     }
+    componentDidUpdate() {
+        if (this.state.showL && this.props.products.length < 5) {
+            this.setState({showL: false});
+        }
+    }
     shift(e) {
         if (this.state.shifted) {
             this.setState({anim: this.state.anim ? '' : `related-animation-${e.target.id}`,
@@ -84,10 +89,17 @@ class Related extends React.Component {
                         (this.state.rolling === 'right' || this.state.shifted ? 5 : 4)), 
                     (product) => {
                         index++;
+                        var image;
+                        if (product.styles) {
+                            image = product.styles.results[0].photos[0].thumbnail_url;
+                        } else {
+                            image = product.img || null;
+                        }
                     return <li key={index}  style={{float: 'left'}}
                         onMouseEnter={() => this.hoverHandler(true, product.id)}
                         onMouseLeave={() => this.hoverHandler(false)}>
-                        <ProductItem product={product} pyro={this.props.pyro} faveX={this.faveX}/>
+                        <ProductItem product={product} pyro={this.props.pyro}
+                            faveX={this.faveX} image={image}/>
                         </li>;
                 })}
                 </ul>
