@@ -89,7 +89,7 @@ class Gallery extends React.Component {
    
     if (this.state.thumbnails === '' && this.props.currentStyle!=='') {
 
-      console.log('in condition')
+      //.log('in condition')
        this.setState({
        thumbnails: this.props.currentStyle.photos,
      })
@@ -107,9 +107,9 @@ class Gallery extends React.Component {
       <div> </div>
     )
     } else {
-      console.log(this.state.thumbnails[0], 'in else')
-      console.log(this.state.thumbnails, 'in else')
-      console.log('this.props.currentStyle[0]', this.props.currentStyle[0])
+      //console.log(this.state.thumbnails[0], 'in else')
+      //console.log(this.state.thumbnails, 'in else')
+      //console.log('this.props.currentStyle[0]', this.props.currentStyle[0])
 
 
       return (
@@ -125,11 +125,11 @@ class Gallery extends React.Component {
                   {/* {this.state.thumbnails.map((x, index) => { */}
 
                   if (index > this.state.endIndex || index < this.state.startIndex) {
-                    return <span></span>
+                    return <span key = {index}></span>
                   }
 
                   return (
-                    <li className = 'overviewThumbnailLI'>
+                    <li className = 'overviewThumbnailLI' key = {index}>
                       <span id = 'galleryThumbnailContainer' className = { index === this.state.mainImage ? 'activeThumbnail' : ''} onClick = {() => this.updateMainImage(index)}> 
                         <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
                       </span>
