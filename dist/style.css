@@ -272,17 +272,9 @@ li {
   rgba(255,255,255,0),rgba(255,255,255,0),rgba(255,255,255,0));
   pointer-events: none;
 }
-
 .ratingAndReviews {
   max-width: 600px;
 }
-
-
-
-
-
-
-
 .dd-wrapper {
   position: relative;
   width: 150px;
@@ -370,5 +362,4 @@ li {
   margin-top: 0px;
   text-transform: uppercase;
   font-weight: bold;
-
-  }
+}
