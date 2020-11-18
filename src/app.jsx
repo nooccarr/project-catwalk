@@ -1,7 +1,7 @@
 import React from 'react';
 import Overview from './components/overview/Overview.jsx';
 import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
-import Related from './components/Related';
+import Related from './components/relatedProducts/Related.jsx';
 
 class App extends React.Component {
   constructor(props) {

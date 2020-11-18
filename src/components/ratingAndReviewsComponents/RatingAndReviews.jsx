@@ -8,16 +8,21 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productId: 6, // requires this.props.productId
+      product: 'Pumped Up Kicks', // requires this.props.name
       reviews: [],
-      sort: 'relevant'
+      sort: 'relevant',
+      show: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.handleSortByChange = this.handleSortByChange.bind(this);
+    this.showReview = this.showReview.bind(this);
+    this.hideReview = this.hideReview.bind(this);
   }
 
   componentDidMount() {
     // requires this.props.productId
-    this.getAllReviews('6', this.state.sort);
+    this.getAllReviews(this.state.productId, this.state.sort);
   }
 
   getAllReviews(productId, sort) {
@@ -42,7 +47,19 @@ class RatingAndReviews extends React.Component {
       sort: sort
     });
     // requires this.props.productId
-    this.getAllReviews('6', sort);
+    this.getAllReviews(this.state.productId, sort);
+  }
+
+  showReview() {
+    this.setState({
+      show: true
+    });
+  }
+
+  hideReview() {
+    this.setState({
+      show: !this.state.show
+    })
   }
 
   render() {
@@ -60,8 +77,12 @@ class RatingAndReviews extends React.Component {
           </select>
         </form>
         <ReviewList reviews={this.state.reviews}/>
-        <button>Write Your Review</button>
-        <NewReview />
+        <button onClick={this.showReview}>Write New Review</button>
+        <NewReview
+          show={this.state.show}
+          hideReview={this.hideReview}
+          product={this.state.product}
+        />
       </div>
     );
   }
