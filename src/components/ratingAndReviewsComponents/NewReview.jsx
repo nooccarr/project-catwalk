@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
+// import Stars from '../Stars.jsx';
 import axios from 'axios';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
@@ -74,6 +75,7 @@ class NewReview extends React.Component {
         <h3>About the {product}</h3>
         <div>
           <h3>*Overall rating</h3>
+          {/* {Stars(120, this.state.value, (e) => this.handleSelect(e))} */}
           <Rating
             name="rating"
             value={this.state.value}
