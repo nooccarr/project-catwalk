@@ -63,8 +63,8 @@ class Overview extends React.Component {
    // axios.get(`${URL}?page=1&count=1`)
     axios.get(`http://3.21.164.220/products/${id}/styles`)
     .then((response) => {
-      console.log(response.data.results)
-      console.log('currentStyle', response.data.results[0])
+      //console.log(response.data.results)
+      //console.log('currentStyle', response.data.results[0])
 
       this.setState({
         styles: response.data.results,
