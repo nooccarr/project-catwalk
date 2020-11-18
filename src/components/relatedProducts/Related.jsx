@@ -66,6 +66,10 @@ class Related extends React.Component {
 
     render() {
         var title = ['RELATED PRODUCTS', 'YOUR OUTFIT'];
+        var addCard = [];
+        if (this.props.pyro === 1) {
+            addCard.push({id: -1, name: 'Add current item to outfit', rating: null});
+        }
         return (
             <div>
             <div className="related">
@@ -74,7 +78,7 @@ class Related extends React.Component {
                     onAnimationStart={this.onAnimationStart}
                     onAnimationEnd={this.onAnimationEnd}>
                 <ul className="related-list" onClick={this.props.handleClick}>
-                {_.map(this.props.products.slice(this.state.scroll, this.state.scroll + 
+                {_.map(addCard.concat(this.props.products).slice(this.state.scroll, this.state.scroll + 
                         (this.state.rolling === 'right' || this.state.shifted ? 5 : 4)), 
                     (product) => {
                     return <li key={product.id}  style={{float: 'left'}}
