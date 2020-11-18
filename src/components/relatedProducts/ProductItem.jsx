@@ -1,4 +1,5 @@
 import React from 'react';
+import Stars from '../Stars.jsx';
 
 const ProductItem = ({product, pyro}) => {
     return (
@@ -15,7 +16,7 @@ const ProductItem = ({product, pyro}) => {
                 <div className="related-item-category">CATEGORY</div>
                     <div id={product.id} className="related-item-name">{product.name}</div>
                 <div className="related-item-category">$123</div>
-                <div className="related-item-name">Stars</div>
+                <div className="related-item-name">{Stars(140, 2.25)}</div>
             </div>
         </div>
     );
