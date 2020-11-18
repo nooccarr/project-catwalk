@@ -8,12 +8,12 @@ import Related from './components/relatedProducts/Related.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {relatedProducts: [], productId: 6, productInfo: null};
+    this.state = {relatedProducts: [], productId: 5, productInfo: null};
     this.handleRelatedClick = this.handleRelatedClick.bind(this);
     this.handleOutfitClick = this.handleOutfitClick.bind(this);
     this.getProduct = this.getProduct.bind(this);
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
-    this.getRelatedProducts(6);
+    this.getRelatedProducts(this.state.productId);
   }
   getProduct(id, cb) {
     axios.get(`http://3.21.164.220/products/${id}`)
@@ -21,8 +21,12 @@ class App extends React.Component {
         var product = results.data;
         axios.get(`http://3.21.164.220/products/${id}/styles?product_id=${id}`)
         .then((styles) => {
-          product.styles = styles.data;
-          cb(product);
+          axios.get(`http://3.21.164.220/reviews/meta?product_id=${id}`)
+            .then((ratings) => {
+              product.average = average(ratings.data);
+              product.styles = styles.data;
+              cb(product);
+            });
         });
       });
   }
@@ -33,7 +37,6 @@ class App extends React.Component {
         var products = [];
         _.each(results.data, (id) => {
           this.getProduct(id, (product) => {
-            console.log(product);
             products.push(product);
             count++;
             if (count === results.data.length) {
