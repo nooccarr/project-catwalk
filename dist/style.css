@@ -396,10 +396,3 @@ ul .overviewThumbnail {
   width: 90%;
 }
 
-.reviewListEntryThumbnail {
-  border: 0;
-  height: 120px;
-  width: 120px;
-  object-fit: cover;
-  cursor: pointer;
-}
