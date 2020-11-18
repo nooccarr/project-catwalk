@@ -221,7 +221,7 @@ ul .overviewThumbnail {
 
   padding-left: 0px;
 
-  
+
   }
 
   .dd-list-item {
@@ -246,21 +246,150 @@ ul .overviewThumbnail {
 
   /* padding-left: 10px; */
   text-indent: 1em;
-  
+
   font-size: 12px;
   margin-top: 0px;
   text-transform: uppercase;
   font-weight: bold;
 
   }
-.newReview {
-  overflow: scroll;
-  position: fixed;
-  left: 5%;
-  top: 5%;
-  width: 90%;
-  height: 90%;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 10px #403b3b;
+
+#galleryThumbnailContainer.activeThumbnail {
+  border: 1px solid yellow;
 }
+
+.arrow {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  /* display: inline-block; */
+  padding: 3px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  position: absolute;
+  margin-left: 25px;
+  margin-top: 25px;
+
+}
+
+.down {
+  transform: rotate(45deg);
+  position: absolute;
+  margin-left: 25px;
+  margin-top: 30px;
+
+}
+
+.left {
+  transform: rotate(135deg);
+  position: absolute;
+  top: 50%;
+  left: 25%;
+
+}
+
+.right {
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 50%;
+  left: 85%;
+
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: inline-block;
+}
+.dd-wrapper {
+  position: relative;
+  width: 150px;
+  font-size: 1.6rem;
+  user-select: none;
+  display: inline-block;
+  margin: 5px;
+}
+
+.dd-wrapper-quantity {
+  position: relative;
+  width: 45px;
+  font-size: 1.6rem;
+  user-select: none;
+  display: inline-block;
+  margin-left: 20px;
+
+}
+
+  .dd-header {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    position: relative;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: white;
+    line-height: 38px;
+    cursor: default;
+    cursor: pointer;
+
+    padding-left: 10px;
+
+    font-size: 12px;
+    margin-top: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .dd-list {
+  margin: 0px;
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  font-size: 0;
+  max-height: 215px;
+  /* border: 1px solid rgb(223, 223, 223); */
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 0 2px 5px -1px rgb(232, 232, 232);
+  background-color: white;
+  text-align: left;
+  -webkit-overflow-scrolling: touch;
+
+  padding-left: 0px;
+
+
+  }
+
+  .dd-list-item {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  padding: none;
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: default;
+  cursor: pointer;
+
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+
+  /* border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px; */
+
+
+  /* padding-left: 10px; */
+  text-indent: 1em;
+
+  font-size: 12px;
+  margin-top: 0px;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  }

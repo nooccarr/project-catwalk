@@ -1,12 +1,12 @@
 import React from 'react';
 import { Rating } from '@material-ui/lab';
+import axios from 'axios';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
 import getLabel from '../../../utils/getLabel.js';
 import capitalize from '../../../utils/capitalize.js';
 import counter from '../../../utils/counter.js';
-import validBody from '../../../utils/validBody.js';
-import validEmail from '../../../utils/validEmail.js';
+import validateSubmit from '../../../utils/validateSubmit.js';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class NewReview extends React.Component {
       fit: null,
       summary: '',
       body: '',
-      // photos: ,
+      photos: [],
       nickname: '',
       email: '',
     };
@@ -37,38 +37,24 @@ class NewReview extends React.Component {
   }
 
   submitReview() {
-    let validate = true;
     let message = 'You must enter the following:';
-    if (
-      !(
-      this.state.rating &&
-      this.state.recommend &&
-      this.state.size &&
-      this.state.width &&
-      this.state.comfort &&
-      this.state.quality &&
-      this.state.length &&
-      this.state.fit &&
-      this.state.body &&
-      this.state.nickname &&
+    let messageSubmitted = validateSubmit(
+      this.state.rating, this.state.recommend,
+      this.state.size, this.state.width,
+      this.state.comfort, this.state.quality,
+      this.state.length, this.state.fit,
+      this.state.body, this.state.nickname,
       this.state.email
-      )
-    ) {
-      message += '\nAny mandatory fields are blank';
-      validate = false;
-    }
-    if (!validBody(this.state.body)) {
-      message += '\nThe review body is less than 50 characters';
-      validate = false;
-    }
-    if (!validEmail(this.state.email)) {
-      message += '\nThe email address provided is not in correct format';
-      validate = false;
-    }
-    if (validate) {
-      alert('SUCCESS')
+    );
+
+    if (message === messageSubmitted) {
+      // axios POST /reviews
+      // then this.props.getAllReviews()
+      // catch error
+      // this.props.hideReview()
+      alert('SUCCESS');
     } else {
-      alert(message)
+      alert(messageSubmitted);
     }
   }
 
@@ -83,7 +69,7 @@ class NewReview extends React.Component {
     }
     return (
       <div className="newReview">
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>
@@ -138,10 +124,10 @@ class NewReview extends React.Component {
           handleSelect={this.handleSelect}
           text={counter(this.state.body)}
         />
-        {/* <div>
+        <div>
           <h3>Upload your photos</h3>
           <button>Upload upto 5 photos</button>
-        </div> */}
+        </div>
         <InputEntry
           subtitle={'*What is your nickname'}
           name={'nickname'}
