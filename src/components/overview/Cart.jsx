@@ -46,10 +46,10 @@ class Cart extends React.Component {
    
     if (this.state.skus === '' && this.props.currentStyle!=='') {
 
-      console.log('in component did update condition')
+      //console.log('in component did update condition')
       var skuArr = Object.values(this.props.currentStyle.skus);
-      console.log(skuArr);
-      console.log(this.props.currentStyle.skus)
+      //console.log(skuArr);
+      //console.log(this.props.currentStyle.skus)
       
       var sizesArr = skuArr.map((x) => x.size);
       var quantitiesArr = skuArr.map((x) => x.quantity);
