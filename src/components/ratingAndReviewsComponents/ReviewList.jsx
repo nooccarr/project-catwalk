@@ -2,11 +2,9 @@ import React from 'react';
 
 const ReviewList = ({ reviews }) => (
   <div>
-    <ul>
       {reviews.map((review, idx) => {
         return <ReviewListEntry review={review} key={idx}/>
       })}
-    </ul>
   </div>
 );
 
