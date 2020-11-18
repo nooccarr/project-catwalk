@@ -56,6 +56,7 @@ class ReviewListEntry extends React.Component {
               </div>);
             })}
         </div>
+        {review.recommend ? <p>&#10003; I recommend this product</p> : null}
         {this.state.showPhoto ? <img
           className="reviewsPhoto"
           src={review.photos[this.state.idx].url}
