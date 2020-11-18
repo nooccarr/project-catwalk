@@ -1,6 +1,5 @@
 import React from 'react';
-// import Sample from './components/sample.jsx';
-import Overview from './components/Overview';
+import Overview from './components/overview/Overview.jsx';
 import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/Related';
 
