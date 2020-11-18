@@ -403,13 +403,3 @@ ul .overviewThumbnail {
   object-fit: cover;
   cursor: pointer;
 }
-
-.reviewsPhoto {
-  position: fixed;
-  background:#000;
-  object-fit: scale-down;
-  width: 100%;
-  height: 90%;
-  top: 5%;
-  left: 0%;
-}
