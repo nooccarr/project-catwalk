@@ -35,7 +35,7 @@ class App extends React.Component {
     var fish = ['Goldfish', 'Catfish', 'Butterfish', 'Kangaroo', 'Bazooka', 'Orange', 'Santa Claus', 'Charlie', 'Toby', 'Marina'];
     var fakeItems = [];
     for (var i=0; i<10;i++) {
-      fakeItems.push({id: i, name: fish[i],
+      fakeItems.push({id: i, name: fish[i], rating: 2.25,
       img: 'https://image.shutterstock.com/image-photo/gold-fish-isolated-on-white-260nw-580306465.jpg'});
     }
     return (

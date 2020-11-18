@@ -16,7 +16,9 @@ const ProductItem = ({product, pyro}) => {
                 <div className="related-item-category">CATEGORY</div>
                     <div id={product.id} className="related-item-name">{product.name}</div>
                 <div className="related-item-category">$123</div>
-                <div className="related-item-name">{Stars(140, 2.25)}</div>
+                <div className="related-item-name">
+                    {product.rating ? Stars(140, product.rating) : ''}
+                    </div>
             </div>
         </div>
     );
