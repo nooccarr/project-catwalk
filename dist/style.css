@@ -200,7 +200,7 @@ ul .overviewThumbnail {
   margin: 0px;
   white-space: nowrap;
   overflow: visible;
-} 
+}
 .related-title {
   font-size: medium;
   font-family: Arial, Helvetica, sans-serif;
@@ -351,7 +351,7 @@ ul .overviewThumbnail {
 
   padding-left: 0px;
 
-  
+
   }
 
   .dd-list-item {
@@ -376,21 +376,40 @@ ul .overviewThumbnail {
 
   /* padding-left: 10px; */
   text-indent: 1em;
-  
+
   font-size: 12px;
   margin-top: 0px;
   text-transform: uppercase;
   font-weight: bold;
 
   }
+
 .newReview {
-  overflow: scroll;
-  position: fixed;
-  left: 5%;
-  top: 5%;
-  width: 90%;
-  height: 90%;
   background: white;
   border: 1px solid #ccc;
   box-shadow: 5px 5px 10px #403b3b;
+  height: 90%;
+  left: 5%;
+  overflow: scroll;
+  position: fixed;
+  top: 5%;
+  width: 90%;
+}
+
+.reviewListEntryThumbnail {
+  border: 0;
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.reviewsPhoto {
+  position: fixed;
+  background:#000;
+  object-fit: scale-down;
+  width: 100%;
+  height: 90%;
+  top: 5%;
+  left: 0%;
 }
