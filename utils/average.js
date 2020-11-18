@@ -1,12 +1,3 @@
-// const sample = {
-//   'product_id': '2',
-//   'ratings': {
-//     2: 2,
-//     3: 2,
-//     4: 2,
-//   }
-// };
-
 const average = (obj) => {
   let sum = 0;
   let total = 0;
@@ -21,5 +12,3 @@ const average = (obj) => {
 };
 
 export default average;
-
-// console.log(average(sample));

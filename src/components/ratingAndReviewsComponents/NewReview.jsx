@@ -28,6 +28,7 @@ class NewReview extends React.Component {
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.submitReview = this.submitReview.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleSelect(e) {
@@ -45,11 +46,16 @@ class NewReview extends React.Component {
   submitReview() {
     let message = 'You must enter the following:';
     let messageSubmitted = validateSubmit(
-      this.state.rating, this.state.recommend,
-      this.state.size, this.state.width,
-      this.state.comfort, this.state.quality,
-      this.state.length, this.state.fit,
-      this.state.body, this.state.nickname,
+      this.state.rating,
+      this.state.recommend,
+      this.state.size,
+      this.state.width,
+      this.state.comfort,
+      this.state.quality,
+      this.state.length,
+      this.state.fit,
+      this.state.body,
+      this.state.nickname,
       this.state.email
     );
 
@@ -64,18 +70,37 @@ class NewReview extends React.Component {
     }
   }
 
+  handleClose() {
+    this.setState({
+      rating: null,
+      recommend: null,
+      size: null,
+      width: null,
+      comfort: null,
+      quality: null,
+      length: null,
+      fit: null,
+      summary: '',
+      body: '',
+      photos: [],
+      nickname: '',
+      email: ''
+    });
+    this.props.hideReview();
+  }
+
   render() {
     const characteristics = [
       'size', 'width', 'comfort', 'quality', 'length', 'fit'
     ];
-    const { show, hideReview, product } = this.props;
+    const { show, product } = this.props;
 
     if (!show) {
       return null;
     }
     return (
       <div className="newReview">
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>
@@ -152,7 +177,7 @@ class NewReview extends React.Component {
           <button
             onClick={this.submitReview}
           >Submit review</button>
-          <button onClick={hideReview}>Close</button>
+          <button onClick={this.handleClose}>Close</button>
         </div>
       </div>
     );
