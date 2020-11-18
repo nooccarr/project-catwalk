@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rating } from '@material-ui/lab';
+import Stars from '../Stars.jsx';
 import formatDate from '../../../utils/formatDate.js';
 
 const ReviewList = ({ reviews }) => (
@@ -40,12 +40,7 @@ class ReviewListEntry extends React.Component {
     return (
       <div>
         {console.log(review)}
-        {console.log(this.state)}
-        <Rating
-          name="rating"
-          value={review.rating}
-          readOnly={true}
-        />
+        {Stars(120, review.rating)}
         <span>{formatDate(review.date)}</span>
         <div>
           <strong>{review.summary}</strong>
@@ -53,7 +48,7 @@ class ReviewListEntry extends React.Component {
         <div>
           <p>{review.body}</p>
             {review.photos.map((photo, idx) => {
-              return (<div onClick={() => this.showPhoto(idx)}>
+              return (<div onClick={() => this.showPhoto(idx)} key={idx}>
                 <img
                   className="reviewListEntryThumbnail"
                   src={photo.url}
@@ -61,22 +56,15 @@ class ReviewListEntry extends React.Component {
               </div>);
             })}
         </div>
-        {this.state.showPhoto ? <ReviewsPhoto
-          url={review.photos[this.state.idx].url}
-          hidePhoto={this.hidePhoto}
+        {this.state.showPhoto ? <img
+          className="reviewsPhoto"
+          src={review.photos[this.state.idx].url}
+          onClick={this.hidePhoto}
         /> : null}
         <hr />
       </div>
     );
   }
 };
-
-const ReviewsPhoto = ({ url, hidePhoto }) => (
-  <img
-    className="reviewsPhoto"
-    src={url}
-    onClick={hidePhoto}
-  />
-);
 
 export default ReviewList;
