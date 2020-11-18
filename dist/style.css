@@ -383,17 +383,7 @@ ul .overviewThumbnail {
   font-weight: bold;
 
   }
-.newReview {
-  overflow: scroll;
-  position: fixed;
-  left: 5%;
-  top: 5%;
-  width: 90%;
-  height: 90%;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 10px #403b3b;
-}
+
 #galleryThumbnailContainer.activeThumbnail {
   border: 1px solid yellow;
 }
