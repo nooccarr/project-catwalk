@@ -17,7 +17,7 @@ class StyleSelector extends React.Component {
   updateStyle(x) {
     console.log('hi');
     console.log(x);
-    this.props.setCurrentStyle(x);
+    this.props.setCurrentStyle(x, x.original_price, x.sale_price);
     //this.state.
   }
 

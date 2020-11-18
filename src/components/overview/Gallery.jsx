@@ -14,8 +14,40 @@ class Gallery extends React.Component {
     this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
     this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
     this.updateMainImage = this.updateMainImage.bind(this);
+    this.slideRight = this.slideRight.bind(this);
+    this.slideLeft = this.slideLeft.bind(this);
 
   }
+
+  slideRight() {
+    var mainIndex = this.state.mainImage +=1;
+
+    if (mainIndex > this.state.endIndex) {
+      this.slideThumbnailsDown()
+    }
+
+    this.setState({
+      mainImage: mainIndex
+    })
+
+  }
+
+  slideLeft() {
+    var mainIndex = this.state.mainImage -=1;
+
+    if (mainIndex < this.state.startIndex) {
+      this.slideThumbnailsUp()
+    }
+
+    this.setState({
+      mainImage: mainIndex
+    })
+
+  }
+
+  
+
+  
 
   updateMainImage(index) {
     this.setState({
@@ -85,28 +117,32 @@ class Gallery extends React.Component {
            {/* <img src = {this.state.currentImage} id = 'galleryImage'/> */}
            
            <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'galleryImage'/>
-           <div id = 'galleryThumbnailColumn'> 
-           <button className = 'galleryThumbnailUp' onClick = {this.slideThumbnailsUp}>up</button>
-           <ul className = 'overviewThumbnailUL'> 
-            {this.props.currentStyle.photos.map((x, index) => { 
-            {/* {this.state.thumbnails.map((x, index) => { */}
+            <div id = 'galleryThumbnailColumn'>
+            <i className="arrow up" onClick = {this.slideThumbnailsUp}></i> 
+              {/* <button className = 'galleryThumbnailUp' onClick = {this.slideThumbnailsUp} >up</button> */}
+                <ul className = 'overviewThumbnailUL'> 
+                  {this.props.currentStyle.photos.map((x, index) => { 
+                  {/* {this.state.thumbnails.map((x, index) => { */}
 
-            if (index > this.state.endIndex || index < this.state.startIndex) {
-              return <span></span>
-            }
+                  if (index > this.state.endIndex || index < this.state.startIndex) {
+                    return <span></span>
+                  }
 
-            return (
-              <li className = 'overviewThumbnailLI'>
-                <span id = 'galleryThumbnailContainer' onClick = {() => this.updateMainImage(index)}> 
-                  <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
-                </span>
-              </li> 
-            )}
-            )}
+                  return (
+                    <li className = 'overviewThumbnailLI'>
+                      <span id = 'galleryThumbnailContainer' className = { index === this.state.mainImage ? 'activeThumbnail' : ''} onClick = {() => this.updateMainImage(index)}> 
+                        <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
+                      </span>
+                    </li> 
+                  )}
+                 )}
 
-          </ul>
-          <button className = 'galleryThumbnailDown' onClick = {this.slideThumbnailsDown}>down</button>
+               </ul>
+          {/* <button className = 'galleryThumbnailDown' onClick = {this.slideThumbnailsDown}>down</button> */}
+          <i className="arrow down" onClick = {this.slideThumbnailsDown}></i> 
         </div>
+        <i className={ this.state.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.slideLeft}></i> 
+        <i className={ this.state.mainImage === this.state.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.slideRight}></i> 
            
         </div>
       )

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Gallery from './Gallery'
 import StyleSelector from './StyleSelector'
-
+import Cart from './Cart'
 var URL = 'http://3.21.164.220/';
 
 class Overview extends React.Component {
@@ -14,6 +14,11 @@ class Overview extends React.Component {
       category: '',
       name: '',
       default_price: '',
+
+      original_price: '',
+      sale_price: '',
+
+
       
       styles: [],
       currentStyle: ''
@@ -26,9 +31,11 @@ class Overview extends React.Component {
     this.getStyle(1);
   }
 
-  setCurrentStyle(newStyle) {
+  setCurrentStyle(newStyle, originalPrice, salePrice) {
     this.setState({
-      currentStyle: newStyle
+      currentStyle: newStyle,
+      original_price: originalPrice,
+      sale_price: salePrice
     })
   }
 
@@ -74,9 +81,9 @@ class Overview extends React.Component {
     return (
       <div className = "overview-container">
          <div className="item grid-item1"> <Gallery currentStyle = {this.state.currentStyle} setCurrentStyle = {this.setCurrentStyle}/></div>
-         <div className="item grid-item2"> <ProductInfo category = {this.state.category} name = {this.state.name} default_price = {this.state.default_price}/> </div>
+         <div className="item grid-item2"> <ProductInfo category = {this.state.category} name = {this.state.name} default_price = {this.state.default_price} original_price = {this.state.original_price} sale_price = {this.state.sale_price} /> </div>
         <div className="item grid-item3">  <StyleSelector styles = {this.state.styles} setCurrentStyle = {this.setCurrentStyle}/> </div>
-        <div className="item grid-item4">  </div>
+        <div className="item grid-item4">  <Cart currentStyle = {this.state.currentStyle}/> </div>
         <div className="item grid-item5">  </div>
         <div className="item grid-item6">  </div>
       </div>
@@ -85,14 +92,31 @@ class Overview extends React.Component {
 
 }
 
-let ProductInfo = ({category, name, default_price}) => {
-  return (
-    <div> 
-      <div id = 'category'> {category} </div>
-      <div id = 'expandedProductName'> {name} </div>
-      <div id = 'price'> ${default_price} </div>
-    </div>
-  )
+let ProductInfo = ({category, name, default_price, original_price, sale_price}) => {
+
+  if (original_price === '') {
+    return (
+      <div> 
+        <div id = 'category'> {category} </div>
+        <div id = 'expandedProductName'> {name} </div>
+        <div id = 'price'> ${default_price}  </div>
+      </div>
+    )
+  } else {
+    return (
+      <div> 
+        <div id = 'category'> {category} </div>
+        <div id = 'expandedProductName'> {name} </div>
+        {/* <div id = 'price'> ${original_price - sale_price === 0 ? original_price : <span style = {{textDecoration: line-through}}> ${original_price} </span> }  </div> */}
+        <div id = 'price'> {original_price - sale_price === 0 ? original_price : <span> 
+                                                                                    <span style ={{color: 'red'}}>${sale_price} </span> 
+                                                                                    <span style ={{textDecoration: 'line-through'}}>${original_price} </span>  
+                                                                                  </span> }  
+        </div>
+
+      </div>
+    )
+  }
 
 }
 
