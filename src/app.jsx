@@ -21,8 +21,12 @@ class App extends React.Component {
         var product = results.data;
         axios.get(`http://3.21.164.220/products/${id}/styles?product_id=${id}`)
         .then((styles) => {
-          product.styles = styles.data;
-          cb(product);
+          axios.get(`http://3.21.164.220/reviews/meta?product_id=${id}`)
+            .then((ratings) => {
+              product.average = average(ratings.data);
+              product.styles = styles.data;
+              cb(product);
+            });
         });
       });
   }
