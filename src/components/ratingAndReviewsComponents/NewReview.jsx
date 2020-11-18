@@ -1,7 +1,6 @@
 import React from 'react';
-import { Rating } from '@material-ui/lab';
-// import Stars from '../Stars.jsx';
 import axios from 'axios';
+import Stars from '../Stars.jsx';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
 import getLabel from '../../../utils/getLabel.js';
@@ -32,9 +31,15 @@ class NewReview extends React.Component {
   }
 
   handleSelect(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    if (typeof e === 'number') {
+      this.setState({
+        rating: e
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
   }
 
   submitReview() {
@@ -70,17 +75,12 @@ class NewReview extends React.Component {
     }
     return (
       <div className="newReview">
-        {/* {console.log(this.state)} */}
+        {console.log(this.state)}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>
           <h3>*Overall rating</h3>
-          {/* {Stars(120, this.state.value, (e) => this.handleSelect(e))} */}
-          <Rating
-            name="rating"
-            value={this.state.value}
-            onChange={(e) => this.handleSelect(e)}
-          />
+          {Stars(120, this.state.rating || 0, (e) => this.handleSelect(e))}
           {this.state.rating ? <span>
             {getLabel('rating', this.state.rating)}
           </span>: null}
