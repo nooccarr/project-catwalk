@@ -8,7 +8,7 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 6, // requires this.props.productId
+      productId: 6, // requires this.props.productId (6)
       product: 'Pumped Up Kicks', // requires this.props.name
       reviews: [],
       sort: 'relevant',

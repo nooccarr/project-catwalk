@@ -200,7 +200,7 @@ ul .overviewThumbnail {
   margin: 0px;
   white-space: nowrap;
   overflow: visible;
-} 
+}
 .related-title {
   font-size: medium;
   font-family: Arial, Helvetica, sans-serif;
@@ -351,7 +351,7 @@ ul .overviewThumbnail {
 
   padding-left: 0px;
 
-  
+
   }
 
   .dd-list-item {
@@ -376,24 +376,14 @@ ul .overviewThumbnail {
 
   /* padding-left: 10px; */
   text-indent: 1em;
-  
+
   font-size: 12px;
   margin-top: 0px;
   text-transform: uppercase;
   font-weight: bold;
 
   }
-.newReview {
-  overflow: scroll;
-  position: fixed;
-  left: 5%;
-  top: 5%;
-  width: 90%;
-  height: 90%;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 10px #403b3b;
-}
+
 #galleryThumbnailContainer.activeThumbnail {
   border: 1px solid yellow;
 }
@@ -407,7 +397,7 @@ ul .overviewThumbnail {
 
 .up {
   transform: rotate(-135deg);
-  position: absolute; 
+  position: absolute;
   margin-left: 25px;
   margin-top: 25px;
 
@@ -415,7 +405,7 @@ ul .overviewThumbnail {
 
 .down {
   transform: rotate(45deg);
-  position: absolute; 
+  position: absolute;
   margin-left: 25px;
   margin-top: 30px;
 
@@ -423,7 +413,7 @@ ul .overviewThumbnail {
 
 .left {
   transform: rotate(135deg);
-  position: absolute; 
+  position: absolute;
   top: 50%;
   left: 25%;
 
@@ -431,7 +421,7 @@ ul .overviewThumbnail {
 
 .right {
   transform: rotate(-45deg);
-  position: absolute; 
+  position: absolute;
   top: 50%;
   left: 85%;
 
