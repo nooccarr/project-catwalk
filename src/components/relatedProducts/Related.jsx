@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import _ from 'underscore';
 import ProductItem from './ProductItem';
 
@@ -67,6 +68,7 @@ class Related extends React.Component {
     render() {
         var title = ['RELATED PRODUCTS', 'YOUR OUTFIT'];
         var addCard = [];
+        var index = 0;
         if (this.props.pyro === 1) {
             addCard.push({id: -1, name: 'Add current item to outfit', rating: null});
         }
@@ -81,7 +83,8 @@ class Related extends React.Component {
                 {_.map(addCard.concat(this.props.products).slice(this.state.scroll, this.state.scroll + 
                         (this.state.rolling === 'right' || this.state.shifted ? 5 : 4)), 
                     (product) => {
-                    return <li key={product.id}  style={{float: 'left'}}
+                        index++;
+                    return <li key={index}  style={{float: 'left'}}
                         onMouseEnter={() => this.hoverHandler(true, product.id)}
                         onMouseLeave={() => this.hoverHandler(false)}>
                         <ProductItem product={product} pyro={this.props.pyro} faveX={this.faveX}/>
