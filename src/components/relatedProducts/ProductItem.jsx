@@ -9,7 +9,7 @@ const ProductItem = ({product, pyro, image}) => {
             <div id={product.id} className="related-item-faveX">
                 <img id={product.id} className="related-item-star"
                     src={`../../../dist/images/${pyro === 0 ?
-                        'full-star' : 'x'}.png`}/>
+                        product.faved ? 'full-star' : 'gray-star' : 'x'}.png`}/>
                 </div>
                 </div>
             <div className="related-item-info">
