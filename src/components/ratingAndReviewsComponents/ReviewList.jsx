@@ -63,8 +63,7 @@ class ReviewListEntry extends React.Component {
 
     return (
       <div>
-        {console.log(review)}
-        {console.log(this.state)}
+        {/* {console.log(review)} */}
         {Stars(120, review.rating)}
         <span>Verified Purchaser </span>
         <span>{review.reviewer_name}, {formatDate(review.date)}</span>
