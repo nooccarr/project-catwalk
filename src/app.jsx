@@ -5,7 +5,6 @@ import average from '../utils/average.js';
 import _ from 'underscore';
 import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/relatedProducts/Related.jsx';
-import average from '../utils/average.js';
 
 class App extends React.Component {
   constructor(props) {

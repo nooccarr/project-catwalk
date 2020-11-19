@@ -81,7 +81,7 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <hr />
         <div>RATINGS & REVIEWS</div>
         <RatingBreakdown
