@@ -23,20 +23,31 @@ class Cart extends React.Component {
 
 
     skus: '',
+    skuKeys: '',
+    sku_id: '',
     sizes: '',
     quantities: '',
     slectedSize: '',
-    availableQuantity: 0
+    availableQuantity: 0,
+    selectedQuantity: ''
 
   }
 
-  this.setSizeQuantity = this.setSizeQuantity.bind(this);
+  this.setSizeQuantities = this.setSizeQuantities.bind(this);
+  this.setQuantity = this.setQuantity.bind(this);
   }
 
-  setSizeQuantity(index) {
+  setQuantity(val) {
+    this.setState({
+      selectedQuantity: val
+    })
+  }
+
+  setSizeQuantities(index) {
     this.setState({
       selectedSize: this.state.sizes[index],
-      availableQuantity: this.state.quantities[index]
+      availableQuantity: this.state.quantities[index],
+      sku_id: this.state.skuKeys[index]
     })
 
   }
@@ -48,7 +59,7 @@ class Cart extends React.Component {
 
       //console.log('in component did update condition')
       var skuArr = Object.values(this.props.currentStyle.skus);
-      //console.log(skuArr);
+      var skuKeys = Object.keys(this.props.currentStyle.skus);
       //console.log(this.props.currentStyle.skus)
       
       var sizesArr = skuArr.map((x) => x.size);
@@ -56,6 +67,7 @@ class Cart extends React.Component {
 
 
        this.setState({
+       skuKeys: skuKeys,
        skus: this.props.currentStyle.skus,
        sizes: sizesArr,
        quantities: quantitiesArr
@@ -71,9 +83,9 @@ class Cart extends React.Component {
   
     return (
       <div> 
-        <EnhancedComponent title="SELECT SIZE" list={this.state.sizes} setSizeQuantity = {this.setSizeQuantity} sizes = {true}/> 
-        <EnhancedComponent title="0" list={  [...Array(this.state.availableQuantity).keys()].map((x) => (x+1)) } quantities = {true}/> 
-
+        <EnhancedComponent title="SELECT SIZE" list={this.state.sizes} setSizeQuantities = {this.setSizeQuantities} sizes = {true}/> 
+        <EnhancedComponent title="0" list={  [...Array(this.state.availableQuantity).keys()].map((x) => (x+1)) } quantities = {true} setQuantity = {this.setQuantity}/> 
+        <AddtoCart size = {this.state.selectedSize} quantity = {this.state.selectedQuantity}/>
       </div>
     )
 
@@ -81,6 +93,32 @@ class Cart extends React.Component {
 
 
 
+}
+
+class AddtoCart extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+   
+  }
+
+  render() {
+   return (
+      <div> 
+        <div className = 'add-to-cart-wrapper'>
+          <div className = 'dd-header' onClick = {this.handleSubmit}> 
+            <span className = 'dd-header-title'>{`Add to Bag`}</span>
+              <i className = 'plus-sign'></i>
+          </div>
+        </div>
+      </div>
+   )
+
+  }
 }
 
 class Dropdown extends React.Component {
@@ -120,13 +158,15 @@ class Dropdown extends React.Component {
       headerTitle: item
     }, () => this.toggleList())
 
-    this.props.setSizeQuantity(index);
+    this.props.setSizeQuantities(index);
 
   } else if (this.props.quantities) {
     this.setState({
       selectedQuantity: item,
       headerTitle: item
     }, () => this.toggleList())
+
+    this.props.setQuantity(item);
 
   }
 
@@ -138,7 +178,8 @@ class Dropdown extends React.Component {
     return(
       <div className= { this.props.sizes ? "dd-wrapper" : "dd-wrapper-quantity"}>
         <div className="dd-header" onClick={(event) => {this.handleClickOutside(event); this.toggleList()}}>
-          <div className="dd-header-title">{headerTitle}</div>
+          <span className="dd-header-title">{headerTitle} </span>
+          <i className={listOpen ? "arrow up-cart" : "arrow down-cart"}> </i>
           {/* {listOpen
             ? <FontAwesome name="angle-up" size="2x"/>
             : <FontAwesome name="angle-down" size="2x"/>
@@ -146,7 +187,7 @@ class Dropdown extends React.Component {
           </div>
          {listOpen && <ul className="dd-list">
           {list.map((item, index) => (
-            <li className="dd-list-item" /*key={item.id}*/ onClick = {() => this.handleSelection(item, index)}>{item}</li>
+            <li key = {index} className="dd-list-item" /*key={item.id}*/ onClick = {() => this.handleSelection(item, index)}>{item}</li>
           ))}
          </ul>}
       </div>
