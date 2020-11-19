@@ -2,19 +2,22 @@ import React from 'react';
 import axios from 'axios';
 import NewReview from './NewReview.jsx';
 import ReviewList from './ReviewList.jsx';
-import Rating from './Rating.jsx';
+import RatingBreakdown from './RatingBreakdown.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
+import average from '../../../utils/average.js';
 
 class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 6, // requires this.props.productId (6)
+      productId: 22, // requires this.props.productId (6, 22)
       product: 'Pumped Up Kicks', // requires this.props.name
       reviews: [],
       sort: 'relevant',
       show: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
+    this.getRating = this.getRating.bind(this);
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showReview = this.showReview.bind(this);
     this.hideReview = this.hideReview.bind(this);
@@ -38,6 +41,19 @@ class RatingAndReviews extends React.Component {
           reviews: data.results
         })
       })
+      .then(this.getRating())
+      .catch(err => console.log(err));
+  }
+
+  getRating() {
+    return axios
+      .get('http://3.21.164.220/reviews/meta', {
+        params: { product_id: this.state.productId }
+      })
+      .then(result => this.setState({
+        rating: result.data,
+        average: average(result.data)
+      }))
       .catch(err => console.log(err));
   }
 
@@ -65,9 +81,14 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {/* {console.log(this.state)} */}
+        {console.log(this.state)}
         <hr />
-        <Rating />
+        <div>RATINGS & REVIEWS</div>
+        <RatingBreakdown
+          average={this.state.average}
+          rating={this.state.rating}
+        />
+        <ProductBreakdown />
         <form>
           <label>Sort on </label>
           <select onChange={(e) => this.handleSortByChange(e)}>
@@ -76,7 +97,12 @@ class RatingAndReviews extends React.Component {
             <option value="newest">Newest</option>
           </select>
         </form>
-        <ReviewList reviews={this.state.reviews}/>
+        <ReviewList
+          reviews={this.state.reviews}
+          getAllReviews={this.getAllReviews}
+          productId={this.state.productId}
+          sort={this.state.sort}
+        />
         <button onClick={this.showReview}>Write New Review</button>
         <NewReview
           show={this.state.show}

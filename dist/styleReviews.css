@@ -26,4 +26,10 @@
   height: 90%;
   top: 5%;
   left: 0%;
+  cursor: pointer;
+}
+
+.reviewHelpfulLink {
+  display: inline-block;
+  cursor: pointer;
 }

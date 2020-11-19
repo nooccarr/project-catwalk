@@ -1,7 +1,6 @@
 import React from 'react';
-import { Rating } from '@material-ui/lab';
-// import Stars from '../Stars.jsx';
 import axios from 'axios';
+import Stars from '../Stars.jsx';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
 import getLabel from '../../../utils/getLabel.js';
@@ -14,13 +13,6 @@ class NewReview extends React.Component {
     super(props);
     this.state = {
       rating: null,
-      recommend: null,
-      size: null,
-      width: null,
-      comfort: null,
-      quality: null,
-      length: null,
-      fit: null,
       summary: '',
       body: '',
       photos: [],
@@ -29,22 +21,34 @@ class NewReview extends React.Component {
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.submitReview = this.submitReview.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleSelect(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    if (typeof e === 'number') {
+      this.setState({
+        rating: e
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
   }
 
   submitReview() {
     let message = 'You must enter the following:';
     let messageSubmitted = validateSubmit(
-      this.state.rating, this.state.recommend,
-      this.state.size, this.state.width,
-      this.state.comfort, this.state.quality,
-      this.state.length, this.state.fit,
-      this.state.body, this.state.nickname,
+      this.state.rating,
+      this.state.recommend,
+      this.state.size,
+      this.state.width,
+      this.state.comfort,
+      this.state.quality,
+      this.state.length,
+      this.state.fit,
+      this.state.body,
+      this.state.nickname,
       this.state.email
     );
 
@@ -59,28 +63,35 @@ class NewReview extends React.Component {
     }
   }
 
+  handleClose() {
+    this.setState({
+      rating: null,
+      summary: '',
+      body: '',
+      photos: [],
+      nickname: '',
+      email: ''
+    });
+    this.props.hideReview();
+  }
+
   render() {
     const characteristics = [
       'size', 'width', 'comfort', 'quality', 'length', 'fit'
     ];
-    const { show, hideReview, product } = this.props;
+    const { show, product } = this.props;
 
     if (!show) {
       return null;
     }
     return (
       <div className="newReview">
-        {/* {console.log(this.state)} */}
+        {console.log(this.state)}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>
           <h3>*Overall rating</h3>
-          {/* {Stars(120, this.state.value, (e) => this.handleSelect(e))} */}
-          <Rating
-            name="rating"
-            value={this.state.value}
-            onChange={(e) => this.handleSelect(e)}
-          />
+          {Stars(120, this.state.rating || 0, (e) => this.handleSelect(e))}
           {this.state.rating ? <span>
             {getLabel('rating', this.state.rating)}
           </span>: null}
@@ -152,7 +163,7 @@ class NewReview extends React.Component {
           <button
             onClick={this.submitReview}
           >Submit review</button>
-          <button onClick={hideReview}>Close</button>
+          <button onClick={this.handleClose}>Close</button>
         </div>
       </div>
     );
