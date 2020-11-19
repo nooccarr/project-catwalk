@@ -8,7 +8,8 @@ const average = (obj) => {
       totalCount += count;
     }
   }
-  return sum / totalCount;
+  let result = sum / totalCount;
+  return Number(result.toFixed(1));
 };
 
 export default average;
