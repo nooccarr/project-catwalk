@@ -9,7 +9,7 @@ class Related extends React.Component {
         super(props);
         this.state = {title: props.title, anim: '', shifted: true, length: 0,
         unq: 0, scroll: 0, showR: false, showL: true, rolling: 'right',
-        products: {}, comparingId: null, comparing: false};
+        products: {}, comparingId: null, comparing: false, count: 0};
         this.shift = this.shift.bind(this);
         this.right = this.right.bind(this);
         this.left = this.left.bind(this);
@@ -21,18 +21,27 @@ class Related extends React.Component {
         this.Add = this.Add.bind(this);
     }
     componentDidUpdate() {
-        if (Object.keys(this.props.products).length !== this.state.length) {
+        var propLength = 0;
+        if(this.props.pyro === 1) {
+            for (var i of this.props.products) {
+                if (i) {
+                    propLength++;
+                }
+            }
+        } else {
+            propLength = this.props.products.length;
+        }
+        if (propLength !== this.state.length && this.state.count < 20) {
             var products = {};
-            var length = 0;
+            var length = propLength;
             for (var product of this.props.products) {
                 if (product) {
                 products[product.id] = product;
-                length++;
                 }
             }
             var unq = Object.keys(products).length;
             this.setState({products: products, length: length,
-                unq: unq, showL: unq > 4});
+                unq: unq, showL: unq > 4, count: this.state.count+1});
         }
     }
     shift(e) {
@@ -76,13 +85,13 @@ class Related extends React.Component {
     }
     handleClick(e) {
         if (e.target.className === 'related-item-star') {
-            if (this.props.pyro === 0) {
+            if (Number(e.target.id) !== this.props.overview.id) {
                 var products = this.state.products;
                 products[e.target.id].faved = !products[e.target.id].faved;
                 this.setState({products: products});
                 this.props.toggleOutfit(Number(e.target.id));
             } else {
-                this.props.toggleOutfit(Number(e.target.id));
+                this.props.toggleOutfit(this.props.overview.id)
             }
         } else if (e.target.id === '-1') {
             this.props.toggleOutfit(this.props.overview.id)
