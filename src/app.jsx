@@ -8,14 +8,9 @@ import Related from './components/relatedProducts/Related.jsx';
 
 class App extends React.Component {
   constructor(props) {
-    var fish = ['Goldfish', 'Catfish', 'Butterfish', 'Kangaroo', 'Bazooka', 'Orange', 'Santa Claus', 'Charlie', 'Toby', 'Marina'];
-    var fakeItems = [];
-    for (var i=0; i<10;i++) {
-      fakeItems.push({id: i + 1, name: fish[i], rating: 2.25,
-        img: 'https://image.shutterstock.com/image-photo/gold-fish-isolated-on-white-260nw-580306465.jpg'});
-    }
     super(props);
-    this.state = {relatedProducts: [],outfit: fakeItems, productId: 5, productInfo: null};
+    this.state = {relatedProducts: [],outfit: [], outfitIndex: {},
+      productId: 5, productInfo: {faved: false}, relatedIndex: {}};
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
     this.getProduct = this.getProduct.bind(this);
@@ -51,9 +46,11 @@ class App extends React.Component {
         _.each(results.data, (id) => {
           this.getProduct(id, (product) => {
             products.push(product);
+            var index = this.state.relatedIndex;
+            index[id] = count;
             count++;
             if (count === results.data.length) {
-              this.setState({relatedProducts: products});
+              this.setState({relatedProducts: products, relatedIndex: index});
             }
           });
         });
@@ -65,7 +62,28 @@ class App extends React.Component {
       }
   }
   toggleOutfit(id) {
-    console.log('Toggle',id);
+    var product, outfit, index;
+    if (id === this.state.productId) {
+      product = this.state.productInfo;
+      product.faved = !product.faved;
+      this.setState({productInfo: product});
+    } else {
+        outfit = this.state.outfit;
+        index = this.state.outfitIndex;
+        //console.log('initial',outfit, index);
+        if (index[id] >= 0) {
+          delete outfit[index[id]];
+          index[id] = -1;
+          //console.log('deleted',outfit, index);
+          this.setState({outfit: outfit, outfitIndex: index});
+        } else {
+          product = this.state.relatedProducts[this.state.relatedIndex[id]];
+          index[id] = outfit.length;
+          outfit.push(product);
+          //console.log('added',outfit, index);
+          this.setState({outfit: outfit, outfitIndex: index});
+      }
+    }
   }
   render() {
     return (

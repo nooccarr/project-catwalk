@@ -25,8 +25,10 @@ class Related extends React.Component {
             var products = {};
             var length = 0;
             for (var product of this.props.products) {
+                if (product) {
                 products[product.id] = product;
                 length++;
+                }
             }
             var unq = Object.keys(products).length;
             this.setState({products: products, length: length,
@@ -78,9 +80,9 @@ class Related extends React.Component {
                 var products = this.state.products;
                 products[e.target.id].faved = !products[e.target.id].faved;
                 this.setState({products: products});
-                this.props.toggleOutfit(e.target.id);
+                this.props.toggleOutfit(Number(e.target.id));
             } else {
-                this.props.toggleOutfit(e.target.id);
+                this.props.toggleOutfit(Number(e.target.id));
             }
         } else if (e.target.id === '-1') {
             this.props.toggleOutfit(this.props.overview.id)
@@ -89,7 +91,7 @@ class Related extends React.Component {
             while (node.className !== 'related-item') {
                 node = node.parentNode;
             }
-            this.props.handleRedirect(node.id);
+            this.props.handleRedirect(Number(node.id));
         }
     }
     comparison() {
@@ -159,7 +161,8 @@ class Related extends React.Component {
     render() {
         var title = ['RELATED PRODUCTS', 'YOUR OUTFIT'];
         var index = 0;
-        var add = this.props.pyro === 0 ? [] : ['add'];
+        var add = this.props.pyro === 0 ? [] : this.props.overview.faved ?
+            [this.props.overview] : ['add'];
         return (
             <div>
             <div className="related">
