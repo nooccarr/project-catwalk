@@ -82,17 +82,65 @@ class Related extends React.Component {
             } else {
                 this.props.toggleOutfit(e.target.id);
             }
+        } else if (e.target.id === '-1') {
+            this.props.toggleOutfit(this.props.overview.id)
         } else {
-            this.props.handleRedirect(e.target.id);
+            var node = e.target;
+            while (node.className !== 'related-item') {
+                node = node.parentNode;
+            }
+            this.props.handleRedirect(node.id);
         }
     }
     comparison() {
-        if (this.state.comparing) {
+        var max = 20;
+        var detail = (vals) => {
+            return (
+                <div key={vals[2]} className="comparison-detail"
+                    style={{top: 45 + vals[3]*25, width: 135 + 10*max}}>
+                        <a className="comparison-value">
+                            {vals[0]}
+                        </a>
+                        <a className="comparison-center" style={{width: 140 + 10*max}}>
+                            {vals[2]}
+                        </a>
+                        <a className="comparison-value comparison-right">
+                            {vals[1]}
+                        </a>
+                    </div>
+            );
+        }
+        if (this.state.comparing && this.props.pyro === 0) {
+            var item = [this.props.overview,
+                this.state.products[this.state.comparingId]];
+            var details = [];
+            details.push([item[0].styles.results.length,
+                item[1].styles.results.length, 'Styles', 0]);
+            for (var i of item[0].features) {
+                for (var j of item[1].features) {
+                    if (i.feature === j.feature) {
+                        max = i.value.length > max ? i.value.length :
+                            j.value.length > max ? j.value.length : max; 
+                        details.push([i.value, j.value, i.feature, details.length]);
+                    }
+                }
+            }
         return (
             <div className="comparison" onMouseEnter={() => this.hoverHandler(true)}
-            onMouseLeave={() => this.hoverHandler(false)}>
-                Comparing {this.props.overview.name+ ' to '
-                    + this.state.products[this.state.comparingId].name}
+                onMouseLeave={() => this.hoverHandler(false)}
+                style={{height: 50 + 25*details.length, width: 150 + 10*max}}>
+                <div className="related-item-category">
+                COMPARING
+                <div className="comparison-detail" style={{top: 20, width: 135 + 10*max}}>
+                    <a className="related-item-name">
+                        {item[0].name}
+                    </a>
+                    <a className="related-item-name comparison-right">
+                        {item[1].name}
+                    </a>
+                </div>
+                    {_.map(details, detail)}
+                </div>
             </div>
             );
         }

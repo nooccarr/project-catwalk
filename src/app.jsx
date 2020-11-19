@@ -60,7 +60,9 @@ class App extends React.Component {
     });
   }
   handleRedirect(id) {
+      if (id !== this.state.productId) {
       console.log('Redirect to id:',id);
+      }
   }
   toggleOutfit(id) {
     console.log('Toggle',id);
