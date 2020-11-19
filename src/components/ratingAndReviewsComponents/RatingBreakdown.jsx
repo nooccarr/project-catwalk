@@ -1,10 +1,25 @@
 import React from 'react';
+import Stars from '../Stars.jsx';
 
-const RatingBreakdown = (props) => {
+class RatingBreakdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  return (
-    <div></div>
-  );
+
+
+  render() {
+    const { average, rating } = this.props;
+
+    return (
+      <div>
+        {console.log(rating)}
+        <div>{average}</div>
+        {Stars(120, average)}
+      </div>
+    );
+  }
 };
 
 export default RatingBreakdown;
