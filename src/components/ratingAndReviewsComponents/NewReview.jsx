@@ -13,13 +13,6 @@ class NewReview extends React.Component {
     super(props);
     this.state = {
       rating: null,
-      recommend: null,
-      size: null,
-      width: null,
-      comfort: null,
-      quality: null,
-      length: null,
-      fit: null,
       summary: '',
       body: '',
       photos: [],
@@ -73,13 +66,6 @@ class NewReview extends React.Component {
   handleClose() {
     this.setState({
       rating: null,
-      recommend: null,
-      size: null,
-      width: null,
-      comfort: null,
-      quality: null,
-      length: null,
-      fit: null,
       summary: '',
       body: '',
       photos: [],
@@ -100,7 +86,7 @@ class NewReview extends React.Component {
     }
     return (
       <div className="newReview">
-        {/* {console.log(this.state)} */}
+        {console.log(this.state)}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>

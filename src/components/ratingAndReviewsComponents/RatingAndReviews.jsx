@@ -8,7 +8,7 @@ class RatingAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 6, // requires this.props.productId (6)
+      productId: 22, // requires this.props.productId (6, 22)
       product: 'Pumped Up Kicks', // requires this.props.name
       reviews: [],
       sort: 'relevant',
@@ -76,7 +76,12 @@ class RatingAndReviews extends React.Component {
             <option value="newest">Newest</option>
           </select>
         </form>
-        <ReviewList reviews={this.state.reviews}/>
+        <ReviewList
+          reviews={this.state.reviews}
+          getAllReviews={this.getAllReviews}
+          productId={this.state.productId}
+          sort={this.state.sort}
+        />
         <button onClick={this.showReview}>Write New Review</button>
         <NewReview
           show={this.state.show}
