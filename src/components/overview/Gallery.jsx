@@ -89,7 +89,7 @@ class Gallery extends React.Component {
    
     if (this.state.thumbnails === '' && this.props.currentStyle!=='') {
 
-      //.log('in condition')
+       console.log('in condition')
        this.setState({
        thumbnails: this.props.currentStyle.photos,
      })
@@ -101,29 +101,27 @@ class Gallery extends React.Component {
   render() {
     //Is there a way to do this without conditional render? doesn't like img src
 
-     if (this.state.thumbnails === '') {
+
+     if (this.props.currentStyle === '') {
     // if (this.props.currentStyle === '') {
     return (
-      <div> </div>
+      <div> null</div>
     )
     } else {
-      //console.log(this.state.thumbnails[0], 'in else')
-      //console.log(this.state.thumbnails, 'in else')
-      //console.log('this.props.currentStyle[0]', this.props.currentStyle[0])
-
 
       return (
         <div>
            {/* <img src = {this.state.currentImage} id = 'galleryImage'/> */}
            
            <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'galleryImage'/>
+
+
             <div id = 'galleryThumbnailColumn'>
             <i className="arrow up" onClick = {this.slideThumbnailsUp}></i> 
               {/* <button className = 'galleryThumbnailUp' onClick = {this.slideThumbnailsUp} >up</button> */}
                 <ul className = 'overviewThumbnailUL'> 
                   {this.props.currentStyle.photos.map((x, index) => { 
                   {/* {this.state.thumbnails.map((x, index) => { */}
-
                   if (index > this.state.endIndex || index < this.state.startIndex) {
                     return <span key = {index}></span>
                   }

@@ -11,15 +11,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {relatedProducts: [],outfit: [], outfitIndex: {},
-      productId: 5, productInfo: {faved: false}, relatedIndex: {}};
+      productId: 5, productInfo: {faved: false}, relatedIndex: {}, currentStyle: ''};
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
     this.getProduct = this.getProduct.bind(this);
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
+    this.setCurrentStyle = this.setCurrentStyle.bind(this);
   }
   componentDidMount() {
-    this.getProduct(this.state.productId, (product) => {
-      this.setState({productInfo: product});
+    this.getProduct(this.state.productId, (product, style) => {
+      this.setState({productInfo: product, currentStyle: style});
     });
     this.getRelatedProducts(this.state.productId);
   }
@@ -34,7 +35,7 @@ class App extends React.Component {
               product.average = average(ratings.data);
               product.styles = styles.data;
               product.faved = false; //true if product is in outfit
-              cb(product);
+              cb(product, styles.data.results[0]);
             });
         });
       });
@@ -63,6 +64,9 @@ class App extends React.Component {
       }
   }
   toggleOutfit(id) {
+
+    console.log('hi toggle outfit invoked with id', id)
+    //console.log('in toggle outfit');
     var product, outfit, index;
     if (id === this.state.productId) {
       product = this.state.productInfo;
@@ -86,6 +90,13 @@ class App extends React.Component {
       }
     }
   }
+  setCurrentStyle(newStyle, originalPrice, salePrice) {
+    this.setState({
+      currentStyle: newStyle,
+      // original_price: originalPrice,
+      // sale_price: salePrice
+    })
+  }
   render() {
     return (
       <div>
@@ -93,7 +104,7 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-        <Overview product={this.state.productInfo}/>
+        <Overview product={this.state.productInfo} currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit} setCurrentStyle = {this.setCurrentStyle}/>
         <div className="listies">
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>
