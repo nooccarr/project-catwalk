@@ -21,7 +21,8 @@ class App extends React.Component {
     this.setProduct = this.setProduct.bind(this);
   }
   componentDidMount() {
-    var id = Number(window.location.search.split('?id=')[1]);
+    var id = Number(window.location.search.split('?id=')[1]) || 1;
+    console.log(id);
     this.setProduct(id);
   }
   setProduct(id) {
