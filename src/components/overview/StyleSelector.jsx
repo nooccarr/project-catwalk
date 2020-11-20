@@ -6,7 +6,8 @@ class StyleSelector extends React.Component {
 
 
     this.state = {
-      selectedStyle: ''
+      selectedStyle: '',
+      selectedStyleThumbnailIndex: 0
     }
 
     this.updateStyle = this.updateStyle.bind(this);
@@ -14,11 +15,15 @@ class StyleSelector extends React.Component {
 
   }
 
-  updateStyle(x) {
-    console.log('hi');
+  updateStyle(x, index) {
+    console.log('hi,x, index', x, index);
+    console.log('index', index)
     console.log(x);
     this.props.setCurrentStyle(x, x.original_price, x.sale_price);
-    //this.state.
+    this.setState({
+      selectedStyleThumbnailIndex: index,
+      selectedStyle: x
+    })
   }
 
   componentDidUpdate() {
@@ -26,35 +31,61 @@ class StyleSelector extends React.Component {
 
   }
   render () {
-    console.log('in reder of style selector', this.props.styles)
+    console.log('in render')
+    // console.log('in reder of style selector', this.props.styles.results[selectedStyleThumbnailIndex].name)
   
     if (this.props.styles !== undefined) {
+    console.log('in reder of style selector', this.props.styles.results[this.state.selectedStyleThumbnailIndex].name)
+
       return (
         <div> 
-          { this.props.styles.results.map((x, index) => {
-            //console.log('index ', index)
-    
-            if ((index+1)%4 === 0) {
+          <div className = 'styleSelectedStyle'> 
+          <b>Style > </b>{this.props.styles.results[this.state.selectedStyleThumbnailIndex].name}
+          </div>
+          <div className = 'styleSelectorThumbnailsWrapper'> 
+            { this.props.styles.results.map((x, index) => {
+              //console.log('index ', index)
+      
+              if ((index+1)%4 === 0) {
+                return (
+                  <span key = {index+1}>
+                  <span className = 'styleSelectorDiv' onClick = {()=> {this.updateStyle(x, index)}}> 
+                  <span className = 'styleSelectorWrapper'> 
+
+                    <img src = {x.photos[0].thumbnail_url} className = 'styleSelectorThumbnail' />            
+                    
+                    {index === this.state.selectedStyleThumbnailIndex ? 
+                    <img src = '../../../dist/images/check.png' 
+                    className = 'styleSelectorCheck'></img> : null}
+                    </span>
+                
+
+                  </span>
+                  <br/>
+                  </span>
+                  )
+      
+              } else {
               return (
-                <span key = {index+1}>
-                <span className = 'styleSelectorDiv' onClick = {()=>this.updateStyle(x)}> 
-                  <img src = {x.photos[0].thumbnail_url} className = 'styleSelectorThumbnail' />            
+              <span className = 'styleSelectorDiv' onClick = {()=>this.updateStyle(x, index)} key = {index+1}> 
+                <span className = 'styleSelectorWrapper'> 
+                
+                <img src = {x.photos[0].thumbnail_url} className = 'styleSelectorThumbnail' />
+                
+                {index === this.state.selectedStyleThumbnailIndex ? 
+                <img src = '../../../dist/images/check.png' 
+                className = 'styleSelectorCheck'></img> : null}
                 </span>
-                <br/>
-                </span>
-                )
-    
-            } else {
-            return (
-            <span className = 'styleSelectorDiv' onClick = {()=>this.updateStyle(x)} key = {index+1}> 
-              <img src = {x.photos[0].thumbnail_url} className = 'styleSelectorThumbnail' />
-            </span>
+                
+
+              </span>
+              )
+      
+              }
+            }
             )
-    
-            }
-          }
-          )
-            }
+              }
+          </div>
         </div>
       )
     } else {

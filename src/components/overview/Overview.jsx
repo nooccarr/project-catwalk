@@ -22,10 +22,23 @@ class Overview extends React.Component {
 
       
       styles: [],
-      currentStyle: ''
+      currentStyle: '',
+
+      // expandedView: false
     }
     // this.setCurrentStyle = this.setCurrentStyle.bind(this);
   }
+
+  // toggleExpandedView() {
+  //   this.setState((prevState) => ({
+  //     expandedView: !prevState.expandedView
+  //   }))
+  // }
+
+
+
+
+
 
   componentDidMount() {
     // this.getProduct(1);
@@ -104,17 +117,26 @@ class Overview extends React.Component {
   // }
 
   render() {
-    return (
-      <div className = "overview-container">
-         <div className="item grid-item1"> <Gallery currentStyle = {this.props.currentStyle} setCurrentStyle = {this.props.setCurrentStyle}/></div>
-         <div className="item grid-item2"> <ProductInfo category = {this.props.product.category} name = {this.props.product.name} default_price = {this.props.product.default_price} original_price = {this.props.currentStyle.original_price} sale_price = {this.props.currentStyle.sale_price} average_rating = {this.props.product.average}/> </div>
-        <div className="item grid-item3">  <StyleSelector styles = {this.props.product.styles} setCurrentStyle = {this.props.setCurrentStyle}/> </div>
-        <div className="item grid-item4">  <Cart currentStyle = {this.props.currentStyle} toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/> </div>
-        <div className="item grid-item5">  </div>
-        <div className="item grid-item6">  </div>
-      </div>
-    );
+
+    //  if (this.state.expandedView) {
+      return (
+        <div className = "overview-container">
+          <div className="item grid-item1"> <Gallery currentStyle = {this.props.currentStyle} setCurrentStyle = {this.props.setCurrentStyle}/></div>
+          <div className="item grid-item2"> <ProductInfo category = {this.props.product.category} name = {this.props.product.name} default_price = {this.props.product.default_price} original_price = {this.props.currentStyle.original_price} sale_price = {this.props.currentStyle.sale_price} average_rating = {this.props.product.average}/> </div>
+          <div className="item grid-item3">  <StyleSelector styles = {this.props.product.styles} setCurrentStyle = {this.props.setCurrentStyle}/> </div>
+          <div className="item grid-item4">  <Cart currentStyle = {this.props.currentStyle} toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/> </div>
+          <div className="item grid-item5">  </div>
+          <div className="item grid-item6">  </div>
+        </div>
+      );
+    // } 
+    //else {
+    //   return (
+    //     <div className = "expandedView"></div>
+    //   )
+    // }
   }
+
 
 }
 
@@ -134,8 +156,10 @@ let ProductInfo = ({category, name, default_price, original_price, sale_price, a
     console.log('product average', average_rating)
 
     return (
-      <div> 
-        {Stars(40, average_rating)}
+      <div>
+        <div className = 'star-reviews-wrapper'> 
+        {Stars(60, average_rating)}
+        </div> 
         <div id = 'category'> {category} </div>
         <div id = 'expandedProductName'> {name} </div>
         {/* <div id = 'price'> ${original_price - sale_price === 0 ? original_price : <span style = {{textDecoration: line-through}}> ${original_price} </span> }  </div> */}

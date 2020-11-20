@@ -9,8 +9,8 @@ class Gallery extends React.Component {
       mainImage: 0,
       startIndex: 0,
       endIndex: 4,
-
     }
+    
     this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
     this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
     this.updateMainImage = this.updateMainImage.bind(this);
@@ -18,6 +18,7 @@ class Gallery extends React.Component {
     this.slideLeft = this.slideLeft.bind(this);
 
   }
+
 
   slideRight() {
     var mainIndex = this.state.mainImage +=1;
@@ -113,7 +114,8 @@ class Gallery extends React.Component {
         <div className = 'galleryContainer'> 
            {/* <img src = {this.state.currentImage} id = 'galleryImage'/> */}
            
-           <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'galleryImage'/>
+           <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'galleryImage'
+           onClick = {() => console.log('imageClicked')}/>
 
 
             <div id = 'galleryThumbnailColumn'>
