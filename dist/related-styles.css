@@ -29,6 +29,10 @@
   .related-animation-left {
     animation: related-carousel-left 0.5s forwards;
   }
+  .related-image-animation {
+    position: absolute;
+    animation: related-image-flip 6s forwards infinite;
+  }
   @keyframes related-carousel-right {
     from {left: 0px;}
     to {left: -162px;}
@@ -36,6 +40,17 @@
   @keyframes related-carousel-left {
     from {left: 0px;}
     to {left: 162px;}
+  }
+  @keyframes related-image-flip {
+    0% {left: 0px}
+    18% {left: -150px}
+    25% {left: -150px}
+    43% {left: -300px}
+    50% {left: -300px}
+    68% {left: -450px}
+    75% {left: -450px}
+    93% {left: -600px}
+    100% {left: -600px}
   }
   .related-list{
     list-style-type: none;
@@ -57,10 +72,19 @@
   }
   .related-item-faveX {
     position: absolute;
-    top: 38px;
+    top: -3px;
     margin: 0px;
   }
+  .related-flipper {
+    position: relative;
+    overflow: hidden;
+    height: 150px;
+    width: 150px;
+  }
   .related-item-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 150px;
   }
   .related-item-star {
