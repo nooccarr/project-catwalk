@@ -23,7 +23,6 @@ class App extends React.Component {
   }
   componentDidMount() {
     var id = Number(window.location.search.split('?id=')[1]) || 1;
-    console.log(id);
     this.setProduct(id);
   }
   setProduct(id) {
@@ -45,6 +44,7 @@ class App extends React.Component {
               product.average = average(ratings.data);
               product.styles = styles.data;
               product.faved = false; //true if product is in outfit
+
               cb(product, styles.data.results[0]);
             });
         });
@@ -173,7 +173,7 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-        <Overview product={this.state.productInfo} currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit} setCurrentStyle = {this.setCurrentStyle}/>
+        {/* <Overview product={this.state.productInfo} currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit} setCurrentStyle = {this.setCurrentStyle}/> */}
         <div className="listies">
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>
