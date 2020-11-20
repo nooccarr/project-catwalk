@@ -8,7 +8,7 @@ class Related extends React.Component {
     constructor(props) {
         super(props);
         this.state = {title: props.title, anim: '', shifted: true, length: 0,
-        unq: 0, scroll: 0, showR: false, showL: true, rolling: 'right',
+        unq: 0, scroll: 0, showR: false, showL: true, rolling: 'right', shifting: false,
         products: {}, comparingId: null, comparing: false, count: 0};
         this.shift = this.shift.bind(this);
         this.right = this.right.bind(this);
@@ -47,20 +47,24 @@ class Related extends React.Component {
     shift(e) {
         if (this.state.shifted) {
             this.setState({anim: this.state.anim ? '' : `related-animation-${e.target.id}`,
-                rolling: e.target.id, showR: true, showL: true});
+                rolling: e.target.id, showR: true, showL: true, shifting: true});
         }
     }
     onAnimationStart () {
+        if (this.state.shifting) {
         this.setState({shifted: false});
+        }
     }
     onAnimationEnd () {
+        if (this.state.shifting) {
         this.setState({
-            shifted: true, anim: '', 
+            shifted: true, anim: '', shifting: false,
             showL: !(this.state.scroll === this.state.unq - (this.props.pyro === 0 ? 5 : 4) 
                 && this.state.rolling === 'right'),
             showR: !(this.state.scroll === 1 && this.state.rolling === 'left'),
             scroll: this.state.scroll + (this.state.rolling === 'right' ? 1 : -1)
         });
+        }
     }
     right() {
         if (this.state.showR) {
@@ -78,9 +82,9 @@ class Related extends React.Component {
                 </div>;
         }
     }
-    hoverHandler(on, id = 0) {
+    hoverHandler(on, id = null) {
         if (id >= 0) {
-            this.setState({comparing: on, comparingId: id || this.state.comparingId});
+            this.setState({comparing: on, comparingId: id});
         }
     }
     handleClick(e) {
@@ -187,17 +191,19 @@ class Related extends React.Component {
                             return this.Add();
                         }
                         index++;
-                        var image;
-                        if (product.styles) {
-                            image = product.styles.results[0].photos[0].thumbnail_url;
-                        } else {
-                            image = product.img || null;
+                        var srcs = [];
+                        for (var set of product.styles.results) {
+                            srcs = srcs.concat(set.photos);
+                        }
+                        var anim = false;
+                        if (this.state.comparing && this.state.comparingId === product.id) {
+                            anim = true;
                         }
                         return <li key={index} style={{float: 'left'}}
                             onMouseEnter={() => this.hoverHandler(true, product.id)}
                             onMouseLeave={() => this.hoverHandler(false)}>
                             <ProductItem product={product} pyro={this.props.pyro}
-                                faveX={this.faveX} image={image}/>
+                                faveX={this.faveX} image={srcs} anim={anim}/>
                             </li>;
                 })}
                 </ul>
