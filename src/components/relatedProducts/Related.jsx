@@ -82,7 +82,7 @@ class Related extends React.Component {
                 </div>;
         }
     }
-    hoverHandler(on, id = null) {
+    hoverHandler(on, id) {
         if (id >= 0) {
             this.setState({comparing: on, comparingId: id});
         }
@@ -125,7 +125,8 @@ class Related extends React.Component {
                     </div>
             );
         }
-        if (this.state.comparing && this.props.pyro === 0) {
+        if (this.state.comparing && this.props.pyro === 0 &&
+                this.state.products[this.state.comparingId].styles) {
             var item = [this.props.overview,
                 this.state.products[this.state.comparingId]];
             var details = [];
@@ -142,7 +143,7 @@ class Related extends React.Component {
             }
         return (
             <div className="comparison" onMouseEnter={() => this.hoverHandler(true)}
-                onMouseLeave={() => this.hoverHandler(false)}
+                onMouseLeave={() => this.hoverHandler(false, this.state.comparingId)}
                 style={{height: 50 + 25*details.length, width: 150 + 10*max}}>
                 <div className="related-item-category">
                 COMPARING
