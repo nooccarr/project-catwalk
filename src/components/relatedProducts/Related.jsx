@@ -35,7 +35,7 @@ class Related extends React.Component {
             var products = {};
             var length = propLength;
             for (var product of this.props.products) {
-                if (product) {
+                if (product && product.id !== this.props.overview.id) {
                 products[product.id] = product;
                 }
             }
@@ -88,6 +88,7 @@ class Related extends React.Component {
         }
     }
     handleClick(e) {
+        this.setState({comparing: false});
         if (e.target.className === 'related-item-star') {
             if (Number(e.target.id) !== this.props.overview.id) {
                 var products = this.state.products;
@@ -112,7 +113,7 @@ class Related extends React.Component {
         var detail = (vals) => {
             return (
                 <div key={vals[2]} className="comparison-detail"
-                    style={{top: 45 + vals[3]*25, width: 135 + 10*max}}>
+                    style={{top: 50 + vals[3]*25, width: 135 + 10*max}}>
                         <a className="comparison-value">
                             {vals[0]}
                         </a>

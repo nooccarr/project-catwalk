@@ -11,19 +11,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {relatedProducts: [],outfit: [], outfitIndex: {},
-      productId: 5, productInfo: {faved: false}, relatedIndex: {}};
+      productId: null, productInfo: {faved: false}, relatedIndex: {}};
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
     this.getLocalOutfit.bind(this);
     this.setLocalOutfit.bind(this);
     this.getProduct = this.getProduct.bind(this);
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
+    this.setProduct = this.setProduct.bind(this);
   }
   componentDidMount() {
-    this.getProduct(this.state.productId, (product) => {
-      this.setState({productInfo: product});
+    var id = Number(window.location.search.split('?id=')[1]);
+    this.setProduct(id);
+  }
+  setProduct(id) {
+    this.setState({relatedProducts: [],outfit: [], outfitIndex: {},
+      productId: null, productInfo: {faved: false}, relatedIndex: {}});
+    this.getProduct(id, (product) => {
+      this.setState({productInfo: product, productId: id});
     });
-    this.getRelatedProducts(this.state.productId);
+    this.getRelatedProducts(id);
   }
   getProduct(id, cb) {
     axios.get(`http://3.21.164.220/products/${id}`)
@@ -39,7 +46,7 @@ class App extends React.Component {
               cb(product);
             });
         });
-      });
+      }).catch((e) => console.log('Invalid ID'));
   }
   getRelatedProducts(id) {
     var count = 0;
@@ -62,7 +69,9 @@ class App extends React.Component {
   }
   handleRedirect(id) {
       if (id !== this.state.productId) {
-      console.log('Redirect to id:',id);
+        var newURL = window.location.href.split('?id=')[0].concat(`?id=${id}`);
+        window.history.pushState({path: newURL}, '', newURL)
+        this.setProduct(id);
       }
   }
   getLocalOutfit() {
