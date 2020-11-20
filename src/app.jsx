@@ -169,6 +169,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {console.log(this.state)}
         <div className="nav">
           <span className="logo">Donauwelle</span>
         </div>
@@ -182,7 +183,12 @@ class App extends React.Component {
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={1} products={this.state.outfit} toggleOutfit={this.toggleOutfit}/>
         </div>
-        <RatingAndReviews className="ratingAndReviews"/>
+        {this.state.productId && this.state.productInfo ?
+          <RatingAndReviews
+            className="ratingAndReviews"
+            productId={this.state.productId}
+            product={this.state.productInfo.name}
+        /> : null}
         </div>
       </div>
     )
