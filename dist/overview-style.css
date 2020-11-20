@@ -55,6 +55,11 @@
   /* object-fit: contain; */
 }
 
+.galleryContainer {
+  height: 100%;
+  display: flex;
+
+}
 
 #galleryImage {
   max-width: 100%;
@@ -64,6 +69,7 @@
   overflow: hidden; */
   /* position: absolute;
    z-index: 1;  */
+   margin: auto;
 }
 
 #galleryThumbnailColumn {
@@ -96,13 +102,15 @@ li {
 
 .overviewThumbnailUL {
   padding-inline-start: 0px;
+
+
  
 }
 
 /* Lost style for 
 */
 .overviewThumbnailLI {
-  transition: 10s
+ 
 } 
 
 

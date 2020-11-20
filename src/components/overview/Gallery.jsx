@@ -110,7 +110,7 @@ class Gallery extends React.Component {
     } else {
 
       return (
-        <div>
+        <div className = 'galleryContainer'> 
            {/* <img src = {this.state.currentImage} id = 'galleryImage'/> */}
            
            <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'galleryImage'/>
