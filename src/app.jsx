@@ -5,7 +5,7 @@ import _ from 'underscore';
 import ls from 'local-storage';
 import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/relatedProducts/Related.jsx';
-import average from '../utils/average.js';
+//import average from '../utils/average.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class App extends React.Component {
     this.getProduct = this.getProduct.bind(this);
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.setProduct = this.setProduct.bind(this);
+    this.setCurrentStyle = this.setCurrentStyle.bind(this);
   }
   componentDidMount() {
     var id = Number(window.location.search.split('?id=')[1]) || 1;
@@ -28,8 +29,8 @@ class App extends React.Component {
   setProduct(id) {
     this.setState({relatedProducts: [],outfit: [], outfitIndex: {},
       productId: null, productInfo: {faved: false}, relatedIndex: {}});
-    this.getProduct(id, (product) => {
-      this.setState({productInfo: product, productId: id});
+    this.getProduct(id, (product, style) => {
+      this.setState({productInfo: product, productId: id, currentStyle: style});
     });
     this.getRelatedProducts(id);
   }
@@ -44,7 +45,7 @@ class App extends React.Component {
               product.average = average(ratings.data);
               product.styles = styles.data;
               product.faved = false; //true if product is in outfit
-              cb(product);
+              cb(product, styles.data.results[0]);
             });
         });
       }).catch((e) => console.log('Invalid ID'));
@@ -134,6 +135,9 @@ class App extends React.Component {
     ls.set('outfit', outfit);
   }
   toggleOutfit(id) {
+
+    console.log('hi toggle outfit invoked with id', id)
+    //console.log('in toggle outfit');
     var product, outfit, index;
     if (id === this.state.productId) {
       product = this.state.productInfo;
@@ -155,6 +159,13 @@ class App extends React.Component {
     }
     this.setLocalOutfit();
   }
+  setCurrentStyle(newStyle, originalPrice, salePrice) {
+    this.setState({
+      currentStyle: newStyle,
+      // original_price: originalPrice,
+      // sale_price: salePrice
+    })
+  }
   render() {
     return (
       <div>
@@ -162,7 +173,7 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-        <Overview product={this.state.productInfo}/>
+        <Overview product={this.state.productInfo} currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit} setCurrentStyle = {this.setCurrentStyle}/>
         <div className="listies">
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>
