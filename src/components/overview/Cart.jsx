@@ -1,3 +1,4 @@
+import { render } from 'enzyme';
 import React from 'react';
 import onClickOutside from 'react-onclickoutside'
 
@@ -6,22 +7,7 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    location: [
-      // {
-      //     id: 0,
-      //     title: 'New York',
-      //     selected: false,
-      //     key: 'location'
-      // },
-      {
-        title: 'New York'
-    }, {
-      title: 'Los Angeles'
-  }
-      
-    ],
-
-
+  
     skus: '',
     skuKeys: '',
     sku_id: '',
@@ -86,13 +72,63 @@ class Cart extends React.Component {
         <EnhancedComponent title="SELECT SIZE" list={this.state.sizes} setSizeQuantities = {this.setSizeQuantities} sizes = {true}/> 
         <EnhancedComponent title="0" list={  [...Array(this.state.availableQuantity).keys()].map((x) => (x+1)) } quantities = {true} setQuantity = {this.setQuantity}/> 
         <AddtoCart size = {this.state.selectedSize} quantity = {this.state.selectedQuantity}/>
+        <Star toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/>
       </div>
     )
 
   }
 
+}
 
 
+
+class Star extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+    
+    this.state = {
+      selected: false
+    }
+  }
+
+  handleClick() {
+    console.log(this.props.product.id);
+    this.props.toggleOutfit(this.props.product.id);
+    // this.props.toggleOutfit(this.props.product.product_id);
+    this.setState(prevState => ({
+      selected: !prevState.selected
+    }))
+  }
+
+  render() {
+
+    if (!this.state.selected) {
+    return (
+      <div className = 'dd-wrapper-star'> 
+        <div className = 'dd-header-star'>
+          <div className = 'contain-star' onClick = {this.handleClick} >
+            <img src = '../../../dist/images/empty-star-grey.png' style = {{maxWidth: '100%'}}/>
+          </div>
+        </div>
+      </div>
+      // <button onClick = {this.handleClick}>star</button>
+    )
+  } else {
+      return (
+        <div className = 'dd-wrapper-star'> 
+          <div className = 'dd-header-star'>
+            <div className = 'contain-star' onClick = {this.handleClick} >
+              <img src = '../../../dist/images/full-star.png' style = {{maxWidth: '100%'}}/>
+            </div>
+          </div>
+        </div>
+
+      )
+  }
+
+}
 }
 
 class AddtoCart extends React.Component {
@@ -108,7 +144,7 @@ class AddtoCart extends React.Component {
 
   render() {
    return (
-      <div> 
+      <div style = {{display: 'inline'}}> 
         <div className = 'add-to-cart-wrapper'>
           <div className = 'dd-header' onClick = {this.handleSubmit}> 
             <span className = 'dd-header-title'>{`Add to Bag`}</span>

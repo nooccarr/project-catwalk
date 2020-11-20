@@ -1,11 +1,17 @@
 import React from 'react';
 import Stars from '../Stars.jsx';
 
-const ProductItem = ({product, pyro, image}) => {
+const ProductItem = ({product, pyro, image, anim}) => {
     return (
         <div id={product.id} className="related-item">
-            <div>
-            <img className="related-item-image" src={image}/>
+            <div className="related-flipper">
+                <div className={anim ? 'related-image-animation' : ''}>
+                    <img className="related-item-image" src={image[0].thumbnail_url}/>
+                    <img className="related-item-image" src={image[1].thumbnail_url} style={{left:150}}/>
+                    <img className="related-item-image" src={image[2].thumbnail_url} style={{left:300}}/>
+                    <img className="related-item-image" src={image[3].thumbnail_url} style={{left:450}}/>
+                    <img className="related-item-image" src={image[0].thumbnail_url} style={{left:600}}/>
+                </div>
             <div className="related-item-faveX">
                 <img id={product.id} className="related-item-star"
                     src={`../../../dist/images/${pyro === 0 ?
