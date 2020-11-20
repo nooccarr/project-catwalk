@@ -25,7 +25,7 @@ class RatingAndReviews extends React.Component {
 
   componentDidMount() {
     // requires this.props.productId
-    this.getAllReviews(this.state.productId, this.state.sort);
+    this.getRating();
   }
 
   getAllReviews(productId, sort) {
@@ -41,7 +41,6 @@ class RatingAndReviews extends React.Component {
           reviews: data.results
         })
       })
-      .then(this.getRating())
       .catch(err => console.log(err));
   }
 
@@ -54,6 +53,7 @@ class RatingAndReviews extends React.Component {
         rating: result.data,
         average: average(result.data)
       }))
+      .then(this.getAllReviews(this.state.productId, this.state.sort))
       .catch(err => console.log(err));
   }
 
@@ -81,7 +81,7 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <hr />
         <div>RATINGS & REVIEWS</div>
         <RatingBreakdown

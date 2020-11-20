@@ -5,7 +5,7 @@ import _ from 'underscore';
 import ls from 'local-storage';
 import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import Related from './components/relatedProducts/Related.jsx';
-//import average from '../utils/average.js';
+import average from '../utils/average.js';
 
 class App extends React.Component {
   constructor(props) {

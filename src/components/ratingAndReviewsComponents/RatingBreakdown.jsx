@@ -14,7 +14,7 @@ class RatingBreakdown extends React.Component {
 
     return (
       <div>
-        {console.log(rating)}
+        {/* {console.log(rating)} */}
         <div>{average}</div>
         {Stars(120, average)}
       </div>
