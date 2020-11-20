@@ -10,7 +10,7 @@ import Stars from '../Stars.jsx';
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(props);
     this.state = {
       // category: '',
       // name: '',

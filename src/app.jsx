@@ -10,7 +10,7 @@ import average from '../utils/average.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {relatedProducts: [],outfit: [], outfitIndex: {},
+    this.state = {relatedProducts: [],outfit: [], outfitIndex: {}, currentStyle: false,
       productId: null, productInfo: {faved: false}, relatedIndex: {}};
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
@@ -26,7 +26,7 @@ class App extends React.Component {
     this.setProduct(id);
   }
   setProduct(id) {
-    this.setState({relatedProducts: [],outfit: [], outfitIndex: {},
+    this.setState({relatedProducts: [],outfit: [], outfitIndex: {}, currentStyle: false,
       productId: null, productInfo: {faved: false}, relatedIndex: {}});
     this.getProduct(id, (product, style) => {
       this.setState({productInfo: product, productId: id, currentStyle: style});
@@ -173,7 +173,9 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-        {/* <Overview product={this.state.productInfo} currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit} setCurrentStyle = {this.setCurrentStyle}/> */}
+        {this.state.currentStyle ? <Overview product={this.state.productInfo}
+          currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit}
+            setCurrentStyle = {this.setCurrentStyle}/> : null}
         <div className="listies">
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>
