@@ -36,3 +36,7 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.ratingBreakdownBar {
+  cursor: pointer;
+}

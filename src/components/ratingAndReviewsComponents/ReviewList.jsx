@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const ReviewList = ({ reviews, getAllReviews, sort }) => (
   <div>
+    {/* {console.log(reviews)} */}
     {reviews.map((review, idx) => {
       return <ReviewListEntry
         review={review}

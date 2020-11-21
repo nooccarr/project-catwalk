@@ -5,6 +5,8 @@ import ReviewList from './ReviewList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import average from '../../../utils/average.js';
+import filterReviews from '../../../utils/filterReviews.js';
+import Stars from '../Stars.jsx';
 
 class RatingAndReviews extends React.Component {
   constructor(props) {
@@ -14,13 +16,16 @@ class RatingAndReviews extends React.Component {
       product: this.props.product,
       reviews: [],
       sort: 'relevant',
-      show: false
+      show: false,
+      filter: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getRating = this.getRating.bind(this);
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showReview = this.showReview.bind(this);
     this.hideReview = this.hideReview.bind(this);
+    this.selectedFilters = this.selectedFilters.bind(this);
+    this.noFilter = this.noFilter.bind(this);
   }
 
   componentDidMount() {
@@ -76,16 +81,35 @@ class RatingAndReviews extends React.Component {
     })
   }
 
+  selectedFilters(filters) {
+    let filtered = filterReviews(this.state.reviews, filters);
+    this.setState({
+      filtered: filtered,
+      filter: true
+    });
+  }
+
+  noFilter() {
+    this.setState({
+      filter: false
+    });
+  }
+
   render() {
     return (
       <div>
         {/* {console.log(this.state)} */}
         <hr />
         <div>RATINGS & REVIEWS</div>
-        <RatingBreakdown
-          average={this.state.average}
-          rating={this.state.rating}
-        />
+        <div>
+          <h1>{this.state.average}</h1>
+          {Stars(120, this.state.average)}
+        </div>
+        {this.state.rating ? <RatingBreakdown
+          ratings={this.state.rating.ratings}
+          selectedFilters={this.selectedFilters}
+          noFilter={this.noFilter}
+        /> : null}
         <ProductBreakdown />
         <form>
           <label>Sort on </label>
@@ -96,7 +120,7 @@ class RatingAndReviews extends React.Component {
           </select>
         </form>
         <ReviewList
-          reviews={this.state.reviews}
+          reviews={this.state.filter ? this.state.filtered : this.state.reviews}
           getAllReviews={this.getAllReviews}
           sort={this.state.sort}
         />
