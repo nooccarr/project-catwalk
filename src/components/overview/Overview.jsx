@@ -125,8 +125,8 @@ class Overview extends React.Component {
           <div className="item grid-item2"> <ProductInfo category = {this.props.product.category} name = {this.props.product.name} default_price = {this.props.product.default_price} original_price = {this.props.currentStyle.original_price} sale_price = {this.props.currentStyle.sale_price} average_rating = {this.props.product.average}/> </div>
           <div className="item grid-item3">  <StyleSelector styles = {this.props.product.styles} setCurrentStyle = {this.props.setCurrentStyle}/> </div>
           <div className="item grid-item4">  <Cart currentStyle = {this.props.currentStyle} toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/> </div>
-          <div className="item grid-item5">  </div>
-          <div className="item grid-item6">  </div>
+          <div className="item grid-item5">  <ProductDescription slogan = {this.props.product.slogan} description = {this.props.product.description}/> </div>
+          <div className="item grid-item6">  <Features features = {this.props.product.features}/> </div>
         </div>
       );
     // } 
@@ -139,6 +139,61 @@ class Overview extends React.Component {
 
 
 }
+
+let Features = ({features}) => {
+
+  if (features === '') {
+    return (
+      <div> 
+       null so far 
+      </div>
+    )
+  } else {
+
+    return (
+      <div className = 'productFeaturesValuesOuterWrapper'>
+        {features.map((x) => {
+          console.log('features being mapped', x.feature);
+          console.log('values being mapped', x.value);
+
+          return (
+          <div className = 'productFeaturesValuesInnerWrapper'>
+            <span className = 'productFeatures'>{x.feature}{'   '}</span>
+            <span className = 'productValues'>{x.value}</span>
+          </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+}
+
+
+
+
+let ProductDescription = ({slogan, description}) => {
+
+
+  if (slogan === '') {
+    return (
+      <div> 
+       null so far 
+      </div>
+    )
+  } else {
+
+    return (
+      <div>
+        <div id = 'slogan'> {slogan} </div>
+        <div id = 'description'> {description} </div>
+      </div>
+    )
+  }
+
+}
+
+
 
 let ProductInfo = ({category, name, default_price, original_price, sale_price, average_rating}) => {
 
@@ -158,7 +213,7 @@ let ProductInfo = ({category, name, default_price, original_price, sale_price, a
     return (
       <div>
         <div className = 'star-reviews-wrapper'> 
-        {Stars(60, average_rating)}
+        {Stars(50, average_rating)}
         </div> 
         <div id = 'category'> {category} </div>
         <div id = 'expandedProductName'> {name} </div>

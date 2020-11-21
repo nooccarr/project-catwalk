@@ -8,8 +8,11 @@ class Gallery extends React.Component {
       thumbnails: '',
       mainImage: 0,
       startIndex: 0,
-      endIndex: 4,
+      endIndex: 3,
+
+      slideTriggered: false
     }
+
     
     this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
     this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
@@ -19,12 +22,46 @@ class Gallery extends React.Component {
 
   }
 
+  componentDidMount() {
+    // var c = document.getElementById("myCanvas");
+    // var ctx = c.getContext("2d");
+    // console.log('component mounted');
+    // console.log(ctx);
+    // var img = document.getElementById("galleryImage");
+    // ctx.drawImage(img, 0, 0);
+  }
+
+  slide() {
+
+  }
+
 
   slideRight() {
-    var mainIndex = this.state.mainImage +=1;
+    this.setState((prevState) => ({
+      slideTriggered: !prevState.slideTriggered
+    }))
 
+
+    var mainIndex = this.state.mainImage + 1;
+
+
+
+    //old logic:
+    // if (mainIndex > this.state.endIndex) {
+    //   this.slideThumbnailsDown()
+    // }
+
+    //new logic: 
+    // I think this.state.startIndex+= was incrementing the state weirdly
+    
     if (mainIndex > this.state.endIndex) {
-      this.slideThumbnailsDown()
+      // var newStartIndex = mainIndex - this.state.endIndex;
+
+      var newStartIndex = this.state.startIndex > mainIndex - this.state.endIndex ? this.state.startIndex : mainIndex - this.state.endIndex;
+
+      this.setState({
+        startIndex: newStartIndex
+      })
     }
 
     this.setState({
@@ -34,10 +71,17 @@ class Gallery extends React.Component {
   }
 
   slideLeft() {
-    var mainIndex = this.state.mainImage -=1;
+    var mainIndex = this.state.mainImage - 1;
 
-    if (mainIndex < this.state.startIndex) {
-      this.slideThumbnailsUp()
+    // if (mainIndex < this.state.startIndex) {
+    //   this.slideThumbnailsUp()
+    // }
+
+    if (mainIndex < this.state.endIndex-1 && this.state.startIndex !== 0) {
+      var newStartIndex = this.state.startIndex - 1
+      this.setState({
+        startIndex: newStartIndex
+      })
     }
 
     this.setState({
@@ -57,15 +101,20 @@ class Gallery extends React.Component {
   }
 
   slideThumbnailsDown() {
-  
-    if (this.state.endIndex >= this.state.thumbnails.length-1) {
+    // if (this.state.endIndex >= this.state.thumbnails.length-1) {
+    //   return;
+    // }
+    if (this.state.startIndex >= this.state.endIndex-1) {
       return;
     }
 
-    var newEnd = this.state.endIndex+=1
-    var newStart = this.state.startIndex+=1
+    //var newEnd = this.state.endIndex+=1
+    var newStart = this.state.startIndex + 1
+
+    console.log('is slide thumbanisl down called?', newStart);
+
     this.setState({
-      endIndex: newEnd,
+      // endIndex: newEnd,
       startIndex: newStart
     })
 
@@ -77,10 +126,10 @@ class Gallery extends React.Component {
       return;
     }
 
-    var newEnd = this.state.endIndex-=1
-    var newStart = this.state.startIndex-=1
+    // var newEnd = this.state.endIndex-=1
+    var newStart = this.state.startIndex - 1
     this.setState({
-      endIndex: newEnd,
+      // endIndex: newEnd,
       startIndex: newStart
     })
 
@@ -103,6 +152,8 @@ class Gallery extends React.Component {
     //Is there a way to do this without conditional render? doesn't like img src
 
 
+    const TN_SHIFT = 60;
+
      if (this.props.currentStyle === '') {
     // if (this.props.currentStyle === '') {
     return (
@@ -111,40 +162,67 @@ class Gallery extends React.Component {
     } else {
 
       return (
-        <div className = 'galleryContainer'> 
-           {/* <img src = {this.state.currentImage} id = 'galleryImage'/> */}
-           
-           <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'galleryImage'
-           onClick = {() => console.log('imageClicked')}/>
+        <div> 
+                  <div id = 'galleryThumbnailColumn'>
+                  <i className="arrow up" onClick = {this.slideThumbnailsUp}></i> 
+                      
+                      
+                      {/* <ul className = 'overviewThumbnailUL'> 
+                        {this.props.currentStyle.photos.map((x, index) => { 
+                        if (index > this.state.endIndex || index < this.state.startIndex) {
+                          return <span key = {index}></span>
+                        }
+                        return (
+                          <li className = 'overviewThumbnailLI' key = {index}>
+                            <span id = 'galleryThumbnailContainer' className = { index === this.state.mainImage ? 'activeThumbnail' : ''} onClick = {() => this.updateMainImage(index)}> 
+                              <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
+                            </span>
+                          </li> 
+                        )}
+                      )}
+                    </ul> */}
 
 
-            <div id = 'galleryThumbnailColumn'>
-            <i className="arrow up" onClick = {this.slideThumbnailsUp}></i> 
-              {/* <button className = 'galleryThumbnailUp' onClick = {this.slideThumbnailsUp} >up</button> */}
-                <ul className = 'overviewThumbnailUL'> 
-                  {this.props.currentStyle.photos.map((x, index) => { 
-                  {/* {this.state.thumbnails.map((x, index) => { */}
-                  if (index > this.state.endIndex || index < this.state.startIndex) {
-                    return <span key = {index}></span>
-                  }
+                   
+                      <div className = 'thumbnailFrame'>
+                      {/* <i className="arrow down" onClick = {this.slideThumbnailsDown}></i>  */}
+                        <div className = 'thumbnailContainer' style = {this.state.startIndex > 0 ? {
+                         transform: `translateY(-${TN_SHIFT * (this.state.startIndex) }px)`
+                         } : {} }> 
+                        {this.props.currentStyle.photos.map((x, index) => { 
+                        // if (index > this.state.endIndex || index < this.state.startIndex) {
+                        //   return <span key = {index}></span>
+                        // }
+                        return (
+                          // <li className = 'overviewThumbnailLI' key = {index}>
+                            <div id = 'galleryThumbnailContainer' style= {{top: `${index*TN_SHIFT}px`}} className = { index === this.state.mainImage ? 'activeThumbnail' : ''} onClick = {() => this.updateMainImage(index)}> 
+                              <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
+                            </div>
+                          // </li> 
+                        )}
+                      )}
+                      </div>
+                      </div>
+                      <i className="arrow down" onClick = {this.slideThumbnailsDown}></i> 
 
-                  return (
-                    <li className = 'overviewThumbnailLI' key = {index}>
-                      <span id = 'galleryThumbnailContainer' className = { index === this.state.mainImage ? 'activeThumbnail' : ''} onClick = {() => this.updateMainImage(index)}> 
-                        <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
-                      </span>
-                    </li> 
-                  )}
-                 )}
 
-               </ul>
-          {/* <button className = 'galleryThumbnailDown' onClick = {this.slideThumbnailsDown}>down</button> */}
-          <i className="arrow down" onClick = {this.slideThumbnailsDown}></i> 
-        </div>
-        <i className={ this.state.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.slideLeft}></i> 
-        <i className={ this.state.mainImage === this.state.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.slideRight}></i> 
-           
-        </div>
+              </div>
+              <div className = 'frame'>   
+                <i className={ this.state.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.slideLeft}></i> 
+                  <div className = 'galleryContainer' style = {{
+                    transform: `translateX(-${this.state.mainImage*500}px)`
+                  }}> 
+                    {this.props.currentStyle.photos.map((x, index) => { return(
+                      // <canvas id = "myCanvas" width = '100' height = '100'> 
+                        <img src = {this.props.currentStyle.photos[index].url} id = 'galleryImage'/>
+                      // </canvas>
+                    )})}
+                  </div>
+                  <i className={ this.state.mainImage === this.state.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.slideRight}></i> 
+
+              </div> 
+
+      </div>
       )
     }
   }

@@ -93,6 +93,9 @@ class Star extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+  }
+
   handleClick() {
     console.log(this.props.product.id);
     this.props.toggleOutfit(this.props.product.id);
@@ -103,7 +106,9 @@ class Star extends React.Component {
   }
 
   render() {
+    console.log('what is this.props.product.faved', this.props.product.faved)
 
+    //also read from
     if (!this.state.selected) {
     return (
       <div className = 'dd-wrapper-star'> 
