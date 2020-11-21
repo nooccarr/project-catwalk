@@ -3,17 +3,16 @@ import Stars from '../Stars.jsx';
 import formatDate from '../../../utils/formatDate.js';
 import axios from 'axios';
 
-const ReviewList = ({ reviews, getAllReviews, productId, sort }) => (
+const ReviewList = ({ reviews, getAllReviews, sort }) => (
   <div>
-      {reviews.map((review, idx) => {
-        return <ReviewListEntry
-          review={review}
-          key={idx}
-          getAllReviews={getAllReviews}
-          productId={productId}
-          sort={sort}
-        />
-      })}
+    {reviews.map((review, idx) => {
+      return <ReviewListEntry
+        review={review}
+        getAllReviews={getAllReviews}
+        sort={sort}
+        key={idx}
+      />
+    })}
   </div>
 );
 
@@ -42,10 +41,9 @@ class ReviewListEntry extends React.Component {
   }
 
   clickHelpfulHandler(id) {
-    const { getAllReviews, productId, sort } = this.props;
+    const { getAllReviews } = this.props;
 
     if (!this.state[id]) {
-      console.log('trigger')
       return axios
         .put(`http://3.21.164.220/reviews/${id}/helpful`, {
           params: { review_id: id }
@@ -53,7 +51,7 @@ class ReviewListEntry extends React.Component {
         .then(result => this.setState({
           [id]: true
         }))
-        .then(result => getAllReviews(productId, sort))
+        .then(result2 => getAllReviews(this.props.sort))
         .catch(err => console.log(err));
     }
   }
@@ -64,6 +62,7 @@ class ReviewListEntry extends React.Component {
     return (
       <div>
         {/* {console.log(review)} */}
+        {/* {console.log(this.state)} */}
         {Stars(120, review.rating)}
         <span>Verified Purchaser </span>
         <span>{review.reviewer_name}, {formatDate(review.date)}</span>

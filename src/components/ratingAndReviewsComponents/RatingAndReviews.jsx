@@ -24,15 +24,15 @@ class RatingAndReviews extends React.Component {
   }
 
   componentDidMount() {
-    // requires this.props.productId
+    this.getAllReviews();
     this.getRating();
   }
 
-  getAllReviews(productId, sort) {
+  getAllReviews(sort) {
     return axios
       .get('http://3.21.164.220/reviews', {
         params: {
-          product_id: productId,
+          product_id: this.state.productId,
           sort: sort
         }
       })
@@ -49,11 +49,10 @@ class RatingAndReviews extends React.Component {
       .get('http://3.21.164.220/reviews/meta', {
         params: { product_id: this.state.productId }
       })
-      .then(result => this.setState({
-        rating: result.data,
-        average: average(result.data)
+      .then(meta => this.setState({
+        rating: meta.data,
+        average: average(meta.data)
       }))
-      .then(this.getAllReviews(this.state.productId, this.state.sort))
       .catch(err => console.log(err));
   }
 
@@ -62,8 +61,7 @@ class RatingAndReviews extends React.Component {
     this.setState({
       sort: sort
     });
-    // requires this.props.productId
-    this.getAllReviews(this.state.productId, sort);
+    this.getAllReviews(sort);
   }
 
   showReview() {
@@ -100,7 +98,6 @@ class RatingAndReviews extends React.Component {
         <ReviewList
           reviews={this.state.reviews}
           getAllReviews={this.getAllReviews}
-          productId={this.state.productId}
           sort={this.state.sort}
         />
         <button onClick={this.showReview}>Write New Review</button>

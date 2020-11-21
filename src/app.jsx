@@ -169,7 +169,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
         <div className="nav">
           <span className="logo">Donauwelle</span>
         </div>
