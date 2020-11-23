@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+// import FB from 'fb';
+// var FB = require('fb')
 
 import Gallery from './Gallery'
 import StyleSelector from './StyleSelector'
@@ -152,6 +154,7 @@ let Features = ({features}) => {
 
     return (
       <div className = 'productFeaturesValuesOuterWrapper'>
+        {/* <span id = 'productDetails'>Product Details</span> */}
         {features.map((x) => {
           console.log('features being mapped', x.feature);
           console.log('values being mapped', x.value);
@@ -187,6 +190,49 @@ let ProductDescription = ({slogan, description}) => {
       <div>
         <div id = 'slogan'> {slogan} </div>
         <div id = 'description'> {description} </div>
+
+        <div id = 'social-media-wrapper'> 
+          <div className = 'social-media-icon-wrapper' onClick = {()=>console.log('twitter icon clicked')}> 
+            
+            <a href="https://twitter.com/intent/tweet?text=Hello%20world">
+              <img src = '../../../dist/images/twitter.png' className = 'social-media-icon'/>
+            </a>
+          </div>
+          <div className = 'social-media-icon-wrapper' onClick = {()=> console.log(window.location.href)}> 
+            <div data-href={window.location.href}>
+              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5501%2Fdist%2Findex.html%3Fid%3D8&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                <img src = '../../../dist/images/fb.png' className = 'social-media-icon'/>
+              </a>
+            </div>          
+          </div>
+          <div className = 'social-media-icon-wrapper'> 
+            <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark">
+              <img src = '../../../dist/images/pinterest.png' className = 'social-media-icon'/>
+            </a>
+          </div>
+          <div className = 'social-media-icon-wrapper'> 
+            <img src = '../../../dist/images/ig.png' className = 'social-media-icon'/>
+          </div>
+
+          {/* <div className = 'social-media-icon-wrapper'> 
+            <img src = '../../../dist/images/twitter-border.png' className = 'social-media-icon'/>
+          </div>
+          <div className = 'social-media-icon-wrapper'> 
+            <img src = '../../../dist/images/fb-border.png' className = 'social-media-icon'/>
+          </div>
+          <div className = 'social-media-icon-wrapper'> 
+            <img src = '../../../dist/images/pinterest-border.png' className = 'social-media-icon'/>
+          </div>
+          <div className = 'social-media-icon-wrapper'> 
+            <img src = '../../../dist/images/ig-border.png' className = 'social-media-icon'/>
+          </div> */}
+        
+
+        
+        
+        
+        </div>
+
       </div>
     )
   }

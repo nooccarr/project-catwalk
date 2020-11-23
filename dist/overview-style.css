@@ -112,6 +112,26 @@
 
 }
 
+#social-media-wrapper {
+  height: 15px;
+  /* border: 1px solid black; */
+  padding-left: 149px;
+  padding-top: 10px;
+}
+
+.social-media-icon-wrapper {
+    height: 100%;
+    width: 16px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-media-icon {
+  height: 100%;
+  width: 100%;
+}
+
 .expandedView {
   width: 70%;
   margin-left: auto;
@@ -389,27 +409,7 @@ li {
     border: 1px solid black;
     /* border-radius: 3px; */
     background-color: white;
-    /* line-height: 38px; */
-    cursor: default;
-    cursor: pointer;
-
-    padding-left: 10px;
-
-    font-size: 10px;
-    /* margin-top: 30px; */
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  .dd-header {
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    position: relative;
-    border: 1px solid black;
-    /* border-radius: 3px; */
-    background-color: white;
-    line-height: 38px;
+    line-height: 34px;
     cursor: default;
     cursor: pointer;
 
@@ -535,7 +535,7 @@ li {
 
 .arrow {
   border: solid black;
-  border-width: 0 2px 2px 0;
+  border-width: 0 1px 1px 0;
   /* display: inline-block; */
   padding: 3px;
 }
@@ -595,7 +595,8 @@ li {
 
 .plus-sign::before {
   content: "+";
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: lighter;
 }
 
 
