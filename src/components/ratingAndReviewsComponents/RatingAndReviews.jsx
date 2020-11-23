@@ -98,20 +98,24 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <hr />
         <div>RATINGS & REVIEWS</div>
         <div>
           <h1>{this.state.average}</h1>
           {Stars(120, this.state.average)}
         </div>
-        {this.state.rating ? <RatingBreakdown
-          ratings={this.state.rating.ratings}
-          selectedFilters={this.selectedFilters}
-          noFilter={this.noFilter}
-          rec={this.state.rating.recommended}
-        /> : null}
-        <ProductBreakdown />
+        {this.state.rating ? <div>
+          <RatingBreakdown
+            ratings={this.state.rating.ratings}
+            selectedFilters={this.selectedFilters}
+            noFilter={this.noFilter}
+            rec={this.state.rating.recommended}
+          />
+          <ProductBreakdown
+            characteristics={this.state.rating.characteristics}
+          />
+        </div>: null}
         <form>
           <label>Sort on </label>
           <select onChange={(e) => this.handleSortByChange(e)}>

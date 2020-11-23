@@ -43,6 +43,7 @@ class RatingBreakdown extends React.Component {
   render() {
     const { ratings, rec } = this.props;
     const anyFilter = appliedFilters(this.state.filters);
+    const recPercentage = getPercentage(rec[0] + rec[1], rec[0]);
 
     return (
       <div>
@@ -63,8 +64,7 @@ class RatingBreakdown extends React.Component {
           />;
         })}
         <div>
-          {getPercentage(rec[0] + rec[1], rec[0])}
-          % of reviews recommend this product
+          {recPercentage}% of reviews recommend this product
         </div>
       </div>
     );
