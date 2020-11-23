@@ -156,9 +156,6 @@ let Features = ({features}) => {
       <div className = 'productFeaturesValuesOuterWrapper'>
         {/* <span id = 'productDetails'>Product Details</span> */}
         {features.map((x) => {
-          console.log('features being mapped', x.feature);
-          console.log('values being mapped', x.value);
-
           return (
           <div className = 'productFeaturesValuesInnerWrapper'>
             <span className = 'productFeatures'>{x.feature}{'   '}</span>
