@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from '../Stars.jsx';
 import formatDate from '../../../utils/formatDate.js';
+import validBody from '../../../utils/validBody.js';
 import axios from 'axios';
 
 const ReviewList = ({ reviews, getAllReviews, sort }) => (
@@ -21,11 +22,18 @@ class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showButton: true,
       showPhoto: false,
     };
     this.showPhoto = this.showPhoto.bind(this);
     this.hidePhoto = this.hidePhoto.bind(this);
     this.clickHelpfulHandler = this.clickHelpfulHandler.bind(this);
+    this.setLargeBody = this.setLargeBody.bind(this);
+    this.handleShowMore = this.handleShowMore.bind(this);
+  }
+
+  componentDidMount() {
+    this.setLargeBody();
   }
 
   showPhoto(idx) {
@@ -57,8 +65,23 @@ class ReviewListEntry extends React.Component {
     }
   }
 
+  setLargeBody() {
+    let largeBody = this.props.review.body.slice(0, 250);
+    this.setState({
+      largeBody: largeBody
+    });
+  }
+
+  handleShowMore() {
+    this.setState({
+      largeBody: this.props.review.body,
+      showButton: false
+    });
+  }
+
   render() {
     const { review } = this.props;
+    const largeBody = validBody(review.body, 251);
 
     return (
       <div>
@@ -71,7 +94,13 @@ class ReviewListEntry extends React.Component {
           <strong>{review.summary}</strong>
         </div>
         <div>
-          <p>{review.body}</p>
+          {largeBody ? <div>
+            <p>{this.state.largeBody}</p>
+            {this.state.showButton ? <div
+              className="showMoreBody"
+              onClick={this.handleShowMore}
+            >Show more</div> : null}
+          </div> : <div><p>{review.body}</p></div>}
           {review.photos.map((photo, idx) => {
             return (<div onClick={() => this.showPhoto(idx)} key={idx}>
               <img

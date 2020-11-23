@@ -13,7 +13,7 @@ const validateSubmit = (rating, recommend, size, width, comfort, quality, length
   ) {
     message += '\nAny mandatory fields are blank';
   }
-  if (!validBody(body)) {
+  if (!validBody(body, 50)) {
     message += '\nThe review body is less than 50 characters';
   }
   if (!validEmail(email)) {
