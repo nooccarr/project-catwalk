@@ -98,7 +98,7 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {/* {console.log(this.state)} */}
+        {console.log(this.state)}
         <hr />
         <div>RATINGS & REVIEWS</div>
         <div>
@@ -109,6 +109,7 @@ class RatingAndReviews extends React.Component {
           ratings={this.state.rating.ratings}
           selectedFilters={this.selectedFilters}
           noFilter={this.noFilter}
+          rec={this.state.rating.recommended}
         /> : null}
         <ProductBreakdown />
         <form>

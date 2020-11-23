@@ -40,3 +40,7 @@
 .ratingBreakdownBar {
   cursor: pointer;
 }
+
+.ratingBreakdownRemoveFilters {
+  cursor: pointer;
+}
