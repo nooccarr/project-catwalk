@@ -1,12 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'underscore';
 import Stars from '../Stars.jsx';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
+import UploadPhotos from './UploadPhotos.jsx';
 import getLabel from '../../../utils/getLabel.js';
 import capitalize from '../../../utils/capitalize.js';
 import counter from '../../../utils/counter.js';
 import validateSubmit from '../../../utils/validateSubmit.js';
+import isNewFile from '../../../utils/isNewFile.js';
+import toBoolean from '../../../utils/toBoolean.js';
+import toCharacteristics from '../../../utils/toCharacteristics.js';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -16,12 +21,21 @@ class NewReview extends React.Component {
       summary: '',
       body: '',
       photos: [],
+      files: [],
+      thumbnails: [],
       nickname: '',
       email: '',
+      showUploadPhotos: false,
+      showAddPhoto: true,
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.submitReview = this.submitReview.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleUploadPhotosButton = this.handleUploadPhotosButton.bind(this);
+    this.deleteThumbnail = this.deleteThumbnail.bind(this);
+    this.handleUploadPhotoClose = this.handleUploadPhotoClose.bind(this);
+    this.handleFileAdd = this.handleFileAdd.bind(this);
+    this.hideAddPhoto = this.hideAddPhoto.bind(this);
   }
 
   handleSelect(e) {
@@ -37,6 +51,7 @@ class NewReview extends React.Component {
   }
 
   submitReview() {
+    let photos = _.map(this.state.files, item => { return item.name });
     let message = 'You must enter the following:';
     let messageSubmitted = validateSubmit(
       this.state.rating,
@@ -47,17 +62,38 @@ class NewReview extends React.Component {
       this.state.quality,
       this.state.length,
       this.state.fit,
+      this.state.summary,
       this.state.body,
       this.state.nickname,
-      this.state.email
+      this.state.email,
+      photos
     );
 
     if (message === messageSubmitted) {
-      // axios POST /reviews
-      // then this.props.getAllReviews()
-      // catch error
-      // this.props.hideReview()
-      alert('SUCCESS');
+      return axios
+        .post('http://3.21.164.220/reviews', {
+          product_id: this.props.productId,
+          rating: this.state.rating,
+          summary: this.state.summary,
+          body: this.state.body,
+          recommend: toBoolean(this.state.recommend),
+          name: this.state.nickname,
+          email: this.state.email,
+          photos: [],
+          characteristics: toCharacteristics(
+            this.props.characteristics,
+            this.state.size,
+            this.state.width,
+            this.state.comfort,
+            this.state.quality,
+            this.state.length,
+            this.state.fit
+          )
+        })
+        .then(result1 => this.props.getAllReviews(this.props.sort))
+        .then(result2 => this.handleClose())
+        .then(alert('SUCCESS'))
+        .catch(err => console.log(err));
     } else {
       alert(messageSubmitted);
     }
@@ -69,10 +105,62 @@ class NewReview extends React.Component {
       summary: '',
       body: '',
       photos: [],
+      files: [],
+      thumbnails: [],
       nickname: '',
-      email: ''
+      email: '',
+      showUploadPhotos: false
     });
     this.props.hideReview();
+  }
+
+  handleUploadPhotosButton() {
+    this.setState({
+      showUploadPhotos: true
+    });
+  }
+
+  handleUploadPhotoClose() {
+    this.setState({
+      showUploadPhotos: false
+    });
+  }
+
+  handleFileAdd(e) {
+    let newFile = e.target.files[0];
+    let files = this.state.files.slice();
+    let newFileSelected = isNewFile(files, newFile);
+    let newThumbnail = URL.createObjectURL(newFile);
+    let thumbnails = this.state.thumbnails.slice();
+    if (newFileSelected) {
+      files.push(newFile);
+      thumbnails.push(newThumbnail);
+      this.setState({
+        files: files,
+        thumbnails: thumbnails
+      });
+      if (files.length === 5) {
+        this.hideAddPhoto();
+      }
+    }
+    // if user likes it, they can confirm and you can upload it to the real storage area, using new path
+  }
+
+  deleteThumbnail(idx) {
+    let files = this.state.files;
+    let thumbnails = this.state.thumbnails;
+    files.splice(idx, 1);
+    thumbnails.splice(idx, 1);
+    this.setState({
+      files: files,
+      thumbnails: thumbnails
+    })
+  }
+
+  hideAddPhoto() {
+    this.setState({
+      showAddPhoto: false
+    });
   }
 
   render() {
@@ -86,7 +174,7 @@ class NewReview extends React.Component {
     }
     return (
       <div className="newReview">
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>
@@ -121,7 +209,7 @@ class NewReview extends React.Component {
           })}
         </div>
         <InputEntry
-          subtitle={'Review summary'}
+          subtitle={'*Review summary'}
           name={'summary'}
           value={this.state.summary}
           maxLength={'60'}
@@ -137,10 +225,17 @@ class NewReview extends React.Component {
           handleSelect={this.handleSelect}
           text={counter(this.state.body)}
         />
-        <div>
-          <h3>Upload your photos</h3>
-          <button>Upload upto 5 photos</button>
-        </div>
+        <button
+          onClick={this.handleUploadPhotosButton}
+        >Upload your photos</button>
+        {this.state.showUploadPhotos ?
+          <UploadPhotos
+            showAddPhoto={this.state.showAddPhoto}
+            handleFileAdd={this.handleFileAdd}
+            thumbnails={this.state.thumbnails}
+            deleteThumbnail={this.deleteThumbnail}
+            handleUploadPhotoClose={this.handleUploadPhotoClose}
+        /> : null}
         <InputEntry
           subtitle={'*What is your nickname'}
           name={'nickname'}

@@ -48,3 +48,23 @@
 .showMoreBody {
   cursor: pointer;
 }
+
+.uploadPhotosSection {
+  overflow: scroll;
+  position: fixed;
+  left: 10%;
+  top: 5%;
+  width: 80%;
+  height: 90%;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 5px 5px 10px #403b3b;
+}
+
+.reviewPhotoThumbnails {
+  cursor: pointer;
+  border: 0;
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+}

@@ -38,7 +38,8 @@ class RatingAndReviews extends React.Component {
       .get('http://3.21.164.220/reviews', {
         params: {
           product_id: this.state.productId,
-          sort: sort
+          sort: sort,
+          count: 20
         }
       })
       .then(({ data }) => {
@@ -130,11 +131,15 @@ class RatingAndReviews extends React.Component {
           sort={this.state.sort}
         />
         <button onClick={this.showReview}>Write New Review</button>
-        <NewReview
+        {this.state.rating ? <NewReview
           show={this.state.show}
           hideReview={this.hideReview}
+          productId={this.state.productId}
           product={this.state.product}
-        />
+          characteristics={this.state.rating.characteristics}
+          getAllReviews={this.getAllReviews}
+          sort={this.state.sort}
+        /> : null}
       </div>
     );
   }

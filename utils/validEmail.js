@@ -1,6 +1,8 @@
 const validEmail = (email) => {
   let parts = email.split('@');
-  if (username(parts[0]) && domain(parts[1])) {
+  if (parts.length === 1) {
+    return false;
+  } else if (username(parts[0]) && domain(parts[1])) {
     return true;
   }
   return false;
