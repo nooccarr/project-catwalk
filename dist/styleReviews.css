@@ -37,6 +37,10 @@
   cursor: pointer;
 }
 
+.reviewReportLink {
+  display: inline-block;
+  cursor: pointer;
+}
 .ratingBreakdownBar {
   cursor: pointer;
 }
