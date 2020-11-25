@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {relatedProducts: [],outfit: [], outfitIndex: {}, currentStyle: false,
-      productId: null, productInfo: {faved: false}, relatedIndex: {}};
+      productId: null, productInfo: {faved: false}, relatedIndex: {}, expandedViewZoom: false, expandedView: false};
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
     this.getLocalOutfit.bind(this);
@@ -20,6 +20,9 @@ class App extends React.Component {
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.setProduct = this.setProduct.bind(this);
     this.setCurrentStyle = this.setCurrentStyle.bind(this);
+
+    this.toggleExpandedView = this.toggleExpandedView.bind(this);
+    this.toggleExpandedViewZoom = this.toggleExpandedViewZoom.bind(this);
   }
   componentDidMount() {
     var id = Number(window.location.search.split('?id=')[1]) || 1;
@@ -166,6 +169,17 @@ class App extends React.Component {
       // sale_price: salePrice
     })
   }
+  toggleExpandedViewZoom() {
+    this.setState((prevState) => ({
+      expandedViewZoom: !prevState.expandedViewZoom
+    }))
+  }
+
+  toggleExpandedView() {
+    this.setState((prevState) => ({
+      expandedView: !prevState.expandedView
+    }))
+  }
   render() {
     return (
       <div>
@@ -175,7 +189,10 @@ class App extends React.Component {
           <div className="app">
         {this.state.currentStyle ? <Overview product={this.state.productInfo}
           currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit}
-            setCurrentStyle = {this.setCurrentStyle}/> : null}
+          setCurrentStyle = {this.setCurrentStyle} expandedView = {this.state.expandedView}
+          expandedViewZoom = {this.state.expandedViewZoom} toggleExpandedView = {this.toggleExpandedView}
+          toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
+          /> : null}
         <div className="listies">
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>

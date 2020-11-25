@@ -5,152 +5,56 @@ class Gallery extends React.Component {
     super(props);
 
     this.state = {
-      thumbnails: '',
-      mainImage: 0,
-      startIndex: 0,
-      endIndex: 3,
+      // thumbnails: '',
+      // mainImage: 0,
+      // startIndex: 0,
+      //endIndex: 3,
 
-      slideTriggered: false
     }
 
-    
-    this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
-    this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
-    this.updateMainImage = this.updateMainImage.bind(this);
-    this.slideRight = this.slideRight.bind(this);
-    this.slideLeft = this.slideLeft.bind(this);
+    // this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
+    // this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
+    // // this.updateMainImage = this.updateMainImage.bind(this);
+    // this.slideRight = this.slideRight.bind(this);
+    // this.slideLeft = this.slideLeft.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSlideRight = this.handleSlideRight.bind(this);
+    this.handleSlideLeft = this.handleSlideLeft.bind(this);
+    this.handleUpdateMainImage = this.handleUpdateMainImage.bind(this);
+    this.handleSlideThumbnailsDown = this.handleSlideThumbnailsDown.bind(this);
+    this.handleSlideThumbnailsUp = this.handleSlideThumbnailsUp.bind(this);
+
 
   }
 
-  componentDidMount() {
-    // var c = document.getElementById("myCanvas");
-    // var ctx = c.getContext("2d");
-    // console.log('component mounted');
-    // console.log(ctx);
-    // var img = document.getElementById("galleryImage");
-    // ctx.drawImage(img, 0, 0);
+  handleClick() {
+    console.log('main image clicked');
+    this.props.toggleExpandedView();
   }
 
-  slide() {
-
+  handleSlideRight() {
+    this.props.slideRight();
   }
 
-
-  slideRight() {
-    this.setState((prevState) => ({
-      slideTriggered: !prevState.slideTriggered
-    }))
-
-
-    var mainIndex = this.state.mainImage + 1;
-
-
-
-    //old logic:
-    // if (mainIndex > this.state.endIndex) {
-    //   this.slideThumbnailsDown()
-    // }
-
-    //new logic: 
-    // I think this.state.startIndex+= was incrementing the state weirdly
-    
-    if (mainIndex > this.state.endIndex) {
-      // var newStartIndex = mainIndex - this.state.endIndex;
-
-      var newStartIndex = this.state.startIndex > mainIndex - this.state.endIndex ? this.state.startIndex : mainIndex - this.state.endIndex;
-
-      this.setState({
-        startIndex: newStartIndex
-      })
-    }
-
-    this.setState({
-      mainImage: mainIndex
-    })
-
+  handleSlideLeft() {
+    this.props.slideLeft();
   }
 
-  slideLeft() {
-    var mainIndex = this.state.mainImage - 1;
-
-    // if (mainIndex < this.state.startIndex) {
-    //   this.slideThumbnailsUp()
-    // }
-
-    if (mainIndex < this.state.endIndex-1 && this.state.startIndex !== 0) {
-      var newStartIndex = this.state.startIndex - 1
-      this.setState({
-        startIndex: newStartIndex
-      })
-    }
-
-    this.setState({
-      mainImage: mainIndex
-    })
-
+  handleUpdateMainImage(index) {
+    this.props.updateMainImage(index);
   }
 
-  
-
-  
-
-  updateMainImage(index) {
-    this.setState({
-      mainImage: index
-    })
+  handleSlideThumbnailsDown() {
+    this.props.slideThumbnailsDown();
   }
 
-  slideThumbnailsDown() {
-    // if (this.state.endIndex >= this.state.thumbnails.length-1) {
-    //   return;
-    // }
-    if (this.state.startIndex >= this.state.endIndex-1) {
-      return;
-    }
-
-    //var newEnd = this.state.endIndex+=1
-    var newStart = this.state.startIndex + 1
-
-    console.log('is slide thumbanisl down called?', newStart);
-
-    this.setState({
-      // endIndex: newEnd,
-      startIndex: newStart
-    })
-
-  }
-
-  slideThumbnailsUp() {
-  
-    if (this.state.startIndex <= 0) {
-      return;
-    }
-
-    // var newEnd = this.state.endIndex-=1
-    var newStart = this.state.startIndex - 1
-    this.setState({
-      // endIndex: newEnd,
-      startIndex: newStart
-    })
-
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-   
-    if (this.state.thumbnails === '' && this.props.currentStyle!=='') {
-
-       console.log('in condition')
-       this.setState({
-       thumbnails: this.props.currentStyle.photos,
-     })
-    }
-
+  handleSlideThumbnailsUp() {
+    this.props.slideThumbnailsUp();
   }
 
 
   render() {
     //Is there a way to do this without conditional render? doesn't like img src
-
 
     const TN_SHIFT = 60;
 
@@ -164,7 +68,7 @@ class Gallery extends React.Component {
       return (
         <div> 
                   <div id = 'galleryThumbnailColumn'>
-                  <i className="arrow up" onClick = {this.slideThumbnailsUp}></i> 
+                  <i className="arrow up" onClick = {this.handleSlideThumbnailsUp}></i> 
                       
                       
                       {/* <ul className = 'overviewThumbnailUL'> 
@@ -186,8 +90,8 @@ class Gallery extends React.Component {
                    
                       <div className = 'thumbnailFrame'>
                       {/* <i className="arrow down" onClick = {this.slideThumbnailsDown}></i>  */}
-                        <div className = 'thumbnailContainer' style = {this.state.startIndex > 0 ? {
-                         transform: `translateY(-${TN_SHIFT * (this.state.startIndex) }px)`
+                        <div className = 'thumbnailContainer' style = {this.props.startIndex > 0 ? {
+                         transform: `translateY(-${TN_SHIFT * (this.props.startIndex) }px)`
                          } : {} }> 
                         {this.props.currentStyle.photos.map((x, index) => { 
                         // if (index > this.state.endIndex || index < this.state.startIndex) {
@@ -195,7 +99,9 @@ class Gallery extends React.Component {
                         // }
                         return (
                           // <li className = 'overviewThumbnailLI' key = {index}>
-                            <div id = 'galleryThumbnailContainer' style= {{top: `${index*TN_SHIFT}px`}} className = { index === this.state.mainImage ? 'activeThumbnail' : ''} onClick = {() => this.updateMainImage(index)}> 
+                            <div id = 'galleryThumbnailContainer' style= {{top: `${index*TN_SHIFT}px`}} 
+                            className = { index === this.props.mainImage ? 'activeThumbnail' : ''} 
+                            onClick = {() => this.handleUpdateMainImage(index)}> 
                               <img src = {x.thumbnail_url} id = 'galleryThumbnail'/> 
                             </div>
                           // </li> 
@@ -203,23 +109,26 @@ class Gallery extends React.Component {
                       )}
                       </div>
                       </div>
-                      <i className="arrow down" onClick = {this.slideThumbnailsDown}></i> 
+                      <i className="arrow down" onClick = {this.handleSlideThumbnailsDown}></i> 
 
 
               </div>
               <div className = 'frame'>   
-                <i className={ this.state.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.slideLeft}></i> 
+              <span className = 'arrowIconWrapperLeft'>
+                <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.handleSlideLeft}></i> 
+              </span>
                   <div className = 'galleryContainer' style = {{
-                    transform: `translateX(-${this.state.mainImage*500}px)`
+                    transform: `translateX(-${this.props.mainImage*500}px)`
                   }}> 
                     {this.props.currentStyle.photos.map((x, index) => { return(
                       // <canvas id = "myCanvas" width = '100' height = '100'> 
-                        <img src = {this.props.currentStyle.photos[index].url} id = 'galleryImage'/>
+                        <img src = {this.props.currentStyle.photos[index].url} id = 'galleryImage' onClick = {this.handleClick}/>
                       // </canvas>
                     )})}
                   </div>
-                  <i className={ this.state.mainImage === this.state.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.slideRight}></i> 
-
+                <span className = 'arrowIconWrapperRight'>
+                  <i className={ this.props.mainImage === this.props.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.handleSlideRight}></i> 
+                </span>
               </div> 
 
       </div>
