@@ -81,11 +81,11 @@ class ReviewListEntry extends React.Component {
       <div>
         {/* {console.log(review)} */}
         {/* {console.log(this.state)} */}
-        {Stars(120, review.rating)}
-        <span>Verified Purchaser </span>
+        {Stars(70, review.rating)}
+        {/* <span>Verified Purchaser </span> */}
         <span>{review.reviewer_name}, {formatDate(review.date)}</span>
         <div>
-          <strong>{review.summary}</strong>
+          <strong className="individualReviewSummary">{review.summary}</strong>
         </div>
         <div>
           {largeBody ? <div>

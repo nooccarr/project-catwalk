@@ -133,51 +133,61 @@ class RatingAndReviews extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="ratingAndReviews">
         {/* {console.log(this.state)} */}
-        <hr />
-        <div>RATINGS & REVIEWS</div>
-        <div>
-          <h1>{this.state.average}</h1>
-          {Stars(120, this.state.average)}
+        <div className="ratingAndReviewsTitle">RATINGS & REVIEWS</div>
+        <div className="ratingBody">
+          <div>
+            <h1 className="averageRating">{this.state.average}</h1>
+            <div className="averageStarRating">{Stars(70, this.state.average)}</div>
+          </div>
+          {this.state.rating ? <div>
+            <RatingBreakdown
+              ratings={this.state.rating.ratings}
+              selectedFilters={this.selectedFilters}
+              noFilter={this.noFilter}
+              rec={this.state.rating.recommended}
+            />
+            <ProductBreakdown
+              characteristics={this.state.rating.characteristics}
+            />
+          </div>: null}
         </div>
-        {this.state.rating ? <div>
-          <RatingBreakdown
-            ratings={this.state.rating.ratings}
-            selectedFilters={this.selectedFilters}
-            noFilter={this.noFilter}
-            rec={this.state.rating.recommended}
+        <div className="reviewBody">
+          <div className="sortOnSection">
+            <label className="sortOnText"
+            >{this.state.moreReviews ? this.state.temp.length
+              : this.state.reviews.length} reviews, sort on</label>
+            <select
+              className="sortOnOptions"
+              onChange={(e) => this.handleSortByChange(e)}>
+              {['relevant', 'helpful', 'newest'].map((value, idx) => {
+                return <option
+                  value={value}
+                  key={idx}
+                >{value}</option>;
+              })}
+            </select>
+          </div>
+          <ReviewList
+            reviews={this.state.filter ? this.state.filtered : this.state.reviews}
+            getAllReviews={this.getAllReviews}
+            sort={this.state.sort}
           />
-          <ProductBreakdown
+          {this.state.moreReviews ? <button
+            onClick={()=> this.handleMoreReviewsClick(this.state.filter)}
+          >More Reviews</button> : null}
+          <button onClick={this.showReview}>Write New Review</button>
+          {this.state.rating ? <NewReview
+            show={this.state.show}
+            hideReview={this.hideReview}
+            productId={this.state.productId}
+            product={this.state.product}
             characteristics={this.state.rating.characteristics}
-          />
-        </div>: null}
-        <form>
-          <label>Sort on </label>
-          <select onChange={(e) => this.handleSortByChange(e)}>
-            <option value="relevant">Relevant</option>
-            <option value="helpful">Helpful</option>
-            <option value="newest">Newest</option>
-          </select>
-        </form>
-        <ReviewList
-          reviews={this.state.filter ? this.state.filtered : this.state.reviews}
-          getAllReviews={this.getAllReviews}
-          sort={this.state.sort}
-        />
-        {this.state.moreReviews ? <button
-          onClick={()=> this.handleMoreReviewsClick(this.state.filter)}
-        >More Reviews</button> : null}
-        <button onClick={this.showReview}>Write New Review</button>
-        {this.state.rating ? <NewReview
-          show={this.state.show}
-          hideReview={this.hideReview}
-          productId={this.state.productId}
-          product={this.state.product}
-          characteristics={this.state.rating.characteristics}
-          getAllReviews={this.getAllReviews}
-          sort={this.state.sort}
-        /> : null}
+            getAllReviews={this.getAllReviews}
+            sort={this.state.sort}
+          /> : null}
+        </div>
       </div>
     );
   }

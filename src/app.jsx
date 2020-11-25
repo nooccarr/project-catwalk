@@ -184,7 +184,6 @@ class App extends React.Component {
         </div>
         {this.state.productId && this.state.productInfo ?
           <RatingAndReviews
-            className="ratingAndReviews"
             productId={this.state.productId}
             product={this.state.productInfo.name}
         /> : null}
