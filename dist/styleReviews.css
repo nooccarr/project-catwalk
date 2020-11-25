@@ -63,6 +63,7 @@
 
 .reviewPhotoThumbnails {
   cursor: pointer;
+  display: block;
   border: 0;
   height: 120px;
   width: 120px;

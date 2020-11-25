@@ -30,6 +30,8 @@ class NewReview extends React.Component {
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.submitReview = this.submitReview.bind(this);
+    this.addNewReview = this.addNewReview.bind(this);
+    this.photosToCloudinary = this.photosToCloudinary.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleUploadPhotosButton = this.handleUploadPhotosButton.bind(this);
     this.deleteThumbnail = this.deleteThumbnail.bind(this);
@@ -70,33 +72,63 @@ class NewReview extends React.Component {
     );
 
     if (message === messageSubmitted) {
-      return axios
-        .post('http://3.21.164.220/reviews', {
-          product_id: this.props.productId,
-          rating: this.state.rating,
-          summary: this.state.summary,
-          body: this.state.body,
-          recommend: toBoolean(this.state.recommend),
-          name: this.state.nickname,
-          email: this.state.email,
-          photos: [],
-          characteristics: toCharacteristics(
-            this.props.characteristics,
-            this.state.size,
-            this.state.width,
-            this.state.comfort,
-            this.state.quality,
-            this.state.length,
-            this.state.fit
-          )
-        })
-        .then(result1 => this.props.getAllReviews(this.props.sort))
-        .then(result2 => this.handleClose())
-        .then(alert('SUCCESS'))
-        .catch(err => console.log(err));
+      this.photosToCloudinary();
     } else {
       alert(messageSubmitted);
     }
+  }
+
+  addNewReview() {
+    return axios
+      .post('http://3.21.164.220/reviews', {
+        product_id: this.props.productId,
+        rating: this.state.rating,
+        summary: this.state.summary,
+        body: this.state.body,
+        recommend: toBoolean(this.state.recommend),
+        name: this.state.nickname,
+        email: this.state.email,
+        photos: this.state.photos,
+        characteristics: toCharacteristics(
+          this.props.characteristics,
+          this.state.size,
+          this.state.width,
+          this.state.comfort,
+          this.state.quality,
+          this.state.length,
+          this.state.fit
+        )
+      })
+      .then(result1 => this.props.getAllReviews(this.props.sort))
+      .then(result2 => this.handleClose())
+      .catch(err => console.log(err));
+  }
+
+  photosToCloudinary() {
+    let photos = this.state.photos.slice();
+    let requests = [];
+    for (let i = 0; i < this.state.files.length; i++) {
+      let formData = new FormData();
+      formData.append('file', this.state.files[i]);
+      formData.append('upload_preset', 'unsigned');
+      let request = axios
+        .post('https://api.cloudinary.com/v1_1/donauwelle/image/upload', formData);
+      requests.push(request);
+    }
+    axios
+      .all(requests)
+      .then(
+        axios.spread((...responses) => {
+          responses.map(response => photos.push(response.data.url));
+        })
+      )
+      .then(result =>{
+        this.setState({
+          photos: photos
+        })
+      })
+      .then(result2 => this.addNewReview())
+      .catch(err => console.log(err));
   }
 
   handleClose() {
@@ -143,7 +175,6 @@ class NewReview extends React.Component {
         this.hideAddPhoto();
       }
     }
-    // if user likes it, they can confirm and you can upload it to the real storage area, using new path
   }
 
   deleteThumbnail(idx) {
@@ -153,7 +184,8 @@ class NewReview extends React.Component {
     thumbnails.splice(idx, 1);
     this.setState({
       files: files,
-      thumbnails: thumbnails
+      thumbnails: thumbnails,
+      showAddPhoto: true
     })
   }
 
@@ -174,7 +206,7 @@ class NewReview extends React.Component {
     }
     return (
       <div className="newReview">
-        {/* {console.log(this.state)} */}
+        {console.log(this.state)}
         <h1>Write Your Review</h1>
         <h3>About the {product}</h3>
         <div>
