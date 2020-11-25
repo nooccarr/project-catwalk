@@ -17,7 +17,8 @@ class RatingAndReviews extends React.Component {
       reviews: [],
       sort: 'relevant',
       show: false,
-      filter: false
+      filter: false,
+      moreReviews: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getRating = this.getRating.bind(this);
@@ -26,6 +27,7 @@ class RatingAndReviews extends React.Component {
     this.hideReview = this.hideReview.bind(this);
     this.selectedFilters = this.selectedFilters.bind(this);
     this.noFilter = this.noFilter.bind(this);
+    this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
   }
 
   componentDidMount() {
@@ -43,9 +45,18 @@ class RatingAndReviews extends React.Component {
         }
       })
       .then(({ data }) => {
-        this.setState({
-          reviews: data.results
-        })
+        let reviews = data.results;
+        if (reviews.length > 2) {
+          this.setState({
+            temp: reviews,
+            reviews: reviews.slice(0, 2),
+            moreReviews: true
+          });
+        } else {
+          this.setState({
+            reviews: reviews
+          })
+        }
       })
       .catch(err => console.log(err));
   }
@@ -84,16 +95,40 @@ class RatingAndReviews extends React.Component {
 
   selectedFilters(filters) {
     let filtered = filterReviews(this.state.reviews, filters);
-    this.setState({
-      filtered: filtered,
-      filter: true
-    });
+    if (filtered.length > 2) {
+      this.setState({
+        temp: filtered,
+        filtered: filtered.slice(0, 2),
+        filter: true,
+        moreReviews: true
+      });
+    } else {
+      this.setState({
+        filtered: filtered,
+        filter: true
+      });
+    }
   }
 
   noFilter() {
     this.setState({
       filter: false
     });
+  }
+
+  handleMoreReviewsClick(filter) {
+    let temp = this.state.temp;
+    if (filter) {
+      this.setState({
+        filtered: temp,
+        moreReviews: false
+      });
+    } else {
+      this.setState({
+        reviews: temp,
+        moreReviews: false
+      });
+    }
   }
 
   render() {
@@ -130,6 +165,9 @@ class RatingAndReviews extends React.Component {
           getAllReviews={this.getAllReviews}
           sort={this.state.sort}
         />
+        {this.state.moreReviews ? <button
+          onClick={()=> this.handleMoreReviewsClick(this.state.filter)}
+        >More Reviews</button> : null}
         <button onClick={this.showReview}>Write New Review</button>
         {this.state.rating ? <NewReview
           show={this.state.show}
