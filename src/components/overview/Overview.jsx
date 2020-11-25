@@ -246,23 +246,31 @@ class Overview extends React.Component {
           style = {{width: Math.min(this.state.mainImageWidth, (window.innerWidth - 60)*.7)}}
           >
 
-          <span className = 'arrowIconWrapperLeftExpandedView'>
+          <span className = { this.state.mainImage === 0 ? null : 'arrowIconWrapperLeftExpandedView'}>
                 <i className={ this.state.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.slideLeft}></i> 
           </span>
-            {/* <div className = "expandedContainer" style = {{
-                    transform: `translateX(-${this.state.expandedViewOffset}px)`
-                  }}> */}
-              {/* {this.props.currentStyle.photos.map((x, index) => { return( */}
-                
+          <span className = 'expandedViewIcons'>
+                {this.props.currentStyle.photos.map((x, index) => {
+                  return (
+                    <div className = {this.state.mainImage === index ? 'expandedViewIconWrapperActive' : 'expandedViewIconWrapper'}>
+                      <img className = 'expandedViewIcon' src = {x.thumbnail_url}
+                      onClick = {() => this.updateMainImage(index)}>
+                      </img>
+                    </div>
+                  )
+                  })}
+          </span>
                 <img src = {this.props.currentStyle.photos[this.state.mainImage].url} id = 'expandedImage'
                 onClick = {this.props.toggleExpandedViewZoom}/>
-              
-              {/* )})} */}
-
-            {/* </div> */}
-            <span className = 'arrowIconWrapperRightExpandedView'>
-                <i className={ this.state.mainImage === this.state.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.slideRight}></i> 
+            
+            
+         
+            <span className = { this.state.mainImage === this.props.currentStyle.photos.length-1 ? null : 'arrowIconWrapperRightExpandedView'}>
+                <i className={ this.state.mainImage === this.props.currentStyle.photos.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.slideRight}></i> 
           </span>
+
+          
+
           </div>
         </div>
       )
@@ -275,9 +283,12 @@ class Overview extends React.Component {
             onMouseMove = {this.onMouseMove}
             onClick = {()=> {this.props.toggleExpandedView(); this.props.toggleExpandedViewZoom()}}
             id = 'expandedImageZoom'
-            style = {{objectPosition: `-${(this.state.x)/1.575}px -${(this.state.y)/1.2}px`}}
+            style = {{objectPosition: 
+                Math.min(this.state.mainImageWidth, (window.innerWidth - 60)*.7) === this.state.mainImageWidth ?
+                `-${(0)}px -${(this.state.y)/1.5}px`
+                :
+                `-${(this.state.x)/ (966/(this.state.mainImageWidth-((window.innerWidth - 60)*.7)))}px -${(this.state.y)/1.2}px`}}
             />  
-            
             <h1>Mouse Coordinates: {this.state.x} {this.state.y} </h1>        
           </div>
         </div>

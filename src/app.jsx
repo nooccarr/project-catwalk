@@ -193,7 +193,7 @@ class App extends React.Component {
           expandedViewZoom = {this.state.expandedViewZoom} toggleExpandedView = {this.toggleExpandedView}
           toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
           /> : null}
-        <div className="listies">
+        <div className="listies" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}>
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}

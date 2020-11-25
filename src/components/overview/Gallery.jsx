@@ -114,7 +114,7 @@ class Gallery extends React.Component {
 
               </div>
               <div className = 'frame'>   
-              <span className = 'arrowIconWrapperLeft'>
+              <span className =  { this.props.mainImage === 0 ? null :  'arrowIconWrapperLeft'}>
                 <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.handleSlideLeft}></i> 
               </span>
                   <div className = 'galleryContainer' style = {{
@@ -126,8 +126,8 @@ class Gallery extends React.Component {
                       // </canvas>
                     )})}
                   </div>
-                <span className = 'arrowIconWrapperRight'>
-                  <i className={ this.props.mainImage === this.props.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.handleSlideRight}></i> 
+                <span className = { this.props.mainImage === this.props.thumbnails.length-1 ? null : 'arrowIconWrapperRight'}>
+                  <i className= { this.props.mainImage === this.props.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.handleSlideRight}></i> 
                 </span>
               </div> 
 
