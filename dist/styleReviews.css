@@ -33,8 +33,7 @@ figure, figcaption, section, summary, mark {
 
 .ratingAndReviews {
   margin: 0 auto;
-  width: 90%;
-  min-width: 900px;
+  width: 900px;
 }
 
 .ratingBody,
@@ -49,12 +48,11 @@ figure, figcaption, section, summary, mark {
 }
 
 .ratingBody {
-  width: 33.33%;
-  min-width: 300px;
+  width: 300px;
 }
 
 .reviewBody {
-  width: 66.66%;
+  width: 600px;
 }
 
 .ratingAndReviewsTitle {
@@ -91,12 +89,22 @@ figure, figcaption, section, summary, mark {
 
 .sortOnSection {
   margin-top: 15px;
-  margin-bottom: 25px;
+
 }
 
 .individualReviewSummary,
 .sortOnText {
 	font: 500 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.individualReviewSummary {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.individualReviewBody {
+  display: block;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .sortOnOptions {
@@ -109,10 +117,13 @@ figure, figcaption, section, summary, mark {
 
 .reviewListEntryThumbnail {
   border: 0;
-  height: 120px;
-  width: 120px;
+  height: 80px;
+  width: 80px;
   object-fit: cover;
   cursor: pointer;
+  padding: 3px;
+  margin-top: 5px;
+  display: inline-block;
 }
 
 .reviewsPhoto {
@@ -120,21 +131,12 @@ figure, figcaption, section, summary, mark {
   background:#000;
   object-fit: scale-down;
   width: 100%;
-  height: 90%;
-  top: 5%;
-  left: 0%;
+  height: 100%;
+  top: 0;
+  left: 0;
   cursor: pointer;
 }
 
-.reviewHelpfulLink {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.reviewReportLink {
-  display: inline-block;
-  cursor: pointer;
-}
 .ratingBreakdownBar {
   cursor: pointer;
 }
@@ -144,7 +146,10 @@ figure, figcaption, section, summary, mark {
 }
 
 .showMoreBody {
+  display: block;
   cursor: pointer;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 5px;
 }
 
 .uploadPhotosSection {
@@ -163,7 +168,77 @@ figure, figcaption, section, summary, mark {
   cursor: pointer;
   display: block;
   border: 0;
-  height: 120px;
-  width: 120px;
+  height: 80px;
+  width: 80px;
   object-fit: cover;
+  padding: 3px;
+}
+
+.starRatingReviewerNameAndDate {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.reviewerNameAndDate {
+  font: 200 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.recommendText {
+  display: inline-block;
+  font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 15px;
+}
+
+.checkSymbol {
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.reviewHelpfulAndReport {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.reviewHelpfulText,
+.reviewHelpfulYes,
+.reviewHelpfulReportDivider {
+  display: inline-block;
+  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.reviewHelpfulReportDivider {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.reviewReportLink,
+.reviewHelpfulLink {
+  display: inline-block;
+  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  text-decoration: underline;
+  padding-left: 7px;
+  padding-right: 2px;
+}
+
+.reviewSellerResponse {
+  display: block;
+  height: auto;
+  background-color: rgb(236, 236, 236);
+  padding: 13px;
+  margin-top: 15px;
+}
+
+.reviewSellerText {
+  display: block;
+  font: 500 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.actualSellerResponse {
+  margin-top: 13px;
+  display: block;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

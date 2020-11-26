@@ -1,8 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import Stars from '../Stars.jsx';
 import formatDate from '../../../utils/formatDate.js';
 import validBody from '../../../utils/validBody.js';
-import axios from 'axios';
+import truncateText from '../../../utils/truncateText.js';
 
 class ReviewListEntry extends React.Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class ReviewListEntry extends React.Component {
   setLargeBody() {
     let largeBody = this.props.review.body.slice(0, 250);
     this.setState({
-      largeBody: largeBody
+      largeBody: truncateText(largeBody)
     });
   }
 
@@ -81,46 +82,55 @@ class ReviewListEntry extends React.Component {
       <div>
         {/* {console.log(review)} */}
         {/* {console.log(this.state)} */}
-        {Stars(70, review.rating)}
-        {/* <span>Verified Purchaser </span> */}
-        <span>{review.reviewer_name}, {formatDate(review.date)}</span>
+        <div className="starRatingReviewerNameAndDate">
+          <div>{Stars(70, review.rating)}</div>
+          <div className="reviewerNameAndDate">
+            {/* <span>Verified Purchaser </span> */}
+            {review.reviewer_name}, {formatDate(review.date)}</div>
+        </div>
         <div>
           <strong className="individualReviewSummary">{review.summary}</strong>
         </div>
+        {largeBody ? <div>
+          <p className="individualReviewBody">
+            {this.state.largeBody}
+          </p>
+          {this.state.showButton ? <div
+            className="showMoreBody"
+            onClick={this.handleShowMore}
+          >Show more</div> : null}
+        </div> : <div><p className="individualReviewBody">{review.body}</p></div>}
         <div>
-          {largeBody ? <div>
-            <p>{this.state.largeBody}</p>
-            {this.state.showButton ? <div
-              className="showMoreBody"
-              onClick={this.handleShowMore}
-            >Show more</div> : null}
-          </div> : <div><p>{review.body}</p></div>}
           {review.photos.map((photo, idx) => {
-            return (<div onClick={() => this.showPhoto(idx)} key={idx}>
-              <img
-                className="reviewListEntryThumbnail"
-                src={photo.url}
-              />
-            </div>);
+            return (<img
+              onClick={() => this.showPhoto(idx)}
+              className="reviewListEntryThumbnail"
+              src={photo.url}
+              key={idx}
+            />);
           })}
         </div>
-        {review.recommend ? <p>&#10003; I recommend this product</p> : null}
-        {review.response ? <div>
-          <p>Response from seller: </p>
-          <p>{review.response}</p>
+        {review.recommend ? <div>
+          <div className="checkSymbol">&#10003;</div>
+          <p className="recommendText">I recommend this product</p>
         </div> : null}
-        <div>
-          <p>Was this review helpful?</p>
+        {review.response ? <div className="reviewSellerResponse">
+          <p className="reviewSellerText">Response from seller: </p>
+          <p className="actualSellerResponse">{review.response}</p>
+        </div> : null}
+        <div className="reviewHelpfulAndReport">
+          <p className="reviewHelpfulText">Was this review helpful?</p>
           <div
             className="reviewHelpfulLink"
             onClick={() => this.clickHelpfulHandler(review.review_id)}
           >Yes</div>
-          <span>({review.helpfulness})</span>
+          <p className="reviewHelpfulYes">({review.helpfulness})</p>
+          <p className="reviewHelpfulReportDivider">|</p>
+          <div
+            className="reviewReportLink"
+            onClick={() => this.clickReportHandler(review.review_id)}
+          >Report</div>
         </div>
-        <div
-          className="reviewReportLink"
-          onClick={() => this.clickReportHandler(review.review_id)}
-        >Report</div>
         {this.state.showPhoto ? <img
           className="reviewsPhoto"
           src={review.photos[this.state.idx].url}
