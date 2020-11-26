@@ -174,19 +174,25 @@ class RatingAndReviews extends React.Component {
             getAllReviews={this.getAllReviews}
             sort={this.state.sort}
           />
-          {this.state.moreReviews ? <button
-            onClick={()=> this.handleMoreReviewsClick(this.state.filter)}
-          >More Reviews</button> : null}
-          <button onClick={this.showReview}>Write New Review</button>
-          {this.state.rating ? <NewReview
-            show={this.state.show}
-            hideReview={this.hideReview}
-            productId={this.state.productId}
-            product={this.state.product}
-            characteristics={this.state.rating.characteristics}
-            getAllReviews={this.getAllReviews}
-            sort={this.state.sort}
-          /> : null}
+          <div className="moreReviewNewReview">
+            {this.state.moreReviews ? <button
+              className="moreReviewButton"
+              onClick={()=> this.handleMoreReviewsClick(this.state.filter)}
+            >MORE REVIEWS</button> : null}
+            <button
+              className="writeNewReviewButton"
+              onClick={this.showReview}
+            >WRITE NEW REVIEW<div className="newReviewSymbol">+</div></button>
+            {this.state.rating ? <NewReview
+              show={this.state.show}
+              hideReview={this.hideReview}
+              productId={this.state.productId}
+              product={this.state.product}
+              characteristics={this.state.rating.characteristics}
+              getAllReviews={this.getAllReviews}
+              sort={this.state.sort}
+            /> : null}
+          </div>
         </div>
       </div>
     );

@@ -242,3 +242,34 @@ figure, figcaption, section, summary, mark {
   display: block;
   font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.moreReviewNewReview {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.moreReviewButton,
+.writeNewReviewButton {
+  display: inline-block;
+  border: 2px solid rgb(185, 185, 185);
+  background: white;
+  cursor: pointer;
+  color: gray;
+  font: 400 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.moreReviewButton {
+  padding: 15px;
+  margin-right: 15px;
+}
+
+.writeNewReviewButton {
+  padding: 9px 15px 13px 15px;
+}
+
+.newReviewSymbol {
+  padding-left: 15px;
+  display: inline-block;
+  font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
