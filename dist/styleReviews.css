@@ -195,6 +195,11 @@ figure, figcaption, section, summary, mark {
   margin-bottom: 15px;
 }
 
+.reviewReportLink:hover,
+.reviewHelpfulLink:hover {
+  color: rgb(40, 148, 184);
+}
+
 .reviewHelpfulText,
 .reviewHelpfulYes,
 .reviewHelpfulReportDivider {
@@ -250,6 +255,12 @@ figure, figcaption, section, summary, mark {
   cursor: pointer;
   color: gray;
   font: 400 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.moreReviewButton:hover,
+.writeNewReviewButton:hover {
+  color: rgb(184, 184, 184);
+  border: 2px solid rgb(207, 207, 207);
 }
 
 .moreReviewButton {
@@ -340,7 +351,12 @@ figure, figcaption, section, summary, mark {
   margin-top: 7px;
   font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid gray;
   padding: 3px;
   border-radius: 3px;
+}
+
+.ratingBreakdownRemoveFilters:hover {
+  color: rgb(184, 184, 184);
+  border-color: rgb(184, 184, 184);
 }
