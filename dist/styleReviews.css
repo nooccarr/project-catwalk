@@ -62,6 +62,7 @@ figure, figcaption, section, summary, mark {
   color: gray;
   padding-left: 10px;
   margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .newReview {
@@ -282,6 +283,7 @@ figure, figcaption, section, summary, mark {
   display: block;
   margin-top: 10px;
   font: 300 17px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: capitalize;
 
 }
 
@@ -335,7 +337,7 @@ figure, figcaption, section, summary, mark {
 
 .percentageOfReviewsRecommended {
   margin-top: 15px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: block;
 }
@@ -350,6 +352,7 @@ figure, figcaption, section, summary, mark {
   cursor: pointer;
   margin-top: 7px;
   font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
   display: inline-block;
   border: 1px solid gray;
   padding: 3px;
@@ -359,4 +362,43 @@ figure, figcaption, section, summary, mark {
 .ratingBreakdownRemoveFilters:hover {
   color: rgb(184, 184, 184);
   border-color: rgb(184, 184, 184);
+}
+
+.characteristicName {
+  display: block;
+  font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 13px;
+}
+
+.feedbackBlock {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 25px;
+}
+
+.characteristicFeedback {
+  display: inline-block;
+  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.characteristicsBreakdown:last-child {
+  margin-bottom: 380px;
+}
+
+.characteristic-bar {
+  background-color:rgb(212, 212, 212);
+  position: relative;
+  display: block;
+  margin: 5px 25px 5px 0px;
+}
+
+.characteristic-bar > span {
+  height: 6px;
+  display: block;
+  margin: 5px 25px 5px 0px;
+  line-height: 10px;
+}
+
+.characteristicEntryName {
+  text-transform: capitalize;
 }

@@ -5,7 +5,7 @@ import getPercentage from '../../../utils/getPercentage.js';
 
 const ProductBreakdown = ({ characteristics }) => {
   return (
-    <div>
+    <div className="characteristicsBreakdown">
       {_.map(characteristics, (scale, characteristic) => {
         return (<Characteristic
           characteristic={characteristic}
@@ -18,16 +18,20 @@ const ProductBreakdown = ({ characteristics }) => {
 };
 
 const Characteristic = ({ characteristic, scale }) => {
+  let textIndent = { textIndent: `${getPercentage(5, Number(scale))}%` };
+
   return (<div>
-    <div>{characteristic}</div>
-    <div>{getPercentage(5, Number(scale))}</div>
-    {isMeasurement(characteristic) ? <div>
-      <span>too small </span>
-      <span>perfect </span>
-      <span>large</span>
-    </div> : <div>
-      <span>poor </span>
-      <span>great</span>
+    <div className="characteristicName">{characteristic}</div>
+    <div className="characteristic-bar">
+      <span style={textIndent}>&#x25BC;</span>
+    </div>
+    {isMeasurement(characteristic) ? <div className="feedbackBlock">
+      <p className="characteristicFeedback">too small </p>
+      <p className="characteristicFeedback">perfect </p>
+      <p className="characteristicFeedback">large</p>
+    </div> : <div className="feedbackBlock">
+      <p className="characteristicFeedback">poor </p>
+      <p className="characteristicFeedback">great</p>
     </div>}
   </div>);
 };

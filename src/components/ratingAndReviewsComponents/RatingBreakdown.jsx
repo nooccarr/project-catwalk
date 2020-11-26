@@ -50,12 +50,12 @@ class RatingBreakdown extends React.Component {
     return (
       <div>
         {/* {console.log(this.state)} */}
-        <h3 className="ratingBreakdownTitle">Rating Breakdown</h3>
+        <h3 className="ratingBreakdownTitle">rating breakdown</h3>
         <div className="appliedFilters">{anyFilter}</div>
         {anyFilter ? <div
           className="ratingBreakdownRemoveFilters"
           onClick={this.handleRemoveFilters}
-        >REMOVE ALL FILTERS</div> : null}
+        >remove all filters</div> : null}
         {[5, 4, 3, 2, 1].map((star, idx) => {
           return <Bar
             star={star}

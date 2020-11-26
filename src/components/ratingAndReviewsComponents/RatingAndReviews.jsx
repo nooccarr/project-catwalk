@@ -135,7 +135,7 @@ class RatingAndReviews extends React.Component {
     return (
       <div className="ratingAndReviews">
         {/* {console.log(this.state)} */}
-        <div className="ratingAndReviewsTitle">RATINGS & REVIEWS</div>
+        <div className="ratingAndReviewsTitle">ratings & reviews</div>
         <div className="ratingBody">
           <div>
             <h1 className="averageRating">{this.state.average}</h1>

@@ -1,11 +1,10 @@
 import React from 'react';
-import capitalize from '../../../utils/capitalize.js';
 import getLabel from '../../../utils/getLabel.js';
 
 const CharacteristicEntry = ({ state, name, handleSelect }) => {
   return (
     <div>
-      <h3>{capitalize(name)}</h3>
+      <h3 className="characteristicEntryName">{name}</h3>
       {state ? <h3>
         {getLabel(name, state)}
       </h3> : <h3>none selected</h3>}
