@@ -183,10 +183,13 @@ class App extends React.Component {
           pyro={1} products={this.state.outfit} toggleOutfit={this.toggleOutfit}/>
         </div>
         {this.state.productId && this.state.productInfo ?
-          <RatingAndReviews
-            productId={this.state.productId}
-            product={this.state.productInfo.name}
-        /> : null}
+          <div>
+            <RatingAndReviews
+              productId={this.state.productId}
+              product={this.state.productInfo.name}
+            />
+          </div>
+        : null}
         </div>
       </div>
     )
