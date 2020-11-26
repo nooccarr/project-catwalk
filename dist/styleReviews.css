@@ -19,7 +19,7 @@ figure, figcaption, section, summary, mark {
 /* Custom Styles */
 .ratingAndReviews {
   color: #403b3b;
-	font: 300 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 300 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* Grid */
@@ -96,14 +96,14 @@ figure, figcaption, section, summary, mark {
 
 .individualReviewSummary,
 .sortOnText {
-	font: 500 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 500 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .sortOnOptions {
   background: none;
   border: none;
   color: #403b3b;
-	font: 500 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 500 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-decoration: underline;
 }
 
