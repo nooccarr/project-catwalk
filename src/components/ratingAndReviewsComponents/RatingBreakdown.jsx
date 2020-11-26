@@ -1,4 +1,5 @@
 import React from 'react';
+import Bar from './Bar.jsx';
 import totalStars from '../../../utils/totalStars.js';
 import getPercentage from '../../../utils/getPercentage.js';
 import selectedBar from '../../../utils/selectedBar.js';
@@ -43,17 +44,18 @@ class RatingBreakdown extends React.Component {
   render() {
     const { ratings, rec } = this.props;
     const anyFilter = appliedFilters(this.state.filters);
-    const recPercentage = getPercentage(rec[0] + rec[1], rec[0]);
+    const total = rec[1] ? rec[0] + rec[1] : rec[0];
+    const recPercentage = getPercentage(total, rec[0]);
 
     return (
       <div>
         {/* {console.log(this.state)} */}
-        <h3>Rating Breakdown</h3>
-        <div>{anyFilter}</div>
+        <h3 className="ratingBreakdownTitle">Rating Breakdown</h3>
+        <div className="appliedFilters">{anyFilter}</div>
         {anyFilter ? <div
           className="ratingBreakdownRemoveFilters"
           onClick={this.handleRemoveFilters}
-        >Remove all filters</div> : null}
+        >REMOVE ALL FILTERS</div> : null}
         {[5, 4, 3, 2, 1].map((star, idx) => {
           return <Bar
             star={star}
@@ -63,26 +65,12 @@ class RatingBreakdown extends React.Component {
             handleBarClick={this.handleBarClick}
           />;
         })}
-        <div>
+        <div className="percentageOfReviewsRecommended">
           {recPercentage}% of reviews recommend this product
         </div>
       </div>
     );
   }
 };
-
-const Bar = ({ star, rating = 0, total, handleBarClick }) => {
-
-  return (
-    <div
-      className="ratingBreakdownBar"
-      onClick={() => handleBarClick(star)}
-    >
-      <span>{star} Stars, </span>
-      <span>{getPercentage(total, rating)} Percent, </span>
-      <span>{rating}</span>
-    </div>
-  );
-}
 
 export default RatingBreakdown;

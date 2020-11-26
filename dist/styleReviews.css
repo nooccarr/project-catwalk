@@ -61,6 +61,7 @@ figure, figcaption, section, summary, mark {
   font-family: Arial, Helvetica, sans-serif;
   color: gray;
   padding-left: 10px;
+  margin-bottom: 10px;
 }
 
 .newReview {
@@ -89,7 +90,6 @@ figure, figcaption, section, summary, mark {
 
 .sortOnSection {
   margin-top: 15px;
-
 }
 
 .individualReviewSummary,
@@ -113,6 +113,7 @@ figure, figcaption, section, summary, mark {
   color: #403b3b;
 	font: 500 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .reviewListEntryThumbnail {
@@ -134,14 +135,6 @@ figure, figcaption, section, summary, mark {
   height: 100%;
   top: 0;
   left: 0;
-  cursor: pointer;
-}
-
-.ratingBreakdownBar {
-  cursor: pointer;
-}
-
-.ratingBreakdownRemoveFilters {
   cursor: pointer;
 }
 
@@ -253,7 +246,7 @@ figure, figcaption, section, summary, mark {
 .writeNewReviewButton {
   display: inline-block;
   border: 2px solid rgb(185, 185, 185);
-  background: white;
+  background-color: white;
   cursor: pointer;
   color: gray;
   font: 400 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -272,4 +265,82 @@ figure, figcaption, section, summary, mark {
   padding-left: 15px;
   display: inline-block;
   font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.ratingBreakdownTitle {
+  display: block;
+  margin-top: 10px;
+  font: 300 17px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.progress-bar {
+  vertical-align: middle;
+  background-color: rgb(189, 189, 189);
+  width: 215px;
+  height: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.progress-bar > span {
+  background-color: green;
+  height: 8px;
+  display: inline-block;
+  text-indent: -9999px;
+}
+
+.ratingBreakdownBar {
+  cursor: pointer;
+  display: block;
+  margin-top: 13px;
+}
+
+.ratingBreakdownBar:hover {
+  color: rgb(40, 148, 184);
+}
+
+.ratingBreakdownBar:hover > .progress-bar {
+  background-color: rgb(212, 212, 212);
+}
+.ratingBreakdownBar:hover > .progress-bar > span {
+ background-color: rgb(0, 170, 0);
+}
+
+.ratingBreakdownStars,
+.ratingBreakdownStarsCount {
+  font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+}
+
+.ratingBreakdownStars {
+  text-decoration: underline;
+  margin-right: 5px;
+}
+
+.ratingBreakdownStarsCount {
+  margin-left: 5px;
+}
+
+.percentageOfReviewsRecommended {
+  margin-top: 15px;
+  margin-bottom: 40px;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: block;
+}
+
+.appliedFilters {
+  margin-top: 10px;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: block;
+}
+
+.ratingBreakdownRemoveFilters {
+  cursor: pointer;
+  margin-top: 7px;
+  font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 3px;
+  border-radius: 3px;
 }
