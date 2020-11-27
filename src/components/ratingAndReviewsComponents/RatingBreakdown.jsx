@@ -4,7 +4,7 @@ import totalStars from '../../../utils/totalStars.js';
 import getPercentage from '../../../utils/getPercentage.js';
 import selectedBar from '../../../utils/selectedBar.js';
 import appliedFilters from '../../../utils/appliedFilters.js';
-import totalCount from '../../../utils/totalStars.js';
+import totalCount from '../../../utils/totalCount.js';
 
 class RatingBreakdown extends React.Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class RatingBreakdown extends React.Component {
   render() {
     const { ratings, rec } = this.props;
     const anyFilter = appliedFilters(this.state.filters);
-    const recPercentage = getPercentage(totalCount(rec), rec[0]);
+    const recPercentage = getPercentage(totalCount(rec), rec[1]);
 
     return (
       <div>
