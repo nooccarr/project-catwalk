@@ -467,6 +467,7 @@ figure, figcaption, section, summary, mark {
   display: inline-block;
   font: 400 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 8px;
+  text-transform: capitalize;
 }
 
 .newReviewOverallRating {

@@ -6,7 +6,6 @@ import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
 import getLabel from '../../../utils/getLabel.js';
-import capitalize from '../../../utils/capitalize.js';
 import counter from '../../../utils/counter.js';
 import validateSubmit from '../../../utils/validateSubmit.js';
 import isNewFile from '../../../utils/isNewFile.js';
@@ -239,7 +238,7 @@ class NewReview extends React.Component {
                   onClick={(e) => this.handleSelect(e)}
                 />
                 <label className="newReviewInputLabel">
-                  {capitalize(value)}
+                  {value}
                 </label>
               </div>);
             })}
