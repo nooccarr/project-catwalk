@@ -1,12 +1,12 @@
-import React from 'react';
 import axios from 'axios';
+import React from 'react';
 import NewReview from './NewReview.jsx';
 import ReviewList from './ReviewList.jsx';
-import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
+import RatingBreakdown from './RatingBreakdown.jsx';
+import Stars from '../Stars.jsx';
 import average from '../../../utils/average.js';
 import filterReviews from '../../../utils/filterReviews.js';
-import Stars from '../Stars.jsx';
 
 class RatingAndReviews extends React.Component {
   constructor(props) {
@@ -18,7 +18,8 @@ class RatingAndReviews extends React.Component {
       sort: 'relevant',
       show: false,
       filter: false,
-      moreReviews: false
+      moreReviews: false,
+      reviewIds: []
     };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getRating = this.getRating.bind(this);
@@ -28,6 +29,7 @@ class RatingAndReviews extends React.Component {
     this.selectedFilters = this.selectedFilters.bind(this);
     this.noFilter = this.noFilter.bind(this);
     this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
+    this.addClickedReviewId = this.addClickedReviewId.bind(this);
   }
 
   componentDidMount() {
@@ -131,6 +133,14 @@ class RatingAndReviews extends React.Component {
     }
   }
 
+  addClickedReviewId(reviewId) {
+    let reviewIds = this.state.reviewIds.slice();
+    reviewIds.push(reviewId);
+    this.setState({
+      reviewIds: reviewIds
+    });
+  }
+
   render() {
     return (
       <div className="ratingAndReviews">
@@ -173,6 +183,11 @@ class RatingAndReviews extends React.Component {
             reviews={this.state.filter ? this.state.filtered : this.state.reviews}
             getAllReviews={this.getAllReviews}
             sort={this.state.sort}
+            moreReviews={this.state.moreReviews}
+            handleMoreReviewsClick={this.handleMoreReviewsClick}
+            filter={this.state.filter}
+            addClickedReviewId={this.addClickedReviewId}
+            reviewIds={this.state.reviewIds}
           />
           <div className="moreReviewNewReview">
             {this.state.moreReviews ? <button
@@ -183,16 +198,16 @@ class RatingAndReviews extends React.Component {
               className="writeNewReviewButton"
               onClick={this.showReview}
             >write new review<div className="newReviewSymbol">+</div></button>
-            {this.state.rating ? <NewReview
-              show={this.state.show}
-              hideReview={this.hideReview}
-              productId={this.state.productId}
-              product={this.state.product}
-              characteristics={this.state.rating.characteristics}
-              getAllReviews={this.getAllReviews}
-              sort={this.state.sort}
-            /> : null}
           </div>
+          {this.state.rating ? <NewReview
+            show={this.state.show}
+            hideReview={this.hideReview}
+            productId={this.state.productId}
+            product={this.state.product}
+            characteristics={this.state.rating.characteristics}
+            getAllReviews={this.getAllReviews}
+            sort={this.state.sort}
+          /> : null}
         </div>
       </div>
     );
