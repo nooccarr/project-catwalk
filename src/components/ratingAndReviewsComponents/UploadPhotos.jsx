@@ -17,11 +17,13 @@ const UploadPhotos = ({ showAddPhoto, handleFileAdd, thumbnails, deleteThumbnail
       {thumbnails.length ? <div>
         <div className="uploadPhotosSpacer">
           {thumbnails.map((thumbnail, idx) => {
-            return (<div className="reviewPhotoThumbnailsContainer">
+            return (<div
+              className="reviewPhotoThumbnailsContainer"
+              key={idx}
+            >
               <img
                 className="reviewPhotoThumbnails"
                 src={thumbnail}
-                key={idx}
                 onClick={() => deleteThumbnail(idx)}
               />
             </div>);
