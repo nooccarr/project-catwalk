@@ -1,4 +1,7 @@
-const getPercentage = (total, star) => {
+const getPercentage = (total, star = 0) => {
+  if (!total) {
+    return 0;
+  }
   let result = (star / total) * 100;
   return Number(result.toFixed(0));
 };
