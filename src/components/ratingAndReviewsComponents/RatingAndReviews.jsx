@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import NewReview from './NewReview.jsx';
 import ReviewList from './ReviewList.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
@@ -189,6 +190,9 @@ class RatingAndReviews extends React.Component {
             addClickedReviewId={this.addClickedReviewId}
             reviewIds={this.state.reviewIds}
           />
+          {this.state.reviews.length ? null : <hr
+            className="noReviewDivider"
+          />}
           <div className="moreReviewNewReview">
             {this.state.moreReviews ? <button
               className="moreReviewButton"

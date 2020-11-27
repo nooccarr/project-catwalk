@@ -1,9 +1,10 @@
 import React from 'react';
 import _ from 'underscore';
+import deleteInnerHTML from '../../../utils/deleteInnerHTML.js';
 import isMeasurement from '../../../utils/isMeasurement.js';
 import getPercentage from '../../../utils/getPercentage.js';
 
-const ProductBreakdown = ({ characteristics }) => {
+const ProductBreakdown = ({ characteristics, scale }) => {
   return (
     <div className="characteristicsBreakdown">
       {_.map(characteristics, (scale, characteristic) => {
@@ -19,11 +20,15 @@ const ProductBreakdown = ({ characteristics }) => {
 
 const Characteristic = ({ characteristic, scale }) => {
   let textIndent = { textIndent: `${getPercentage(5, Number(scale))}%` };
+  if (!scale) { deleteInnerHTML('upsideDownTriangle'); }
 
   return (<div>
     <div className="characteristicName">{characteristic}</div>
     <div className="characteristic-bar">
-      <span style={textIndent}>&#x25BC;</span>
+      <span
+        id="upsideDownTriangle"
+        style={textIndent}
+      >&#x25BC;</span>
     </div>
     {isMeasurement(characteristic) ? <div className="feedbackBlock">
       <p className="characteristicFeedback">too small </p>

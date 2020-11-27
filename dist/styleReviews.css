@@ -529,3 +529,7 @@ figure, figcaption, section, summary, mark {
   display: block;
   height: 150px;
 }
+
+.noReviewDivider {
+  margin-top: 30px;
+}
