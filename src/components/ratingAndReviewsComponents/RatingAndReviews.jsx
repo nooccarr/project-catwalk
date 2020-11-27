@@ -178,11 +178,11 @@ class RatingAndReviews extends React.Component {
             {this.state.moreReviews ? <button
               className="moreReviewButton"
               onClick={()=> this.handleMoreReviewsClick(this.state.filter)}
-            >MORE REVIEWS</button> : null}
+            >more reviews</button> : null}
             <button
               className="writeNewReviewButton"
               onClick={this.showReview}
-            >WRITE NEW REVIEW<div className="newReviewSymbol">+</div></button>
+            >write new review<div className="newReviewSymbol">+</div></button>
             {this.state.rating ? <NewReview
               show={this.state.show}
               hideReview={this.hideReview}

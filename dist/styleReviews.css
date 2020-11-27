@@ -16,20 +16,10 @@ figure, figcaption, section, summary, mark {
 	vertical-align: baseline;
 }
 
-/* Custom Styles */
 .ratingAndReviews {
   color: #403b3b;
 	font: 300 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-/* Grid */
-/* *,
-*:before,
-*:after {
-	-webkit-box-sizing: border-box;
-		 -moz-box-sizing: border-box;
-					box-sizing: border-box;
-} */
 
 .ratingAndReviews {
   margin: 0 auto;
@@ -42,9 +32,7 @@ figure, figcaption, section, summary, mark {
   display: inline-block;
   padding-left: 10px;
   padding-right: 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .ratingBody {
@@ -65,16 +53,23 @@ figure, figcaption, section, summary, mark {
   text-transform: uppercase;
 }
 
-.newReview {
+.newWindow {
   overflow: scroll;
   position: fixed;
-  left: 5%;
-  top: 5%;
-  width: 90%;
-  height: 90%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background: white;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 10px #403b3b;
+}
+
+.newWindowContainer {
+  width: 500px;
+  margin: 0 auto;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 30px;
 }
 
 .averageRating {
@@ -146,26 +141,19 @@ figure, figcaption, section, summary, mark {
   margin-top: 5px;
 }
 
-.uploadPhotosSection {
-  overflow: scroll;
-  position: fixed;
-  left: 10%;
-  top: 5%;
-  width: 80%;
-  height: 90%;
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 10px #403b3b;
+.reviewPhotoThumbnailsContainer {
+  display: inline-block;
+  padding: 5px 10px 5px 0;
+  margin: 15px 0 5px 0;
 }
-
 .reviewPhotoThumbnails {
+  border: 0;
   cursor: pointer;
-  display: block;
+  display: inline-block;
   border: 0;
   height: 80px;
   width: 80px;
   object-fit: cover;
-  padding: 3px;
 }
 
 .starRatingReviewerNameAndDate {
@@ -242,29 +230,44 @@ figure, figcaption, section, summary, mark {
   font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.moreReviewNewReview {
+.moreReviewNewReview,
+.submitReviewClose,
+.uploadClose {
   display: block;
   margin-top: 15px;
+}
+
+.moreReviewNewReview {
   margin-bottom: 30px;
 }
 
 .moreReviewButton,
-.writeNewReviewButton {
+.writeNewReviewButton,
+.submitReviewButton,
+.closeButton,
+.uploadCloseButton {
   display: inline-block;
   border: 2px solid rgb(185, 185, 185);
   background-color: white;
   cursor: pointer;
   color: gray;
   font: 400 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
 }
 
 .moreReviewButton:hover,
-.writeNewReviewButton:hover {
+.writeNewReviewButton:hover,
+.submitReviewButton:hover,
+.closeButton:hover,
+.uploadCloseButton:hover {
   color: rgb(184, 184, 184);
   border: 2px solid rgb(207, 207, 207);
 }
 
-.moreReviewButton {
+.moreReviewButton,
+.submitReviewButton,
+.closeButton,
+.uploadCloseButton {
   padding: 15px;
   margin-right: 15px;
 }
@@ -399,6 +402,129 @@ figure, figcaption, section, summary, mark {
   line-height: 10px;
 }
 
+.newWindowTitle {
+  background-color: #d34788;
+  margin: 0px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.newWindowLogo {
+  font-weight: bold;
+  font-size: 1.9em;
+  margin: 0 auto;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
 .characteristicEntryName {
   text-transform: capitalize;
+  display: block;
+  font: 400 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 10px;
+}
+
+.characteristicEntryFeedback {
+  display: block;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.newReviewWindowTitle {
+  text-transform: capitalize;
+  display: block;
+  font: 500 17px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.newReviewAboutProduct {
+  display: block;
+  font: 400 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 15px;
+}
+
+.newReviewInput {
+  display: block;
+  font: 400 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 15px;
+}
+
+.newReviewInputInfo {
+  display: block;
+  font: 300 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.newReviewInputColumn {
+  display: inline-block;
+}
+
+.newReviewInputRadio {
+  display: inline-block;
+}
+
+.newReviewInputLabel {
+  display: inline-block;
+  font: 400 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 8px;
+}
+
+.newReviewOverallRating {
+  display: block;
+  margin-top: 3px;
+}
+
+.newReviewOverallRatingStarRating {
+  display: inline-block;
+}
+
+.newReviewOverallRatingFeedback {
+  display: inline-block;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-left: 10px;
+  vertical-align: text-top;
+}
+
+.newReviewInputBox {
+  margin: 3px 0 3px 0;
+  width: 98%;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 3px;
+  height: 25px;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-left: 5px;
+}
+
+.newReviewFormDivider {
+  margin-top: 11px;
+}
+
+.newReviewUploadPhotosWindow {
+  cursor: pointer;
+  margin: 15px 0 22px 0;
+  font: 400 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  display: block;
+  border: 1px solid rgb(185, 185, 185);
+  padding: 8px;
+  border-radius: 2px;
+  background-color: white;
+  color: gray;
+}
+
+.newReviewUploadPhotosWindow:hover {
+  color: rgb(184, 184, 184);
+  border: 1px solid rgb(207, 207, 207);
+}
+
+.newReviewAddPhotoInput {
+  display: block;
+  margin-top: 25px;
+  font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: gray;
+}
+
+.uploadPhotosSpacer {
+  display: block;
+  height: 150px;
 }

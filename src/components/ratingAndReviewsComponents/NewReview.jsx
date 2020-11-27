@@ -205,92 +205,114 @@ class NewReview extends React.Component {
       return null;
     }
     return (
-      <div className="newReview">
-        {console.log(this.state)}
-        <h1>Write Your Review</h1>
-        <h3>About the {product}</h3>
-        <div>
-          <h3>*Overall rating</h3>
-          {Stars(120, this.state.rating || 0, (e) => this.handleSelect(e))}
-          {this.state.rating ? <span>
-            {getLabel('rating', this.state.rating)}
-          </span>: null}
+      <div className="newWindow">
+        <div className="newWindowTitle">
+          <h1 className="newWindowLogo">donauwelle</h1>
         </div>
-        <div>
-          <h3>*Do you recommend this product?</h3>
-          {['yes', 'no'].map((value, idx) => {
-            return (<span key={idx}>
-              <input
-                type="radio"
-                name="recommend"
-                value={value}
-                onClick={(e) => this.handleSelect(e)} />
-              <label>{capitalize(value)}</label>
-            </span>);
-          })}
-        </div>
-        <div>
-          <h3>*Characteristics</h3>
-          {characteristics.map((name, idx) => {
-            return (<CharacteristicEntry
-              state={this.state[name]}
-              name={name}
-              handleSelect={this.handleSelect}
-              key={idx}
-            />);
-          })}
-        </div>
-        <InputEntry
-          subtitle={'*Review summary'}
-          name={'summary'}
-          value={this.state.summary}
-          maxLength={'60'}
-          placeholder={'Example: Best purchase ever!'}
-          handleSelect={this.handleSelect}
-        />
-        <InputEntry
-          subtitle={'*Review body'}
-          name={'body'}
-          value={this.state.body}
-          maxLength={'1000'}
-          placeholder={'Why did you like the product or not?'}
-          handleSelect={this.handleSelect}
-          text={counter(this.state.body)}
-        />
-        <button
-          onClick={this.handleUploadPhotosButton}
-        >Upload your photos</button>
-        {this.state.showUploadPhotos ?
-          <UploadPhotos
-            showAddPhoto={this.state.showAddPhoto}
-            handleFileAdd={this.handleFileAdd}
-            thumbnails={this.state.thumbnails}
-            deleteThumbnail={this.deleteThumbnail}
-            handleUploadPhotoClose={this.handleUploadPhotoClose}
-        /> : null}
-        <InputEntry
-          subtitle={'*What is your nickname'}
-          name={'nickname'}
-          value={this.state.nickname}
-          maxLength={'60'}
-          placeholder={'Example: jackson11!'}
-          handleSelect={this.handleSelect}
-          text={'For privacy reasons, do not use your full name or email address'}
-        />
-        <InputEntry
-          subtitle={'*Your email'}
-          name={'email'}
-          value={this.state.email}
-          maxLength={'60'}
-          placeholder={'Example: jackson11@email.com'}
-          handleSelect={this.handleSelect}
-          text={'For authentication reasons, you will not be emailed'}
-        />
-        <div>
+        <div className="newWindowContainer">
+          {/* {console.log(this.state)} */}
+          <h1 className="newReviewWindowTitle">write your review</h1>
+          <h3 className="newReviewAboutProduct">About the {product}</h3>
+          <h3 className="newReviewInput">*Overall rating</h3>
+          <div className="newReviewOverallRating">
+            <div className="newReviewOverallRatingStarRating">
+              {Stars(80, this.state.rating || 0, (e) => this.handleSelect(e))}
+            </div>
+            {this.state.rating ? <div
+              className="newReviewOverallRatingFeedback"
+            >
+              {getLabel('rating', this.state.rating)}
+            </div>: null}
+          </div>
+          <div>
+            <h3 className="newReviewInput">*Do you recommend this product?</h3>
+            {['yes', 'no'].map((value, idx) => {
+              return (<div
+                className="newReviewInputColumn"
+                key={idx}
+              >
+                <input
+                  className="newReviewInputRadio"
+                  type="radio"
+                  name="recommend"
+                  value={value}
+                  onClick={(e) => this.handleSelect(e)}
+                />
+                <label className="newReviewInputLabel">
+                  {capitalize(value)}
+                </label>
+              </div>);
+            })}
+          </div>
+          <div>
+            <h3 className="newReviewInput">*Characteristics</h3>
+            {characteristics.map((name, idx) => {
+              return (<CharacteristicEntry
+                state={this.state[name]}
+                name={name}
+                handleSelect={this.handleSelect}
+                key={idx}
+              />);
+            })}
+          </div>
+          <InputEntry
+            subtitle={'*Review summary'}
+            name={'summary'}
+            value={this.state.summary}
+            maxLength={'60'}
+            placeholder={'Example: Best purchase ever!'}
+            handleSelect={this.handleSelect}
+          />
+          <InputEntry
+            subtitle={'*Review body'}
+            name={'body'}
+            value={this.state.body}
+            maxLength={'1000'}
+            placeholder={'Why did you like the product or not?'}
+            handleSelect={this.handleSelect}
+            text={counter(this.state.body)}
+          />
           <button
-            onClick={this.submitReview}
-          >Submit review</button>
-          <button onClick={this.handleClose}>Close</button>
+            className="newReviewUploadPhotosWindow"
+            onClick={this.handleUploadPhotosButton}
+          >Upload your photos</button>
+          {this.state.showUploadPhotos ?
+            <UploadPhotos
+              showAddPhoto={this.state.showAddPhoto}
+              handleFileAdd={this.handleFileAdd}
+              thumbnails={this.state.thumbnails}
+              deleteThumbnail={this.deleteThumbnail}
+              handleUploadPhotoClose={this.handleUploadPhotoClose}
+          /> : null}
+          <InputEntry
+            subtitle={'*What is your nickname'}
+            name={'nickname'}
+            value={this.state.nickname}
+            maxLength={'60'}
+            placeholder={'Example: jackson11!'}
+            handleSelect={this.handleSelect}
+            text={'For privacy reasons, do not use your full name or email address'}
+          />
+          <InputEntry
+            subtitle={'*Your email'}
+            name={'email'}
+            value={this.state.email}
+            maxLength={'60'}
+            placeholder={'Example: jackson11@email.com'}
+            handleSelect={this.handleSelect}
+            text={'For authentication reasons, you will not be emailed'}
+          />
+          <hr className="newReviewFormDivider" />
+          <div className="submitReviewClose">
+            <button
+              className="submitReviewButton"
+              onClick={this.submitReview}
+            >submit review</button>
+            <button
+            className="closeButton"
+            onClick={this.handleClose}
+            >close</button>
+          </div>
         </div>
       </div>
     );
