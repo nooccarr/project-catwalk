@@ -139,8 +139,6 @@ class App extends React.Component {
   }
   toggleOutfit(id) {
 
-    console.log('hi toggle outfit invoked with id', id)
-    //console.log('in toggle outfit');
     var product, outfit, index;
     if (id === this.state.productId) {
       product = this.state.productInfo;

@@ -16,9 +16,6 @@ class StyleSelector extends React.Component {
   }
 
   updateStyle(x, index) {
-    console.log('hi,x, index', x, index);
-    console.log('index', index)
-    console.log(x);
     this.props.setCurrentStyle(x, x.original_price, x.sale_price);
     this.setState({
       selectedStyleThumbnailIndex: index,
@@ -31,14 +28,11 @@ class StyleSelector extends React.Component {
 
   }
   render () {
-    console.log('in render')
-    // console.log('in reder of style selector', this.props.styles.results[selectedStyleThumbnailIndex].name)
-  
+
     if (this.props.styles !== undefined) {
-    console.log('in reder of style selector', this.props.styles.results[this.state.selectedStyleThumbnailIndex].name)
 
       return (
-        <div>
+        <div onClick = {(e) => this.props.trackAction(e, this.props.moduleName)}>
           <div className = 'gridItem3Wrapper'>
             <div className = 'styleSelectedStyle'> 
             <b>Style > </b>{this.props.styles.results[this.state.selectedStyleThumbnailIndex].name}
