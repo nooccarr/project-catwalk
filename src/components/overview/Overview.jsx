@@ -232,10 +232,10 @@ class Overview extends React.Component {
                                                      startIndex = {this.state.startIndex} endIndex = {this.state.endIndex}
                                                     /></div>
           <div className="item grid-item2"> <ProductInfo category = {this.props.product.category} name = {this.props.product.name} default_price = {this.props.product.default_price} original_price = {this.props.currentStyle.original_price} sale_price = {this.props.currentStyle.sale_price} average_rating = {this.props.product.average}/> </div>
-          <div className="item grid-item3">  <StyleSelector styles = {this.props.product.styles} setCurrentStyle = {this.props.setCurrentStyle}/> </div>
-          <div className="item grid-item4">  <Cart currentStyle = {this.props.currentStyle} toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/> </div>
-          <div className="item grid-item5">  <ProductDescription slogan = {this.props.product.slogan} description = {this.props.product.description}/> </div>
-          <div className="item grid-item6">  <Features features = {this.props.product.features}/> </div>
+          <div className="item grid-item3"> <StyleSelector styles = {this.props.product.styles} setCurrentStyle = {this.props.setCurrentStyle}/> </div>
+          <div className="item grid-item4"> <Cart currentStyle = {this.props.currentStyle} toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/> </div>
+          <div className="item grid-item5"> <ProductDescription slogan = {this.props.product.slogan} description = {this.props.product.description}/> </div>
+          <div className="item grid-item6"> <Features features = {this.props.product.features}/> </div>
         </div>
       );
     } 
