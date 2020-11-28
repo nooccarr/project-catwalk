@@ -44,7 +44,13 @@ class ReviewListEntry extends React.Component {
           params: { review_id: review_id }
         })
         .then(result1 => this.props.addClickedReviewId(review_id))
-        .then(result2 => this.props.getCurrentReviews(this.props.sort))
+        .then(result2 => {
+          if (this.props.filter) {
+            this.props.getCurrentFiltered(review_id);
+          } else {
+            this.props.getCurrentReviews(this.props.sort);
+          }
+        })
         .then(result3 => {
           if (!this.props.moreReviews) {
             this.props.handleMoreReviewsClick(this.props.filter)}

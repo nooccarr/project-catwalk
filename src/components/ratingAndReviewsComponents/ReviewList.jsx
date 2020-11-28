@@ -1,13 +1,14 @@
 import React from 'react';
 import ReviewListEntry from './ReviewListEntry.jsx';
 
-const ReviewList = ({ reviews, getCurrentReviews, sort, moreReviews, handleMoreReviewsClick, filter, addClickedReviewId, reviewIds }) => (
+const ReviewList = ({ reviews, getCurrentReviews, getCurrentFiltered, sort, moreReviews, handleMoreReviewsClick, filter, addClickedReviewId, reviewIds }) => (
   <div>
     {/* {console.log(reviews)} */}
     {reviews.map((review, idx) => {
       return <ReviewListEntry
         review={review}
         getCurrentReviews={getCurrentReviews}
+        getCurrentFiltered={getCurrentFiltered}
         sort={sort}
         moreReviews={moreReviews}
         handleMoreReviewsClick={handleMoreReviewsClick}

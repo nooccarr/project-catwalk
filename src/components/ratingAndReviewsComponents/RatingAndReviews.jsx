@@ -8,6 +8,8 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import Stars from '../Stars.jsx';
 import average from '../../../utils/average.js';
 import filterReviews from '../../../utils/filterReviews.js';
+import updateFiltered from '../../../utils/updateFiltered.js';
+
 
 class RatingAndReviews extends React.Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class RatingAndReviews extends React.Component {
       productId: this.props.productId,
       product: this.props.product,
       reviews: [],
-      temp: [],
+      reviewsTemp: [],
       sort: 'relevant',
       show: false,
       filter: false,
@@ -25,11 +27,12 @@ class RatingAndReviews extends React.Component {
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getRating = this.getRating.bind(this);
     this.getCurrentReviews = this.getCurrentReviews.bind(this);
+    this.getCurrentFiltered = this.getCurrentFiltered.bind(this);
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showReview = this.showReview.bind(this);
     this.hideReview = this.hideReview.bind(this);
-    // this.selectedFilters = this.selectedFilters.bind(this);
-    // this.noFilter = this.noFilter.bind(this);
+    this.selectedFilters = this.selectedFilters.bind(this);
+    this.noFilter = this.noFilter.bind(this);
     this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
     this.addClickedReviewId = this.addClickedReviewId.bind(this);
   }
@@ -48,34 +51,20 @@ class RatingAndReviews extends React.Component {
           count: 1000
         }
       })
-      // .then(({ data }) => {
-      //   let reviews = data.results;
-      //   if (reviews.length > 2) {
-      //     this.setState({
-      //       temp: reviews,
-      //       reviews: reviews.slice(0, 2),
-      //       moreReviews: true
-      //     });
-      //   } else {
-      //     this.setState({
-      //       reviews: reviews
-      //     })
-      //   }
-      // })
       .then(({ data }) => {
         let reviews = data.results;
         this.setState({
-          temp: reviews,
+          reviewsTemp: reviews,
           reviews: reviews.slice(0, 2),
-          totalLength: reviews.length,
+          reviewsLength: reviews.length,
           scrolling: false,
           moreReviews: true,
-          start: 0,
-          end: 2
+          reviewsStart: 0,
+          reviewsEnd: 2
         });
       })
       .then(result => {
-        if (!this.state.totalLength) { this.setState({ moreReviews: false })}
+        if (!this.state.reviewsLength) { this.setState({ moreReviews: false })}
       })
       .catch(err => console.log(err));
   }
@@ -104,7 +93,32 @@ class RatingAndReviews extends React.Component {
       .then(({ data }) => {
         let reviews = data.results;
         this.setState({
-          reviews: reviews.slice(0, this.state.end)
+          reviews: reviews.slice(0, this.state.reviewsEnd)
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+  getCurrentFiltered(reviewId) {
+    return axios
+      .get('http://3.21.164.220/reviews', {
+        params: {
+          product_id: this.state.productId,
+          count: 1000
+        }
+      })
+      .then(({ data }) => {
+        let reviews = data.results;
+        this.setState({
+          reviewsTemp: reviews
+        });
+      })
+      .then(result => {
+        let filteredTemp = updateFiltered(this.state.reviewsTemp, this.state.filteredTemp, reviewId);
+        let filtered = updateFiltered(this.state.reviewsTemp, this.state.filtered, reviewId);
+        this.setState({
+          filteredTemp: filteredTemp,
+          filtered: filtered
         });
       })
       .catch(err => console.log(err));
@@ -130,55 +144,67 @@ class RatingAndReviews extends React.Component {
     })
   }
 
-  // selectedFilters(filters) {
-  //   let filtered = filterReviews(this.state.reviews, filters);
-  //   if (filtered.length > 2) {
-  //     this.setState({
-  //       temp: filtered,
-  //       filtered: filtered.slice(0, 2),
-  //       filter: true,
-  //       moreReviews: true
-  //     });
-  //   } else {
-  //     this.setState({
-  //       filtered: filtered,
-  //       filter: true
-  //     });
-  //   }
-  // }
-
-  // noFilter() {
-  //   this.setState({
-  //     filter: false
-  //   });
-  // }
-
-  handleMoreReviewsClick(filter) {
-    // let temp = this.state.temp;
-    // if (filter) {
-    //   this.setState({
-    //     filtered: temp,
-    //     moreReviews: false
-    //   });
-    // } else {
-    //   this.setState({
-    //     reviews: temp,
-    //     moreReviews: false
-    //   });
-    // }
-    let start = this.state.start + 2;
-    let end = this.state.end + 2;
-    if (end >= this.state.totalLength) {
+  selectedFilters(filters) {
+    let filtered = filterReviews(this.state.reviewsTemp, filters);
+    if (filtered.length > 2) {
       this.setState({
-        moreReviews: false
+        filteredTemp: filtered,
+        filtered: filtered.slice(0, 2),
+        filteredStart: 0,
+        filteredEnd: 2,
+        filteredLength: filtered.length,
+        filter: true,
+        moreReviews: true
+      });
+    } else {
+      this.setState({
+        filteredTemp: filtered,
+        filtered: filtered,
+        filteredEnd: 2,
+        filteredLength: filtered.length,
+        filter: true
       });
     }
+  }
+
+  noFilter() {
     this.setState({
-      reviews: [...this.state.reviews, ...this.state.temp.slice(start, end)],
-      start: start,
-      end: end,
-      scrolling: true
+      filter: false
     });
+  }
+
+  handleMoreReviewsClick(filter) {
+    let start;
+    let end;
+    if (filter) {
+      start = this.state.filteredStart + 2;
+      end = this.state.filteredEnd + 2;
+      this.setState({
+        filtered: [...this.state.filtered, ...this.state.filteredTemp.slice(start, end)],
+        filteredStart: start,
+        filteredEnd: end,
+        scrolling: true
+      });
+      if (end >= this.state.filteredLength) {
+        this.setState({
+          moreReviews: false
+        });
+      }
+    } else {
+      start = this.state.reviewsStart + 2;
+      end = this.state.reviewsEnd + 2;
+      this.setState({
+        reviews: [...this.state.reviews, ...this.state.reviewsTemp.slice(start, end)],
+        reviewsStart: start,
+        reviewsEnd: end,
+        scrolling: true
+      });
+      if (end >= this.state.reviewsLength) {
+        this.setState({
+          moreReviews: false
+        });
+      }
+    }
   }
 
   addClickedReviewId(reviewId) {
@@ -213,11 +239,8 @@ class RatingAndReviews extends React.Component {
         </div>
         <div className="reviewBody">
           <div className="sortOnSection">
-            {/* <label className="sortOnText"
-            >{this.state.moreReviews ? this.state.temp.length
-              : this.state.reviews.length} reviews, sort on</label> */}
             <label className="sortOnText"
-            >{this.state.temp.length} reviews, sort on</label>
+            >{this.state.reviewsTemp.length} reviews, sort on</label>
             <select
               className="sortOnOptions"
               onChange={(e) => this.handleSortByChange(e)}>
@@ -232,6 +255,7 @@ class RatingAndReviews extends React.Component {
           <ReviewList
             reviews={this.state.filter ? this.state.filtered : this.state.reviews}
             getCurrentReviews={this.getCurrentReviews}
+            getCurrentFiltered={this.getCurrentFiltered}
             sort={this.state.sort}
             moreReviews={this.state.moreReviews}
             handleMoreReviewsClick={this.handleMoreReviewsClick}
