@@ -24,7 +24,7 @@ class ReviewListEntry extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.filter !== prevProps.filter) {
+    if (this.props.filter !== prevProps.filter || this.props.reviews !== prevProps.reviews) {
       this.setLargeBody();
     }
   }
