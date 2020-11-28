@@ -60,7 +60,7 @@ class RatingAndReviews extends React.Component {
           reviewsTemp: reviews,
           reviews: reviews.slice(0, 2),
           reviewsLength: reviews.length,
-          scrolling: false,
+          // scrolling: false,
           moreReviews: true,
           reviewsStart: 0,
           reviewsEnd: 2
@@ -150,7 +150,6 @@ class RatingAndReviews extends React.Component {
 
   selectedFilters(filters) {
     let filtered = filterReviews(this.state.reviewsTemp, filters);
-    if (filtered.length > 2) {
       this.setState({
         filteredTemp: filtered,
         filtered: filtered.slice(0, 2),
@@ -160,15 +159,6 @@ class RatingAndReviews extends React.Component {
         filter: true,
         moreReviews: true
       });
-    } else {
-      this.setState({
-        filteredTemp: filtered,
-        filtered: filtered,
-        filteredEnd: 2,
-        filteredLength: filtered.length,
-        filter: true
-      });
-    }
   }
 
   noFilter() {
@@ -187,7 +177,6 @@ class RatingAndReviews extends React.Component {
         filtered: [...this.state.filtered, ...this.state.filteredTemp.slice(start, end)],
         filteredStart: start,
         filteredEnd: end,
-        scrolling: true
       });
       if (end >= this.state.filteredLength) {
         this.setState({
@@ -201,7 +190,6 @@ class RatingAndReviews extends React.Component {
         reviews: [...this.state.reviews, ...this.state.reviewsTemp.slice(start, end)],
         reviewsStart: start,
         reviewsEnd: end,
-        scrolling: true
       });
       if (end >= this.state.reviewsLength) {
         this.setState({
@@ -220,7 +208,7 @@ class RatingAndReviews extends React.Component {
   }
 
   handleScroll() {
-    let lastDiv = document.querySelector("div.reviewLists > div:last-child");
+    let lastDiv = document.querySelector("button.writeNewReviewButton");
     let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
     let pageOffset = window.pageYOffset + window.innerHeight;
     if (pageOffset > lastDivOffset) {
@@ -231,7 +219,7 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div className="ratingAndReviews">
-        {console.log(this.state)}
+        {/* {console.log(this.state)} */}
         <div className="ratingAndReviewsTitle">ratings & reviews</div>
         <div className="ratingBody">
           <div>
