@@ -263,9 +263,12 @@ class RatingAndReviews extends React.Component {
             addClickedReviewId={this.addClickedReviewId}
             reviewIds={this.state.reviewIds}
           />
-          {this.state.reviews.length ? null : <hr
+          {!this.state.filter && !this.state.reviews.length ? <hr
             className="noReviewDivider"
-          />}
+          /> : null}
+          {this.state.filter && !this.state.filtered.length ? <hr
+            className="noReviewDivider"
+          /> : null}
           <div className="moreReviewNewReview">
             {this.state.moreReviews ? <button
               className="moreReviewButton"
