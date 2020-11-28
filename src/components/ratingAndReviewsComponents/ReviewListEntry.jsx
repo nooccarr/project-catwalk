@@ -44,7 +44,7 @@ class ReviewListEntry extends React.Component {
           params: { review_id: review_id }
         })
         .then(result1 => this.props.addClickedReviewId(review_id))
-        .then(result2 => this.props.getAllReviews(this.props.sort))
+        .then(result2 => this.props.getCurrentReviews(this.props.sort))
         .then(result3 => {
           if (!this.props.moreReviews) {
             this.props.handleMoreReviewsClick(this.props.filter)}
@@ -58,7 +58,7 @@ class ReviewListEntry extends React.Component {
       .put(`http://3.21.164.220/reviews/${review_id}/report`, {
         params: { review_id: review_id }
       })
-      .then(result1 => this.props.getAllReviews(this.props.sort))
+      .then(result1 => this.props.getCurrentReviews(this.props.sort))
       .then(result2 => {
         if (!this.props.moreReviews) {
           this.props.handleMoreReviewsClick(this.props.filter)}
