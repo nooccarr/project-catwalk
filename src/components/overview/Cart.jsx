@@ -68,7 +68,7 @@ class Cart extends React.Component {
   render () {
   
     return (
-      <div> 
+      <div onClick = {(e) => this.props.trackAction(e, this.props.moduleName)}> 
         <EnhancedComponent title="SELECT SIZE" list={this.state.sizes} setSizeQuantities = {this.setSizeQuantities} sizes = {true}/> 
         <EnhancedComponent title="0" list={  [...Array(this.state.availableQuantity).keys()].map((x) => (x+1)) } quantities = {true} setQuantity = {this.setQuantity}/> 
         <AddtoCart size = {this.state.selectedSize} quantity = {this.state.selectedQuantity}/>
@@ -88,23 +88,25 @@ class Star extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     
-    this.state = {
-      selected: false
-    }
+    // this.state = {
+    //   selected: false
+    // }
+  }
+
+  componentDidUpdate() {
   }
 
   handleClick() {
-    console.log(this.props.product.id);
+    // console.log(this.props.product.id);
     this.props.toggleOutfit(this.props.product.id);
-    // this.props.toggleOutfit(this.props.product.product_id);
-    this.setState(prevState => ({
-      selected: !prevState.selected
-    }))
+    // this.setState(prevState => ({
+    //   selected: !prevState.selected
+    // }))
   }
 
   render() {
 
-    if (!this.state.selected) {
+    if (this.props.product.faved === false) {
     return (
       <div className = 'dd-wrapper-star'> 
         <div className = 'dd-header-star'>
@@ -113,9 +115,9 @@ class Star extends React.Component {
           </div>
         </div>
       </div>
-      // <button onClick = {this.handleClick}>star</button>
+      
     )
-  } else {
+    } else {
       return (
         <div className = 'dd-wrapper-star'> 
           <div className = 'dd-header-star'>
@@ -123,10 +125,34 @@ class Star extends React.Component {
               <img src = '../../../dist/images/full-star.png' style = {{maxWidth: '100%'}}/>
             </div>
           </div>
-        </div>
-
+        </div>  
       )
-  }
+    }
+    
+    
+    
+  //   if (!this.state.selected) {
+  //   return (
+  //     <div className = 'dd-wrapper-star'> 
+  //       <div className = 'dd-header-star'>
+  //         <div className = 'contain-star' onClick = {this.handleClick} >
+  //           <img src = '../../../dist/images/empty-star-grey.png' style = {{maxWidth: '100%'}}/>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   )
+  // } else {
+  //     return (
+  //       <div className = 'dd-wrapper-star'> 
+  //         <div className = 'dd-header-star'>
+  //           <div className = 'contain-star' onClick = {this.handleClick} >
+  //             <img src = '../../../dist/images/full-star.png' style = {{maxWidth: '100%'}}/>
+  //           </div>
+  //         </div>
+  //       </div>
+
+  //     )
+  // }
 
 }
 }
