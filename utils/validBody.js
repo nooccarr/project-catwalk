@@ -1,5 +1,5 @@
-const validBody = (body) => {
-  return body.length >= 50;
+const validBody = (body, min) => {
+  return body.length >= min;
 };
 
 export default validBody;

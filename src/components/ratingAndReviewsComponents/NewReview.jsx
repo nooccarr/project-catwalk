@@ -1,12 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'underscore';
 import Stars from '../Stars.jsx';
 import CharacteristicEntry from './CharacteristicEntry.jsx';
 import InputEntry from './InputEntry.jsx';
+import UploadPhotos from './UploadPhotos.jsx';
 import getLabel from '../../../utils/getLabel.js';
-import capitalize from '../../../utils/capitalize.js';
 import counter from '../../../utils/counter.js';
 import validateSubmit from '../../../utils/validateSubmit.js';
+import isNewFile from '../../../utils/isNewFile.js';
+import toBoolean from '../../../utils/toBoolean.js';
+import toCharacteristics from '../../../utils/toCharacteristics.js';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -16,12 +20,23 @@ class NewReview extends React.Component {
       summary: '',
       body: '',
       photos: [],
+      files: [],
+      thumbnails: [],
       nickname: '',
       email: '',
+      showUploadPhotos: false,
+      showAddPhoto: true,
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.submitReview = this.submitReview.bind(this);
+    this.addNewReview = this.addNewReview.bind(this);
+    this.photosToCloudinary = this.photosToCloudinary.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleUploadPhotosButton = this.handleUploadPhotosButton.bind(this);
+    this.deleteThumbnail = this.deleteThumbnail.bind(this);
+    this.handleUploadPhotoClose = this.handleUploadPhotoClose.bind(this);
+    this.handleFileAdd = this.handleFileAdd.bind(this);
+    this.hideAddPhoto = this.hideAddPhoto.bind(this);
   }
 
   handleSelect(e) {
@@ -37,6 +52,7 @@ class NewReview extends React.Component {
   }
 
   submitReview() {
+    let photos = _.map(this.state.files, item => { return item.name });
     let message = 'You must enter the following:';
     let messageSubmitted = validateSubmit(
       this.state.rating,
@@ -47,20 +63,71 @@ class NewReview extends React.Component {
       this.state.quality,
       this.state.length,
       this.state.fit,
+      this.state.summary,
       this.state.body,
       this.state.nickname,
-      this.state.email
+      this.state.email,
+      photos
     );
 
     if (message === messageSubmitted) {
-      // axios POST /reviews
-      // then this.props.getAllReviews()
-      // catch error
-      // this.props.hideReview()
-      alert('SUCCESS');
+      this.photosToCloudinary();
     } else {
       alert(messageSubmitted);
     }
+  }
+
+  addNewReview() {
+    return axios
+      .post('http://3.21.164.220/reviews', {
+        product_id: this.props.productId,
+        rating: this.state.rating,
+        summary: this.state.summary,
+        body: this.state.body,
+        recommend: toBoolean(this.state.recommend),
+        name: this.state.nickname,
+        email: this.state.email,
+        photos: this.state.photos,
+        characteristics: toCharacteristics(
+          this.props.characteristics,
+          this.state.size,
+          this.state.width,
+          this.state.comfort,
+          this.state.quality,
+          this.state.length,
+          this.state.fit
+        )
+      })
+      .then(result1 => this.props.getAllReviews(this.props.sort))
+      .then(result2 => this.handleClose())
+      .catch(err => console.log(err));
+  }
+
+  photosToCloudinary() {
+    let photos = this.state.photos.slice();
+    let requests = [];
+    for (let i = 0; i < this.state.files.length; i++) {
+      let formData = new FormData();
+      formData.append('file', this.state.files[i]);
+      formData.append('upload_preset', 'unsigned');
+      let request = axios
+        .post('https://api.cloudinary.com/v1_1/donauwelle/image/upload', formData);
+      requests.push(request);
+    }
+    axios
+      .all(requests)
+      .then(
+        axios.spread((...responses) => {
+          responses.map(response => photos.push(response.data.url));
+        })
+      )
+      .then(result =>{
+        this.setState({
+          photos: photos
+        })
+      })
+      .then(result2 => this.addNewReview())
+      .catch(err => console.log(err));
   }
 
   handleClose() {
@@ -69,10 +136,62 @@ class NewReview extends React.Component {
       summary: '',
       body: '',
       photos: [],
+      files: [],
+      thumbnails: [],
       nickname: '',
-      email: ''
+      email: '',
+      showUploadPhotos: false
     });
     this.props.hideReview();
+  }
+
+  handleUploadPhotosButton() {
+    this.setState({
+      showUploadPhotos: true
+    });
+  }
+
+  handleUploadPhotoClose() {
+    this.setState({
+      showUploadPhotos: false
+    });
+  }
+
+  handleFileAdd(e) {
+    let newFile = e.target.files[0];
+    let files = this.state.files.slice();
+    let newFileSelected = isNewFile(files, newFile);
+    let newThumbnail = URL.createObjectURL(newFile);
+    let thumbnails = this.state.thumbnails.slice();
+    if (newFileSelected) {
+      files.push(newFile);
+      thumbnails.push(newThumbnail);
+      this.setState({
+        files: files,
+        thumbnails: thumbnails
+      });
+      if (files.length === 5) {
+        this.hideAddPhoto();
+      }
+    }
+  }
+
+  deleteThumbnail(idx) {
+    let files = this.state.files;
+    let thumbnails = this.state.thumbnails;
+    files.splice(idx, 1);
+    thumbnails.splice(idx, 1);
+    this.setState({
+      files: files,
+      thumbnails: thumbnails,
+      showAddPhoto: true
+    })
+  }
+
+  hideAddPhoto() {
+    this.setState({
+      showAddPhoto: false
+    });
   }
 
   render() {
@@ -85,85 +204,114 @@ class NewReview extends React.Component {
       return null;
     }
     return (
-      <div className="newReview">
-        {console.log(this.state)}
-        <h1>Write Your Review</h1>
-        <h3>About the {product}</h3>
-        <div>
-          <h3>*Overall rating</h3>
-          {Stars(120, this.state.rating || 0, (e) => this.handleSelect(e))}
-          {this.state.rating ? <span>
-            {getLabel('rating', this.state.rating)}
-          </span>: null}
+      <div className="newWindow">
+        <div className="newWindowTitle">
+          <h1 className="newWindowLogo">donauwelle</h1>
         </div>
-        <div>
-          <h3>*Do you recommend this product?</h3>
-          {['yes', 'no'].map((value, idx) => {
-            return (<span key={idx}>
-              <input
-                type="radio"
-                name="recommend"
-                value={value}
-                onClick={(e) => this.handleSelect(e)} />
-              <label>{capitalize(value)}</label>
-            </span>);
-          })}
-        </div>
-        <div>
-          <h3>*Characteristics</h3>
-          {characteristics.map((name, idx) => {
-            return (<CharacteristicEntry
-              state={this.state[name]}
-              name={name}
-              handleSelect={this.handleSelect}
-              key={idx}
-            />);
-          })}
-        </div>
-        <InputEntry
-          subtitle={'Review summary'}
-          name={'summary'}
-          value={this.state.summary}
-          maxLength={'60'}
-          placeholder={'Example: Best purchase ever!'}
-          handleSelect={this.handleSelect}
-        />
-        <InputEntry
-          subtitle={'*Review body'}
-          name={'body'}
-          value={this.state.body}
-          maxLength={'1000'}
-          placeholder={'Why did you like the product or not?'}
-          handleSelect={this.handleSelect}
-          text={counter(this.state.body)}
-        />
-        <div>
-          <h3>Upload your photos</h3>
-          <button>Upload upto 5 photos</button>
-        </div>
-        <InputEntry
-          subtitle={'*What is your nickname'}
-          name={'nickname'}
-          value={this.state.nickname}
-          maxLength={'60'}
-          placeholder={'Example: jackson11!'}
-          handleSelect={this.handleSelect}
-          text={'For privacy reasons, do not use your full name or email address'}
-        />
-        <InputEntry
-          subtitle={'*Your email'}
-          name={'email'}
-          value={this.state.email}
-          maxLength={'60'}
-          placeholder={'Example: jackson11@email.com'}
-          handleSelect={this.handleSelect}
-          text={'For authentication reasons, you will not be emailed'}
-        />
-        <div>
+        <div className="newWindowContainer">
+          {/* {console.log(this.state)} */}
+          <h1 className="newReviewWindowTitle">write your review</h1>
+          <h3 className="newReviewAboutProduct">About the {product}</h3>
+          <h3 className="newReviewInput">*Overall rating</h3>
+          <div className="newReviewOverallRating">
+            <div className="newReviewOverallRatingStarRating">
+              {Stars(80, this.state.rating || 0, (e) => this.handleSelect(e))}
+            </div>
+            {this.state.rating ? <div
+              className="newReviewOverallRatingFeedback"
+            >
+              {getLabel('rating', this.state.rating)}
+            </div>: null}
+          </div>
+          <div>
+            <h3 className="newReviewInput">*Do you recommend this product?</h3>
+            {['yes', 'no'].map((value, idx) => {
+              return (<div
+                className="newReviewInputColumn"
+                key={idx}
+              >
+                <input
+                  className="newReviewInputRadio"
+                  type="radio"
+                  name="recommend"
+                  value={value}
+                  onClick={(e) => this.handleSelect(e)}
+                />
+                <label className="newReviewInputLabel">
+                  {value}
+                </label>
+              </div>);
+            })}
+          </div>
+          <div>
+            <h3 className="newReviewInput">*Characteristics</h3>
+            {characteristics.map((name, idx) => {
+              return (<CharacteristicEntry
+                state={this.state[name]}
+                name={name}
+                handleSelect={this.handleSelect}
+                key={idx}
+              />);
+            })}
+          </div>
+          <InputEntry
+            subtitle={'*Review summary'}
+            name={'summary'}
+            value={this.state.summary}
+            maxLength={'60'}
+            placeholder={'Example: Best purchase ever!'}
+            handleSelect={this.handleSelect}
+          />
+          <InputEntry
+            subtitle={'*Review body'}
+            name={'body'}
+            value={this.state.body}
+            maxLength={'1000'}
+            placeholder={'Why did you like the product or not?'}
+            handleSelect={this.handleSelect}
+            text={counter(this.state.body)}
+          />
           <button
-            onClick={this.submitReview}
-          >Submit review</button>
-          <button onClick={this.handleClose}>Close</button>
+            className="newReviewUploadPhotosWindow"
+            onClick={this.handleUploadPhotosButton}
+          >Upload your photos</button>
+          {this.state.showUploadPhotos ?
+            <UploadPhotos
+              showAddPhoto={this.state.showAddPhoto}
+              handleFileAdd={this.handleFileAdd}
+              thumbnails={this.state.thumbnails}
+              deleteThumbnail={this.deleteThumbnail}
+              handleUploadPhotoClose={this.handleUploadPhotoClose}
+          /> : null}
+          <InputEntry
+            subtitle={'*What is your nickname'}
+            name={'nickname'}
+            value={this.state.nickname}
+            maxLength={'60'}
+            placeholder={'Example: jackson11!'}
+            handleSelect={this.handleSelect}
+            text={'For privacy reasons, do not use your full name or email address'}
+          />
+          <InputEntry
+            subtitle={'*Your email'}
+            name={'email'}
+            value={this.state.email}
+            maxLength={'60'}
+            placeholder={'Example: jackson11@email.com'}
+            handleSelect={this.handleSelect}
+            text={'For authentication reasons, you will not be emailed'}
+          />
+          <hr className="newReviewFormDivider" />
+          <div className="submitReviewClose">
+            <button
+              className="submitReviewButton"
+              onClick={this.submitReview}
+            >submit review</button>
+            <button
+            className="closeButton"
+            onClick={this.handleClose}
+            >close</button>
+          </div>
         </div>
       </div>
     );
