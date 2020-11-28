@@ -127,7 +127,8 @@ class RatingAndReviews extends React.Component {
   handleSortByChange(e) {
     const sort = e.target.value;
     this.setState({
-      sort: sort
+      sort: sort,
+      filter: false
     });
     this.getAllReviews(sort);
   }
