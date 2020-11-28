@@ -185,11 +185,16 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-        {this.state.currentStyle ? <Overview product={this.state.productInfo}
-          currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit}
-          setCurrentStyle = {this.setCurrentStyle} expandedView = {this.state.expandedView}
-          expandedViewZoom = {this.state.expandedViewZoom} toggleExpandedView = {this.toggleExpandedView}
-          toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
+        {this.state.currentStyle ? 
+          <Overview 
+            product={this.state.productInfo}
+            currentStyle = {this.state.currentStyle} 
+            toggleOutfit = {this.toggleOutfit}
+            setCurrentStyle = {this.setCurrentStyle} 
+            expandedView = {this.state.expandedView}
+            expandedViewZoom = {this.state.expandedViewZoom} 
+            toggleExpandedView = {this.toggleExpandedView}
+            toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
           /> : null}
         <div className="listies" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}>
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
@@ -198,7 +203,7 @@ class App extends React.Component {
           pyro={1} products={this.state.outfit} toggleOutfit={this.toggleOutfit}/>
         </div>
         {this.state.productId && this.state.productInfo ?
-          <div>
+          <div id= "RatingAndReviews" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}>
             <RatingAndReviews
               productId={this.state.productId}
               product={this.state.productInfo.name}

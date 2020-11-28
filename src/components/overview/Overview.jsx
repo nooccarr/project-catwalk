@@ -8,6 +8,7 @@ import Cart from './Cart'
 import Stars from '../Stars.jsx';
 
 import Tracker from './Tracker'
+import RatingAndReviews from '../ratingAndReviewsComponents/RatingAndReviews';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -259,6 +260,7 @@ class Overview extends React.Component {
           toggleExpandedViewZoom = {this.props.toggleExpandedViewZoom}
           slideLeft = {this.slideLeft}
           slideRight = {this.slideRight}
+          updateMainImage = {this.updateMainImage}
           />
       )
     } else if (this.props.expandedViewZoom) {
@@ -288,7 +290,7 @@ class Overview extends React.Component {
 
 
 let ExpandedView = ({expandedView, expandedViewZoom, trackAction, moduleName, 
-  mainImageWidth, mainImage, currentStyle,toggleExpandedViewZoom, slideLeft, slideRight}) => {
+  mainImageWidth, mainImage, currentStyle,toggleExpandedViewZoom, slideLeft, slideRight, updateMainImage}) => {
 
     return (
       // <div onClick = {(e) => trackAction(e, moduleName)}> REIMPLEMENT THIS WHEN YOU CAN WRAP all 3 conditional renders UNDER 1 TRACKER COMPONENT
@@ -300,10 +302,13 @@ let ExpandedView = ({expandedView, expandedViewZoom, trackAction, moduleName,
         <span className = 'expandedViewIcons'>
               {currentStyle.photos.map((x, index) => {
                 return (
-                  <div key = {index} className = {mainImage === index ? 'expandedViewIconWrapperActive' : 'expandedViewIconWrapper'}>
-                    <img className = 'expandedViewIcon' src = {x.thumbnail_url}
+                  <div key = {index} 
+                       className = {mainImage === index ? 'expandedViewIconWrapperActive' : 'expandedViewIconWrapper'}
+                       onClick = {() => updateMainImage(index)}
+                  >
+                    {/* <img className = 'expandedViewIcon' src = {x.thumbnail_url}
                          onClick = {() => updateMainImage(index)}>
-                    </img>
+                    </img> */}
                   </div>
                 )
               })}
@@ -433,9 +438,19 @@ let ProductInfo = ({category, name, default_price, original_price, sale_price, a
 
     return (
       <div onClick = {(e) => trackAction(e, moduleName)}>
+        
         <div className = 'star-reviews-wrapper'> 
         {Stars(50, average_rating)}
-        </div> 
+        </div>
+        <div id = 'read-all-reviews'
+          onClick = {()=>{
+            document.getElementById('RatingAndReviews').scrollIntoView()
+          }
+        }
+        >
+          Read All Reviews
+        </div>
+   
         <div id = 'category'> {category} </div>
         <div id = 'expandedProductName'> {name} </div>
         <div id = 'price'> {original_price - sale_price === 0 ? original_price : <span> 

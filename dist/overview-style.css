@@ -98,13 +98,25 @@
 }
 
 .star-reviews-wrapper {
-  width: 100%;
+  /* width: 100%; 
+  change to 52 as long as stars are 50px
+  */
+  width: 52px;
   height: 30%;
   margin-top: 3%;
 
   padding-left: 5px;
+  display: inline-block;
 
 }
+
+#read-all-reviews {
+  display: inline-block;
+  font-size: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 #expandedProductName {
   font-size: 20px;
   font-weight: bold;
@@ -172,29 +184,45 @@
 }
 
 .expandedViewIconWrapper {
-  width: 50px;
-  height: 50px;
+  width: 12px;
+  height: 12px;
   border: 1px solid black;
-  margin-right: 10px;
+  background-color: white;
+  margin-right: 18px;
 
   display: inline-block;
   overflow: hidden;
   border-radius: 50px;
+
+  cursor: pointer;
 }
 
 .expandedViewIconWrapperActive {
-  width: 50px;
-  height: 50px;
+  /* width: 50px;
+  height: 50px; */
+  width: 12px;
+  height: 12px;
   border: 1px solid gold;
-  margin-right: 10px;
+  background-color: gold;
+  color: grey;
+  margin-right: 18px;
 
   display: inline-block;
   overflow: hidden;
   border-radius: 50px;
+
+  cursor: pointer;
 }
 
 .expandedViewIcon {
   width: 100%;
+}
+
+.expandedViewIconDot {
+  height: 10px;
+  width: 10px;
+  color: orange;
+  border-radius: 10px;
 }
 
 .expandedViewZoom {
