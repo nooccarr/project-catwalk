@@ -41,7 +41,7 @@ class StyleSelector extends React.Component {
         <div>
           <div className = 'gridItem3Wrapper'>
             <div className = 'styleSelectedStyle'> 
-            <b>Style > </b>{this.props.styles.results[this.state.selectedStyleThumbnailIndex].name}
+            <b>Style {'>'} </b>{this.props.styles.results[this.state.selectedStyleThumbnailIndex].name}
             </div>
             <div className = 'styleSelectorThumbnailsWrapper'> 
               { this.props.styles.results.map((x, index) => {
@@ -56,7 +56,7 @@ class StyleSelector extends React.Component {
                       <img src = {x.photos[0].thumbnail_url} className = 'styleSelectorThumbnail' />            
                       
                       {index === this.state.selectedStyleThumbnailIndex ? 
-                      <img src = '../../../dist/images/check.png' 
+                      <img src = './images/check.png' 
                       className = 'styleSelectorCheck'></img> : null}
                       </span>
                   
@@ -74,7 +74,7 @@ class StyleSelector extends React.Component {
                   <img src = {x.photos[0].thumbnail_url} className = 'styleSelectorThumbnail' />
                   
                   {index === this.state.selectedStyleThumbnailIndex ? 
-                  <img src = '../../../dist/images/check.png' 
+                  <img src = './images/check.png' 
                   className = 'styleSelectorCheck'></img> : null}
                   </span>
                   

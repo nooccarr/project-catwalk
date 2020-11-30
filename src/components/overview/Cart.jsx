@@ -112,7 +112,7 @@ class Star extends React.Component {
       <div className = 'dd-wrapper-star'> 
         <div className = 'dd-header-star'>
           <div className = 'contain-star' onClick = {this.handleClick} >
-            <img src = '../../../dist/images/empty-star-grey.png' style = {{maxWidth: '100%'}}/>
+            <img src = './images/empty-star-grey.png' style = {{maxWidth: '100%'}}/>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ class Star extends React.Component {
         <div className = 'dd-wrapper-star'> 
           <div className = 'dd-header-star'>
             <div className = 'contain-star' onClick = {this.handleClick} >
-              <img src = '../../../dist/images/full-star.png' style = {{maxWidth: '100%'}}/>
+              <img src = './images/full-star.png' style = {{maxWidth: '100%'}}/>
             </div>
           </div>
         </div>  

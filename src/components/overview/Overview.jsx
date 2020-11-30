@@ -350,23 +350,23 @@ let ProductDescription = ({slogan, description}) => {
           <div className = 'social-media-icon-wrapper'> 
             
             <a href="https://twitter.com/intent/tweet?text=Hello%20world">
-              <img src = '../../../dist/images/twitter.png' className = 'social-media-icon'/>
+              <img src = './images/twitter.png' className = 'social-media-icon'/>
             </a>
           </div>
           <div className = 'social-media-icon-wrapper'> 
             <div data-href={window.location.href}>
               <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5501%2Fdist%2Findex.html%3Fid%3D8&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
-                <img src = '../../../dist/images/fb.png' className = 'social-media-icon'/>
+                <img src = './images/fb.png' className = 'social-media-icon'/>
               </a>
             </div>          
           </div>
           <div className = 'social-media-icon-wrapper'> 
             <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark">
-              <img src = '../../../dist/images/pinterest.png' className = 'social-media-icon'/>
+              <img src = './images/pinterest.png' className = 'social-media-icon'/>
             </a>
           </div>
           <div className = 'social-media-icon-wrapper'> 
-            <img src = '../../../dist/images/ig.png' className = 'social-media-icon'/>
+            <img src = './images/ig.png' className = 'social-media-icon'/>
           </div>
 
           {/* <div className = 'social-media-icon-wrapper'> 
