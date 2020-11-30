@@ -1,4 +1,3 @@
-import { render } from 'enzyme';
 import React from 'react';
 import onClickOutside from 'react-onclickoutside'
 
@@ -68,7 +67,7 @@ class Cart extends React.Component {
   render () {
   
     return (
-      <div> 
+      <div onClick = {(e) => this.props.trackAction(e, this.props.moduleName)}> 
         <EnhancedComponent title="SELECT SIZE" list={this.state.sizes} setSizeQuantities = {this.setSizeQuantities} sizes = {true}/> 
         <EnhancedComponent title="0" list={  [...Array(this.state.availableQuantity).keys()].map((x) => (x+1)) } quantities = {true} setQuantity = {this.setQuantity}/> 
         <AddtoCart size = {this.state.selectedSize} quantity = {this.state.selectedQuantity}/>
@@ -97,7 +96,7 @@ class Star extends React.Component {
   }
 
   handleClick() {
-    console.log(this.props.product.id);
+    // console.log(this.props.product.id);
     this.props.toggleOutfit(this.props.product.id);
     // this.setState(prevState => ({
     //   selected: !prevState.selected

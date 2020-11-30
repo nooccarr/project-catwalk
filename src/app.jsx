@@ -20,6 +20,7 @@ class App extends React.Component {
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.setProduct = this.setProduct.bind(this);
     this.setCurrentStyle = this.setCurrentStyle.bind(this);
+
     this.clickTracker = this.clickTracker.bind(this);
     this.toggleExpandedView = this.toggleExpandedView.bind(this);
     this.toggleExpandedViewZoom = this.toggleExpandedViewZoom.bind(this);
@@ -139,8 +140,6 @@ class App extends React.Component {
   }
   toggleOutfit(id) {
 
-    console.log('hi toggle outfit invoked with id', id)
-    //console.log('in toggle outfit');
     var product, outfit, index;
     if (id === this.state.productId) {
       product = this.state.productInfo;
@@ -180,6 +179,7 @@ class App extends React.Component {
       expandedView: !prevState.expandedView
     }))
   }
+
   clickTracker (e, module) {
     var date = new Date();
     var node = e.target;
@@ -196,15 +196,21 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-            <div onClick={(e) => this.clickTracker(e, 'Overview')}>
-        {this.state.currentStyle ? <Overview product={this.state.productInfo}
-          currentStyle = {this.state.currentStyle} toggleOutfit = {this.toggleOutfit}
-          setCurrentStyle = {this.setCurrentStyle} expandedView = {this.state.expandedView}
-          expandedViewZoom = {this.state.expandedViewZoom} toggleExpandedView = {this.toggleExpandedView}
-          toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
-          /> : null}
-          </div>
-        <div  onClick={(e) => this.clickTracker(e, 'Related Products')}
+          <div id = 'Overview' onClick={(e) => this.clickTracker(e, 'Overview')}>
+          {this.state.currentStyle ? 
+            <Overview 
+              product={this.state.productInfo}
+              currentStyle = {this.state.currentStyle} 
+              toggleOutfit = {this.toggleOutfit}
+              setCurrentStyle = {this.setCurrentStyle} 
+              expandedView = {this.state.expandedView}
+              expandedViewZoom = {this.state.expandedViewZoom} 
+              toggleExpandedView = {this.toggleExpandedView}
+              toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
+            /> : null} 
+           </div>
+          
+        <div onClick={(e) => this.clickTracker(e, 'Related Products')}
           className="listies" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}>
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>
@@ -212,7 +218,8 @@ class App extends React.Component {
           pyro={1} products={this.state.outfit} toggleOutfit={this.toggleOutfit}/>
         </div>
         {this.state.productId && this.state.productInfo ?
-          <div onClick={(e) => this.clickTracker(e, 'Ratings and Reviews')}>
+          <div id= "RatingAndReviews" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
+            onClick={(e) => this.clickTracker(e, 'Ratings and Reviews')}>
             <RatingAndReviews
               productId={this.state.productId}
               product={this.state.productInfo.name}

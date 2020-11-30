@@ -8,7 +8,7 @@ body {
   color: #403b3b
 }
 .nav {
-  background-color: #d34788;
+  /* background-color: #d34788; */
   margin: 0px;
   padding: 10px;
   display: flex;

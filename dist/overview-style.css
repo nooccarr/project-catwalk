@@ -1,4 +1,7 @@
-
+#Overview {
+  margin-top: 50px;
+  margin-bottom: 150px; 
+}
 .overview-container {
   width: 70%;
   margin-left: auto;
@@ -34,6 +37,8 @@
   position: relative;
   overflow: hidden;
   /* display: inline-block; */
+
+  padding-left: 5px
 }
 
 .grid-item3 {
@@ -43,6 +48,8 @@
   position: relative;
   overflow: hidden;
   /* display: inline-block; */
+  padding-left: 5px
+
 }
 
 .grid-item4 {
@@ -52,6 +59,8 @@
   position: relative;
   overflow: show;
   /* display: inline-block; */
+  padding-left: 5px
+
 }
 
 .grid-item5 {
@@ -70,6 +79,9 @@
   position: relative;
   overflow: hidden;
   /* display: inline-block; */
+  padding-left: 5px
+
+
 }
 #category {
   font-size: 11px;
@@ -98,13 +110,26 @@
 }
 
 .star-reviews-wrapper {
-  width: 100%;
+  /* width: 100%; 
+  change to 52 as long as stars are 50px
+  */
+  width: 52px;
   height: 30%;
   margin-top: 3%;
 
   padding-left: 5px;
+  display: inline-block;
 
 }
+
+#read-all-reviews {
+  display: inline-block;
+  font-size: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
 #expandedProductName {
   font-size: 20px;
   font-weight: bold;
@@ -172,30 +197,50 @@
 }
 
 .expandedViewIconWrapper {
-  width: 50px;
-  height: 50px;
+  width: 12px;
+  height: 12px;
   border: 1px solid black;
-  margin-right: 10px;
+  background-color: white;
+  margin-right: 18px;
+
 
   display: inline-block;
   overflow: hidden;
   border-radius: 50px;
+
+  cursor: pointer;
 }
 
 .expandedViewIconWrapperActive {
-  width: 50px;
-  height: 50px;
+  /* width: 50px;
+  height: 50px; */
+  width: 12px;
+  height: 12px;
   border: 1px solid gold;
-  margin-right: 10px;
+  background-color: gold;
+  color: grey;
+  margin-right: 18px;
+
 
   display: inline-block;
   overflow: hidden;
   border-radius: 50px;
+
+  cursor: pointer;
+
 }
 
 .expandedViewIcon {
   width: 100%;
 }
+
+.expandedViewIconDot {
+  height: 10px;
+  width: 10px;
+  color: orange;
+  border-radius: 10px;
+}
+
 
 .expandedViewZoom {
   width: 70%;
@@ -631,8 +676,10 @@ li {
   top: 50%;
   left: 80%;
   border: 1px solid white;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
+  border-radius: 30px;
+
 }
 
 .arrowIconWrapperLeft {
@@ -640,9 +687,11 @@ li {
   top: 50%;
   left: 20%;
   border: 1px solid white;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   z-index: 1;
+  border-radius: 30px;
+
 }
 
 .arrowIconWrapperLeftExpandedView {
@@ -650,9 +699,12 @@ li {
   top: 50%;
   left: 5%;
   border: 1px solid white;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   z-index: 1;
+
+  border-radius: 30px;
+
 }
 
 .arrowIconWrapperRightExpandedView {
@@ -661,8 +713,10 @@ li {
   /* left: 95%; */
   left: 92%;
   border: 1px solid white;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
+
+  border-radius: 30px;
 }
 
 .arrow {
@@ -701,6 +755,8 @@ li {
   left: 25%;
   z-index: 1 */
   margin-left: 10px;
+  margin-bottom: 2px;
+
 
 }
 
@@ -709,7 +765,9 @@ li {
   /* position: absolute;
   top: 50%;
   left: 85%; */
-  margin-left: 10px;
+  margin-left: 8px;
+  margin-bottom: 2px;
+
 
 }
 
