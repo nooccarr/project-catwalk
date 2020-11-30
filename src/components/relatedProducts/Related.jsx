@@ -70,7 +70,7 @@ class Related extends React.Component {
         if (this.state.showR) {
             return <div id="left" className="arrowdiv-right" onClick={this.shift}>
                 <img id="left" className="related-right" onClick={this.shift}
-                    src="../../../dist/images/left.png"/>
+                    src="./images/left.png"/>
                 </div>;
         }
     }
@@ -78,7 +78,7 @@ class Related extends React.Component {
         if (this.state.showL) {
             return <div id="right" className="arrowdiv-left" onClick={this.shift}>
                 <img id="right" className="related-left" onClick={this.shift}
-                src="../../../dist/images/right.png"/>
+                src="./images/right.png"/>
                 </div>;
         }
     }
@@ -170,7 +170,7 @@ class Related extends React.Component {
             <li key="outfit" style={{float: 'left'}}>
                 <div id={-1} className="related-item">
                     &nbsp;&nbsp;&nbsp;Add to Outfit
-                    <img id={-1} className="related-plus" src="../../../dist/images/plus.png"/>
+                    <img id={-1} className="related-plus" src="./images/plus.png"/>
                 </div>
             </li>
             );
@@ -199,7 +199,10 @@ class Related extends React.Component {
                         index++;
                         var srcs = [];
                         for (var set of product.styles.results) {
-                            srcs = srcs.concat(set.photos);
+                            srcs = srcs.concat(set.photos || '');
+                        }
+                        if (!srcs.length) {
+                            srcs = ['','','','',''];
                         }
                         var anim = false;
                         var shadow = '';
