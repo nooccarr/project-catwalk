@@ -66,7 +66,7 @@ class RatingAndReviews extends React.Component {
         });
       })
       .then(result => {
-        if (!this.state.reviewsLength) { this.setState({ moreReviews: false })}
+        if (!this.state.reviewsLength) { this.setState({ moreReviews: false }); }
       })
       .catch(err => console.log(err));
   }
@@ -144,7 +144,7 @@ class RatingAndReviews extends React.Component {
   hideReview() {
     this.setState({
       show: !this.state.show
-    })
+    });
   }
 
   selectedFilters(filters) {
