@@ -60,7 +60,6 @@ class RatingAndReviews extends React.Component {
           reviewsTemp: reviews,
           reviews: reviews.slice(0, 2),
           reviewsLength: reviews.length,
-          // scrolling: false,
           moreReviews: true,
           reviewsStart: 0,
           reviewsEnd: 2
@@ -209,10 +208,13 @@ class RatingAndReviews extends React.Component {
 
   handleScroll() {
     let lastDiv = document.querySelector("button.writeNewReviewButton");
-    let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
-    let pageOffset = window.pageYOffset + window.innerHeight;
-    if (pageOffset > lastDivOffset) {
-      this.handleMoreReviewsClick(this.state.filter);
+    let lastDivOffset, pageOffset;
+    if (lastDiv) {
+      lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
+      pageOffset = window.pageYOffset + window.innerHeight;
+      if (pageOffset > lastDivOffset) {
+        this.handleMoreReviewsClick(this.state.filter);
+      }
     }
   }
 
