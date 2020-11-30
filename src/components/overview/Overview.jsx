@@ -32,11 +32,11 @@ class Overview extends React.Component {
       sale_price: '',
 
 
-      
+
       styles: [],
       currentStyle: '',
     }
- 
+
     this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
     this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
     this.updateMainImage = this.updateMainImage.bind(this);
@@ -52,13 +52,13 @@ class Overview extends React.Component {
   }
 
   slideRight() {
-  
+
     var mainIndex = this.state.mainImage + 1;
 
     if (mainIndex > this.state.endIndex) {
-      var newStartIndex = this.state.startIndex > mainIndex - this.state.endIndex 
+      var newStartIndex = this.state.startIndex > mainIndex - this.state.endIndex
       ? this.state.startIndex : mainIndex - this.state.endIndex;
-      
+
       this.setState({
         startIndex: newStartIndex
       })
@@ -92,7 +92,7 @@ class Overview extends React.Component {
   }
 
   slideThumbnailsDown() {
-  
+
     if (this.state.startIndex >= this.state.thumbnails.length-this.state.endIndex-1) {
       return;
     }
@@ -105,7 +105,7 @@ class Overview extends React.Component {
   }
 
   slideThumbnailsUp() {
-  
+
     if (this.state.startIndex <= 0) {
       return;
     }
@@ -127,8 +127,8 @@ class Overview extends React.Component {
     // this.incrementExpandedViewOffset = this.incrementExpandedViewOffset.bind(this);
     // this.decrementExpandedViewOffset = this.decrementExpandedViewOffset.bind(this);
   }
-  
-  
+
+
   getImageWidth(index) {
 
     if (this.props.currentStyle!== undefined) {
@@ -136,14 +136,14 @@ class Overview extends React.Component {
         var x = this.props.currentStyle.photos[index].url.indexOf('&w=')
         var y = this.props.currentStyle.photos[index].url.indexOf('&q')
         var width = this.props.currentStyle.photos[index].url.slice(x+3,y);
-       
+
         return Number(width);
     }
 
   }
 
   componentDidUpdate(prevProps, prevState) {
-   
+
     if (this.state.thumbnails === '' && this.props.currentStyle!=='') {
 
        this.setState({
@@ -152,108 +152,108 @@ class Overview extends React.Component {
     }
 
     if (this.state.mainImage !== prevState.mainImage) {
-     
+
       var x = this.props.currentStyle.photos[this.state.mainImage].url.indexOf('&w=')
       var y = this.props.currentStyle.photos[this.state.mainImage].url.indexOf('&q')
       var width = this.props.currentStyle.photos[this.state.mainImage].url.slice(x+3,y);
-     
+
       this.setState({
         mainImageWidth: Number(width)
       })
-      
+
     }
 
   }
 
   render() {
-    
+
     if (!this.props.expandedView) {
       return (
         <Tracker
           render = { ({trackAction}) => {
             return (
               <div className = "overview-container">
-                <div className="item grid-item1">            
+                <div className="item grid-item1">
                   <Gallery
                     trackAction = {trackAction}
-                    moduleName = {'Gallery'} 
-                    
-                    currentStyle = {this.props.currentStyle} 
-                    setCurrentStyle = {this.props.setCurrentStyle} 
-                    toggleExpandedView = {this.props.toggleExpandedView}
-                    updateMainImage = {this.updateMainImage} 
-                    slideRight = {this.slideRight} 
-                    slideLeft = {this.slideLeft}
-                    slideThumbnailsDown = {this.slideThumbnailsDown} 
-                    slideThumbnailsUp = {this.slideThumbnailsUp}
-                    mainImage = {this.state.mainImage} 
-                    thumbnails = {this.state.thumbnails}
-                    startIndex = {this.state.startIndex} 
-                    endIndex = {this.state.endIndex}
-                  />   
-                </div>
-                <div className="item grid-item2"> 
-                  <ProductInfo
-                    trackAction = {trackAction}                                                        
-                    moduleName = {'ProductInfo'} 
-                    
-                    category = {this.props.product.category} 
-                    name = {this.props.product.name} 
-                    default_price = {this.props.product.default_price} 
-                    original_price = {this.props.currentStyle.original_price} 
-                    sale_price = {this.props.currentStyle.sale_price} 
-                    average_rating = {this.props.product.average}
-                  />             
-                </div>
-                <div className="item grid-item3"> 
-                  <StyleSelector 
-                    moduleName = {'StyleSelector'} 
-                    trackAction = {trackAction}
-                    
-                    styles = {this.props.product.styles} 
+                    moduleName = {'Gallery'}
+
+                    currentStyle = {this.props.currentStyle}
                     setCurrentStyle = {this.props.setCurrentStyle}
-                    /> 
+                    toggleExpandedView = {this.props.toggleExpandedView}
+                    updateMainImage = {this.updateMainImage}
+                    slideRight = {this.slideRight}
+                    slideLeft = {this.slideLeft}
+                    slideThumbnailsDown = {this.slideThumbnailsDown}
+                    slideThumbnailsUp = {this.slideThumbnailsUp}
+                    mainImage = {this.state.mainImage}
+                    thumbnails = {this.state.thumbnails}
+                    startIndex = {this.state.startIndex}
+                    endIndex = {this.state.endIndex}
+                  />
                 </div>
-                <div className="item grid-item4"> 
-                  <Cart 
-                    moduleName = {'Cart'} 
+                <div className="item grid-item2">
+                  <ProductInfo
+                    trackAction = {trackAction}
+                    moduleName = {'ProductInfo'}
+
+                    category = {this.props.product.category}
+                    name = {this.props.product.name}
+                    default_price = {this.props.product.default_price}
+                    original_price = {this.props.currentStyle.original_price}
+                    sale_price = {this.props.currentStyle.sale_price}
+                    average_rating = {this.props.product.average}
+                  />
+                </div>
+                <div className="item grid-item3">
+                  <StyleSelector
+                    moduleName = {'StyleSelector'}
                     trackAction = {trackAction}
 
-                    currentStyle = {this.props.currentStyle} 
-                    toggleOutfit = {this.props.toggleOutfit} 
-                    product = {this.props.product}
-                  /> 
+                    styles = {this.props.product.styles}
+                    setCurrentStyle = {this.props.setCurrentStyle}
+                    />
                 </div>
-                <div className="item grid-item5"> 
-                  <ProductDescription 
-                    moduleName = {'ProductDescription'} 
+                <div className="item grid-item4">
+                  <Cart
+                    moduleName = {'Cart'}
                     trackAction = {trackAction}
-                                                                      
-                    slogan = {this.props.product.slogan} 
+
+                    currentStyle = {this.props.currentStyle}
+                    toggleOutfit = {this.props.toggleOutfit}
+                    product = {this.props.product}
+                  />
+                </div>
+                <div className="item grid-item5">
+                  <ProductDescription
+                    moduleName = {'ProductDescription'}
+                    trackAction = {trackAction}
+
+                    slogan = {this.props.product.slogan}
                     description = {this.props.product.description}
                   />
                 </div>
-                <div className="item grid-item6"> 
-                  <Features 
-                    moduleName = {'Features'} 
-                    trackAction = {trackAction} 
-                                                            
-                    features = {this.props.product.features}/> 
+                <div className="item grid-item6">
+                  <Features
+                    moduleName = {'Features'}
+                    trackAction = {trackAction}
+
+                    features = {this.props.product.features}/>
                 </div>
               </div>
             )
           }}
-      /> 
+      />
       )
     }
-   
+
     else if (this.props.expandedView && !this.props.expandedViewZoom){
        return (
 
-        <ExpandedView 
+        <ExpandedView
           expandedView = {this.props.expandedView}
           expandedViewZoom = {this.props.expandedViewZoom}
-          
+
           // trackAction = {trackAction}
           // moduleName = {'ExpandedView'}
 
@@ -270,7 +270,7 @@ class Overview extends React.Component {
 
       return (
 
-      <ExpandedViewZoom 
+      <ExpandedViewZoom
           // trackAction = {trackAction}
           // moduleName = {moduleName}
 
@@ -292,7 +292,7 @@ class Overview extends React.Component {
 
 
 
-let ExpandedView = ({expandedView, expandedViewZoom, trackAction, moduleName, 
+let ExpandedView = ({expandedView, expandedViewZoom, trackAction, moduleName,
   mainImageWidth, mainImage, currentStyle,toggleExpandedViewZoom, slideLeft, slideRight, updateMainImage}) => {
 
     return (
@@ -300,12 +300,12 @@ let ExpandedView = ({expandedView, expandedViewZoom, trackAction, moduleName,
       <div>
         <div className = "expandedView" style = {{width: Math.min(mainImageWidth, (window.innerWidth - 60)*.7)}}>
         <span className = {mainImage === 0 ? null : 'arrowIconWrapperLeftExpandedView'}>
-              <i className={mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {slideLeft}></i> 
+              <i className={mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {slideLeft}></i>
         </span>
         <span className = 'expandedViewIcons'>
               {currentStyle.photos.map((x, index) => {
                 return (
-                  <div key = {index} 
+                  <div key = {index}
                        className = {mainImage === index ? 'expandedViewIconWrapperActive' : 'expandedViewIconWrapper'}
                        onClick = {() => updateMainImage(index)}
                   >
@@ -318,14 +318,14 @@ let ExpandedView = ({expandedView, expandedViewZoom, trackAction, moduleName,
         </span>
           <img src = {currentStyle.photos[mainImage].url} id = 'expandedImage'onClick = {toggleExpandedViewZoom}/>
         <span className = {mainImage === currentStyle.photos.length-1 ? null : 'arrowIconWrapperRightExpandedView'}>
-          <i className={mainImage === currentStyle.photos.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {slideRight}></i> 
+          <i className={mainImage === currentStyle.photos.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {slideRight}></i>
         </span>
       </div>
     </div>
     )
 }
 
-let ExpandedViewZoom = ({mainImageWidth, trackAction, moduleName, currentStyle, mainImage, 
+let ExpandedViewZoom = ({mainImageWidth, trackAction, moduleName, currentStyle, mainImage,
   onMouseMove, toggleExpandedView, toggleExpandedViewZoom, x, y}) => {
     return (
       // <div onClick = {(e) => trackAction(e, moduleName)}>
@@ -335,13 +335,13 @@ let ExpandedViewZoom = ({mainImageWidth, trackAction, moduleName, currentStyle, 
             onMouseMove = {onMouseMove}
             onClick = {()=> {toggleExpandedView(); toggleExpandedViewZoom()}}
             id = 'expandedImageZoom'
-            style = {{objectPosition: 
+            style = {{objectPosition:
                 Math.min(mainImageWidth, (window.innerWidth - 60)*.7) === mainImageWidth ?
                 `-${(0)}px -${(y)/1.5}px`
                 :
                 `-${(x)/ (966/(mainImageWidth-((window.innerWidth - 60)*.7)))}px -${(y)/1.2}px`}}
-            />  
-          <h1>Mouse Coordinates: {x} {y} </h1>        
+            />
+          <h1>Mouse Coordinates: {x} {y} </h1>
         </div>
       </div>
     )
@@ -353,13 +353,13 @@ let ExpandedViewZoom = ({mainImageWidth, trackAction, moduleName, currentStyle, 
 let Features = ({features, trackAction, moduleName}) => {
   if (features === '') {
     return (
-      <div> 
-       null so far 
+      <div>
+       null so far
       </div>
     )
   } else {
     return (
-      <div onClick = {(e) => trackAction(e, moduleName)}> 
+      <div onClick = {(e) => trackAction(e, moduleName)}>
         <div className = 'productFeaturesValuesOuterWrapper'>
           {features.map((x, index) => {
             return (
@@ -382,8 +382,8 @@ let Features = ({features, trackAction, moduleName}) => {
 let ProductDescription = ({slogan, description, trackAction, moduleName}) => {
   if (slogan === '') {
     return (
-      <div> 
-       null so far 
+      <div>
+       null so far
       </div>
     )
   } else {
@@ -392,29 +392,29 @@ let ProductDescription = ({slogan, description, trackAction, moduleName}) => {
         <div id = 'slogan'> {slogan} </div>
         <div id = 'description'> {description} </div>
 
-        <div id = 'social-media-wrapper'> 
-          <div className = 'social-media-icon-wrapper'> 
-            
+        <div id = 'social-media-wrapper'>
+          <div className = 'social-media-icon-wrapper'>
+
             <a href="https://twitter.com/intent/tweet?text=Hello%20world">
-              <img src = '../../../dist/images/twitter.png' className = 'social-media-icon'/>
+              <img src = './images/twitter.png' className = 'social-media-icon'/>
             </a>
           </div>
-          <div className = 'social-media-icon-wrapper'> 
+          <div className = 'social-media-icon-wrapper'>
             <div data-href={window.location.href}>
               <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5501%2Fdist%2Findex.html%3Fid%3D8&amp;src=sdkpreparse" className = "fb-xfbml-parse-ignore">
-                <img src = '../../../dist/images/fb.png' className = 'social-media-icon'/>
+                <img src = './images/fb.png' className = 'social-media-icon'/>
               </a>
-            </div>          
+            </div>
           </div>
-          <div className = 'social-media-icon-wrapper'> 
+          <div className = 'social-media-icon-wrapper'>
             <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark">
-              <img src = '../../../dist/images/pinterest.png' className = 'social-media-icon'/>
+              <img src = './images/pinterest.png' className = 'social-media-icon'/>
             </a>
           </div>
-          <div className = 'social-media-icon-wrapper'> 
-            <img src = '../../../dist/images/ig.png' className = 'social-media-icon'/>
+          <div className = 'social-media-icon-wrapper'>
+            <img src = './images/ig.png' className = 'social-media-icon'/>
           </div>
-        
+
         </div>
 
       </div>
@@ -430,7 +430,7 @@ let ProductInfo = ({category, name, default_price, original_price, sale_price, a
 
   if (original_price === '') {
     return (
-      <div> 
+      <div>
         {/* {Stars(140, product.average || product.rating)} */}
         <div id = 'category'> {category} </div>
         <div id = 'expandedProductName'> {name} </div>
@@ -441,8 +441,8 @@ let ProductInfo = ({category, name, default_price, original_price, sale_price, a
 
     return (
       <div onClick = {(e) => trackAction(e, moduleName)}>
-        
-        <div className = 'star-reviews-wrapper'> 
+
+        <div className = 'star-reviews-wrapper'>
         {Stars(50, average_rating)}
         </div>
         <div id = 'read-all-reviews'
@@ -453,13 +453,13 @@ let ProductInfo = ({category, name, default_price, original_price, sale_price, a
         >
           Read All Reviews
         </div>
-   
+
         <div id = 'category'> {category} </div>
         <div id = 'expandedProductName'> {name} </div>
-        <div id = 'price'> {original_price - sale_price === 0 ? original_price : <span> 
-                                                                                    <span style ={{color: 'red'}}>${sale_price} </span> 
-                                                                                    <span style ={{textDecoration: 'line-through'}}>${original_price} </span>  
-                                                                                  </span> }  
+        <div id = 'price'> {original_price - sale_price === 0 ? original_price : <span>
+                                                                                    <span style ={{color: 'red'}}>${sale_price} </span>
+                                                                                    <span style ={{textDecoration: 'line-through'}}>${original_price} </span>
+                                                                                  </span> }
         </div>
 
       </div>
