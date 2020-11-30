@@ -22,7 +22,7 @@ const Characteristic = ({ characteristic, scale }) => {
   let textIndent = { textIndent: `${getPercentage(5, Number(scale))}%` };
   if (!scale) { deleteInnerHTML('upsideDownTriangle'); }
 
-  return (<div>
+  return (<React.Fragment>
     <div className="characteristicName">{characteristic}</div>
     <div className="characteristic-bar">
       <span
@@ -38,7 +38,7 @@ const Characteristic = ({ characteristic, scale }) => {
       <p className="characteristicFeedback">poor </p>
       <p className="characteristicFeedback">great</p>
     </div>}
-  </div>);
+  </React.Fragment>);
 };
 
 export default ProductBreakdown;

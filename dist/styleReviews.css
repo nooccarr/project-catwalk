@@ -135,11 +135,17 @@ figure, figcaption, section, summary, mark {
 }
 
 .showMoreBody {
-  display: block;
+  display: inline-block;
   cursor: pointer;
   font: 300 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 5px;
 }
+
+.recommendTextContainer,
+.individualReviewBodyContainer {
+  display: block;
+}
+
 
 .reviewPhotoThumbnailsContainer {
   display: inline-block;

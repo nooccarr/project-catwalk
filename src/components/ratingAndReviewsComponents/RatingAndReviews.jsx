@@ -60,14 +60,13 @@ class RatingAndReviews extends React.Component {
           reviewsTemp: reviews,
           reviews: reviews.slice(0, 2),
           reviewsLength: reviews.length,
-          // scrolling: false,
           moreReviews: true,
           reviewsStart: 0,
           reviewsEnd: 2
         });
       })
       .then(result => {
-        if (!this.state.reviewsLength) { this.setState({ moreReviews: false })}
+        if (!this.state.reviewsLength) { this.setState({ moreReviews: false }); }
       })
       .catch(err => console.log(err));
   }
@@ -102,7 +101,7 @@ class RatingAndReviews extends React.Component {
       .catch(err => console.log(err));
   }
 
-  getCurrentFiltered(reviewId) {
+  getCurrentFiltered(reviewId, isHelpful) {
     return axios
       .get('http://3.21.164.220/reviews', {
         params: {
@@ -117,8 +116,8 @@ class RatingAndReviews extends React.Component {
         });
       })
       .then(result => {
-        let filteredTemp = updateFiltered(this.state.reviewsTemp, this.state.filteredTemp, reviewId);
-        let filtered = updateFiltered(this.state.reviewsTemp, this.state.filtered, reviewId);
+        let filteredTemp = updateFiltered(this.state.reviewsTemp, this.state.filteredTemp, reviewId, isHelpful);
+        let filtered = updateFiltered(this.state.reviewsTemp, this.state.filtered, reviewId, isHelpful);
         this.setState({
           filteredTemp: filteredTemp,
           filtered: filtered
@@ -145,7 +144,7 @@ class RatingAndReviews extends React.Component {
   hideReview() {
     this.setState({
       show: !this.state.show
-    })
+    });
   }
 
   selectedFilters(filters) {
@@ -209,10 +208,13 @@ class RatingAndReviews extends React.Component {
 
   handleScroll() {
     let lastDiv = document.querySelector("button.writeNewReviewButton");
-    let lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
-    let pageOffset = window.pageYOffset + window.innerHeight;
-    if (pageOffset > lastDivOffset) {
-      this.handleMoreReviewsClick(this.state.filter);
+    let lastDivOffset, pageOffset;
+    if (lastDiv) {
+      lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
+      pageOffset = window.pageYOffset + window.innerHeight;
+      if (pageOffset > lastDivOffset) {
+        setTimeout(() => this.handleMoreReviewsClick(this.state.filter), 500);
+      }
     }
   }
 
@@ -222,11 +224,9 @@ class RatingAndReviews extends React.Component {
         {/* {console.log(this.state)} */}
         <div className="ratingAndReviewsTitle">ratings & reviews</div>
         <div className="ratingBody">
-          <div>
-            <h1 className="averageRating">{this.state.average}</h1>
-            <div className="averageStarRating">{Stars(70, this.state.average)}</div>
-          </div>
-          {this.state.rating ? <div>
+          <h1 className="averageRating">{this.state.average}</h1>
+          <div className="averageStarRating">{Stars(70, this.state.average)}</div>
+          {this.state.rating ? <React.Fragment>
             <RatingBreakdown
               ratings={this.state.rating.ratings}
               selectedFilters={this.selectedFilters}
@@ -236,7 +236,7 @@ class RatingAndReviews extends React.Component {
             <ProductBreakdown
               characteristics={this.state.rating.characteristics}
             />
-          </div>: null}
+          </React.Fragment> : null}
         </div>
         <div className="reviewBody">
           <div className="sortOnSection">

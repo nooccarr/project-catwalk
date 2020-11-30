@@ -69,7 +69,13 @@ class ReviewListEntry extends React.Component {
       .put(`http://3.21.164.220/reviews/${review_id}/report`, {
         params: { review_id: review_id }
       })
-      .then(result1 => this.props.getCurrentReviews(this.props.sort))
+      .then(result1 => {
+        if (this.props.filter) {
+          this.props.getCurrentFiltered(review_id, false);
+        } else {
+          this.props.getCurrentReviews(this.props.sort);
+        }
+      })
       .then(result2 => {
         if (!this.props.moreReviews) {
           this.props.handleMoreReviewsClick(this.props.filter)}
@@ -97,38 +103,32 @@ class ReviewListEntry extends React.Component {
     const largeBody = validBody(review.body, 251);
 
     return (
-      <div>
+      <React.Fragment>
         {/* {console.log(review)} */}
         {/* {console.log(this.state)} */}
         <div className="starRatingReviewerNameAndDate">
-          <div>{Stars(70, review.rating)}</div>
+          {Stars(70, review.rating)}
           <div className="reviewerNameAndDate">
             {/* <span>Verified Purchaser </span> */}
             {review.reviewer_name}, {formatDate(review.date)}</div>
         </div>
-        <div>
-          <strong className="individualReviewSummary">{review.summary}</strong>
-        </div>
-        {largeBody ? <div>
-          <p className="individualReviewBody">
-            {this.state.largeBody}
-          </p>
+        <strong className="individualReviewSummary">{review.summary}</strong>
+        {largeBody ? <div className="individualReviewBodyContainer">
+          <p className="individualReviewBody">{this.state.largeBody}</p>
           {this.state.showButton ? <div
             className="showMoreBody"
             onClick={this.handleShowMore}
           >Show more</div> : null}
-        </div> : <div><p className="individualReviewBody">{review.body}</p></div>}
-        <div>
-          {review.photos.map((photo, idx) => {
-            return (<img
-              onClick={() => this.showPhoto(idx)}
-              className="reviewListEntryThumbnail"
-              src={photo.url}
-              key={idx}
-            />);
-          })}
-        </div>
-        {review.recommend ? <div>
+        </div> : <p className="individualReviewBody">{review.body}</p>}
+        {review.photos.map((photo, idx) => {
+          return (<img
+            onClick={() => this.showPhoto(idx)}
+            className="reviewListEntryThumbnail"
+            src={photo.url}
+            key={idx}
+          />);
+        })}
+        {review.recommend ? <div className="recommendTextContainer">
           <div className="checkSymbol">&#10003;</div>
           <p className="recommendText">I recommend this product</p>
         </div> : null}
@@ -155,7 +155,7 @@ class ReviewListEntry extends React.Component {
           onClick={this.hidePhoto}
         /> : null}
         <hr />
-      </div>
+      </React.Fragment>
     );
   }
 };

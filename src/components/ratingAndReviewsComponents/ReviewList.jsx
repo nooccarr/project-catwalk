@@ -2,7 +2,7 @@ import React from 'react';
 import ReviewListEntry from './ReviewListEntry.jsx';
 
 const ReviewList = ({ reviews, getCurrentReviews, getCurrentFiltered, sort, moreReviews, handleMoreReviewsClick, filter, addClickedReviewId, reviewIds }) => (
-  <div>
+  <React.Fragment>
     {/* {console.log(reviews)} */}
     {reviews.map((review, idx) => {
       return <ReviewListEntry
@@ -18,7 +18,7 @@ const ReviewList = ({ reviews, getCurrentReviews, getCurrentFiltered, sort, more
         key={idx}
       />
     })}
-  </div>
+  </React.Fragment>
 );
 
 export default ReviewList;

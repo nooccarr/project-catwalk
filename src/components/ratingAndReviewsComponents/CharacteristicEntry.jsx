@@ -3,7 +3,7 @@ import getLabel from '../../../utils/getLabel.js';
 
 const CharacteristicEntry = ({ state, name, handleSelect }) => {
   return (
-    <div>
+    <React.Fragment>
       <h3 className="characteristicEntryName">{name}</h3>
       {state ? <h3
         className="characteristicEntryFeedback"
@@ -28,7 +28,7 @@ const CharacteristicEntry = ({ state, name, handleSelect }) => {
           <label className="newReviewInputLabel">{value}</label>
         </div>);
       })}
-    </div>
+    </React.Fragment>
   );
 };
 
