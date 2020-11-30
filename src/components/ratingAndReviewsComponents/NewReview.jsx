@@ -223,37 +223,33 @@ class NewReview extends React.Component {
               {getLabel('rating', this.state.rating)}
             </div>: null}
           </div>
-          <div>
-            <h3 className="newReviewInput">*Do you recommend this product?</h3>
-            {['yes', 'no'].map((value, idx) => {
-              return (<div
-                className="newReviewInputColumn"
-                key={idx}
-              >
-                <input
-                  className="newReviewInputRadio"
-                  type="radio"
-                  name="recommend"
-                  value={value}
-                  onClick={(e) => this.handleSelect(e)}
-                />
-                <label className="newReviewInputLabel">
-                  {value}
-                </label>
-              </div>);
-            })}
-          </div>
-          <div>
-            <h3 className="newReviewInput">*Characteristics</h3>
-            {characteristics.map((name, idx) => {
-              return (<CharacteristicEntry
-                state={this.state[name]}
-                name={name}
-                handleSelect={this.handleSelect}
-                key={idx}
-              />);
-            })}
-          </div>
+          <h3 className="newReviewInput">*Do you recommend this product?</h3>
+          {['yes', 'no'].map((value, idx) => {
+            return (<div
+              className="newReviewInputColumn"
+              key={idx}
+            >
+              <input
+                className="newReviewInputRadio"
+                type="radio"
+                name="recommend"
+                value={value}
+                onClick={(e) => this.handleSelect(e)}
+              />
+              <label className="newReviewInputLabel">
+                {value}
+              </label>
+            </div>);
+          })}
+          <h3 className="newReviewInput">*Characteristics</h3>
+          {characteristics.map((name, idx) => {
+            return (<CharacteristicEntry
+              state={this.state[name]}
+              name={name}
+              handleSelect={this.handleSelect}
+              key={idx}
+            />);
+          })}
           <InputEntry
             subtitle={'*Review summary'}
             name={'summary'}

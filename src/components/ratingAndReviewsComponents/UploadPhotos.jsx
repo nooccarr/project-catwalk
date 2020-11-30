@@ -14,7 +14,7 @@ const UploadPhotos = ({ showAddPhoto, handleFileAdd, thumbnails, deleteThumbnail
         type="file"
         onChange={(e) => handleFileAdd(e)}
       /> : null}
-      {thumbnails.length ? <div>
+      {thumbnails.length ? <React.Fragment>
         <div className="uploadPhotosSpacer">
           {thumbnails.map((thumbnail, idx) => {
             return (<div
@@ -36,7 +36,7 @@ const UploadPhotos = ({ showAddPhoto, handleFileAdd, thumbnails, deleteThumbnail
             onClick={handleUploadPhotoClose}
           >Upload</button>
         </div>
-      </div> : <div>
+      </React.Fragment> : <React.Fragment>
         <div className="uploadPhotosSpacer"></div>
         <hr />
         <div className="uploadClose">
@@ -45,7 +45,7 @@ const UploadPhotos = ({ showAddPhoto, handleFileAdd, thumbnails, deleteThumbnail
             onClick={handleUploadPhotoClose}
           >Close</button>
         </div>
-      </div>}
+      </React.Fragment>}
     </div>
   </div>);
 };

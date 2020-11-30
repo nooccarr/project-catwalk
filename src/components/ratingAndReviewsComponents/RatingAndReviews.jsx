@@ -224,11 +224,9 @@ class RatingAndReviews extends React.Component {
         {/* {console.log(this.state)} */}
         <div className="ratingAndReviewsTitle">ratings & reviews</div>
         <div className="ratingBody">
-          <div>
-            <h1 className="averageRating">{this.state.average}</h1>
-            <div className="averageStarRating">{Stars(70, this.state.average)}</div>
-          </div>
-          {this.state.rating ? <div>
+          <h1 className="averageRating">{this.state.average}</h1>
+          <div className="averageStarRating">{Stars(70, this.state.average)}</div>
+          {this.state.rating ? <React.Fragment>
             <RatingBreakdown
               ratings={this.state.rating.ratings}
               selectedFilters={this.selectedFilters}
@@ -238,7 +236,7 @@ class RatingAndReviews extends React.Component {
             <ProductBreakdown
               characteristics={this.state.rating.characteristics}
             />
-          </div>: null}
+          </React.Fragment> : null}
         </div>
         <div className="reviewBody">
           <div className="sortOnSection">

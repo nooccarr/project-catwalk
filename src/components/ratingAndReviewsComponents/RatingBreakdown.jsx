@@ -48,7 +48,7 @@ class RatingBreakdown extends React.Component {
     const recPercentage = getPercentage(totalCount(rec), rec[1]);
 
     return (
-      <div>
+      <React.Fragment>
         {/* {console.log(this.state)} */}
         <h3 className="ratingBreakdownTitle">rating breakdown</h3>
         <div className="appliedFilters">{anyFilter}</div>
@@ -68,7 +68,7 @@ class RatingBreakdown extends React.Component {
         <div className="percentageOfReviewsRecommended">
           {recPercentage}% of reviews recommend this product
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 };
