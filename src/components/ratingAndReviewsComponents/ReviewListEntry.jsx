@@ -69,7 +69,13 @@ class ReviewListEntry extends React.Component {
       .put(`http://3.21.164.220/reviews/${review_id}/report`, {
         params: { review_id: review_id }
       })
-      .then(result1 => this.props.getCurrentReviews(this.props.sort))
+      .then(result1 => {
+        if (this.props.filter) {
+          this.props.getCurrentFiltered(review_id, false);
+        } else {
+          this.props.getCurrentReviews(this.props.sort);
+        }
+      })
       .then(result2 => {
         if (!this.props.moreReviews) {
           this.props.handleMoreReviewsClick(this.props.filter)}

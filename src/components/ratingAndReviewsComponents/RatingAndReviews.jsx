@@ -101,7 +101,7 @@ class RatingAndReviews extends React.Component {
       .catch(err => console.log(err));
   }
 
-  getCurrentFiltered(reviewId) {
+  getCurrentFiltered(reviewId, isHelpful) {
     return axios
       .get('http://3.21.164.220/reviews', {
         params: {
@@ -116,8 +116,8 @@ class RatingAndReviews extends React.Component {
         });
       })
       .then(result => {
-        let filteredTemp = updateFiltered(this.state.reviewsTemp, this.state.filteredTemp, reviewId);
-        let filtered = updateFiltered(this.state.reviewsTemp, this.state.filtered, reviewId);
+        let filteredTemp = updateFiltered(this.state.reviewsTemp, this.state.filteredTemp, reviewId, isHelpful);
+        let filtered = updateFiltered(this.state.reviewsTemp, this.state.filtered, reviewId, isHelpful);
         this.setState({
           filteredTemp: filteredTemp,
           filtered: filtered
@@ -213,7 +213,7 @@ class RatingAndReviews extends React.Component {
       lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
       pageOffset = window.pageYOffset + window.innerHeight;
       if (pageOffset > lastDivOffset) {
-        this.handleMoreReviewsClick(this.state.filter);
+        setTimeout(() => this.handleMoreReviewsClick(this.state.filter), 500);
       }
     }
   }
