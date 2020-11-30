@@ -8,7 +8,6 @@ import Cart from './Cart'
 import Stars from '../Stars.jsx';
 
 import Tracker from './Tracker'
-import RatingAndReviews from '../ratingAndReviewsComponents/RatingAndReviews';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -118,7 +117,7 @@ class Overview extends React.Component {
 
 
   componentDidMount() {
-   
+    // console.log('hi', this.props.currentStyle)
       this.setState({
         mainImageWidth: this.getImageWidth(0)
       })

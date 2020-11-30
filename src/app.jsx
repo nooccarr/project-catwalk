@@ -185,17 +185,20 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
           <div className="app">
-        {this.state.currentStyle ? 
-          <Overview 
-            product={this.state.productInfo}
-            currentStyle = {this.state.currentStyle} 
-            toggleOutfit = {this.toggleOutfit}
-            setCurrentStyle = {this.setCurrentStyle} 
-            expandedView = {this.state.expandedView}
-            expandedViewZoom = {this.state.expandedViewZoom} 
-            toggleExpandedView = {this.toggleExpandedView}
-            toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
-          /> : null}
+          <div id = 'Overview'>
+          {this.state.currentStyle ? 
+            <Overview 
+              product={this.state.productInfo}
+              currentStyle = {this.state.currentStyle} 
+              toggleOutfit = {this.toggleOutfit}
+              setCurrentStyle = {this.setCurrentStyle} 
+              expandedView = {this.state.expandedView}
+              expandedViewZoom = {this.state.expandedViewZoom} 
+              toggleExpandedView = {this.toggleExpandedView}
+              toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
+            /> : null} 
+           </div>
+          
         <div className="listies" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}>
           <Related overview={this.state.productInfo} handleRedirect={this.handleRedirect}
           pyro={0} products={this.state.relatedProducts} toggleOutfit={this.toggleOutfit}/>

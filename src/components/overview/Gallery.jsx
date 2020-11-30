@@ -81,7 +81,8 @@ class Gallery extends React.Component {
                 <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.handleSlideLeft}></i> 
               </span>
                 <div className = 'galleryContainer' style = {{
-                  transform: `translateX(-${this.props.mainImage*500}px)`
+                  //-30 for margin on app; -72 for padding in grid item 1; 3/5 is grid item 1's width of container; container is 70% of screen
+                  transform: `translateX(-${this.props.mainImage*(((window.innerWidth*.7)*3/5)-72-30)}px)`
                   }}> 
                   {this.props.currentStyle.photos.map((x, index) => { return(
                     // <canvas id = "myCanvas" width = '100' height = '100'> 
