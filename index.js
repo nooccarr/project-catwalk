@@ -7,8 +7,7 @@ app.use(express.static('./dist'));
 app.use(bodyParser.json());
 
 app.post('/clicks', (req, res) => {
-    console.log(req.body);
-    res.send();
+  res.send();
 });
 
 app.listen(port, () => console.log(`Listening at port ${port}!`));
