@@ -23,8 +23,8 @@ class App extends React.Component {
     };
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
-    this.getLocalOutfit.bind(this);
-    this.setLocalOutfit.bind(this);
+    this.getLocalOutfit = this.getLocalOutfit.bind(this);
+    this.setLocalOutfit = this.setLocalOutfit.bind(this);
     this.getProduct = this.getProduct.bind(this);
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.setProduct = this.setProduct.bind(this);
@@ -258,7 +258,9 @@ class App extends React.Component {
             />
           </div>
           {this.state.productId && this.state.productInfo ?
-            <div id= "RatingAndReviews" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
+            <div
+              id= "RatingAndReviews"
+              style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
               onClick={(e) => this.clickTracker(e, 'Ratings and Reviews')}>
               <RatingAndReviews
                 productId={this.state.productId}

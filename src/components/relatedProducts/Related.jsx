@@ -4,12 +4,25 @@ import _ from 'underscore';
 import ProductItem from './ProductItem';
 
 class Related extends React.Component {
-
     constructor(props) {
         super(props);
-        this.state = {title: props.title, anim: '', shifted: true, length: 0, XY: [100, 100],
-        unq: 0, scroll: 0, showR: false, showL: true, rolling: 'right', shifting: false,
-        products: {}, comparingId: null, comparing: false, count: 0};
+        this.state = {
+            title: props.title,
+            anim: '',
+            shifted: true,
+            length: 0,
+            XY: [100, 100],
+            unq: 0,
+            scroll: 0,
+            showR: false,
+            showL: true,
+            rolling: 'right',
+            shifting: false,
+            products: {},
+            comparingId: null,
+            comparing: false,
+            count: 0
+        };
         this.shift = this.shift.bind(this);
         this.right = this.right.bind(this);
         this.left = this.left.bind(this);
@@ -20,6 +33,7 @@ class Related extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.Add = this.Add.bind(this);
     }
+
     componentDidUpdate() {
         var propLength = 0;
         if(this.props.pyro === 1) {
@@ -44,28 +58,32 @@ class Related extends React.Component {
                 unq: unq, showL: unq > 4, count: this.state.count+1});
         }
     }
+
     shift(e) {
         if (this.state.shifted) {
             this.setState({anim: this.state.anim ? '' : `related-animation-${e.target.id}`,
                 rolling: e.target.id, showR: true, showL: true, shifting: true});
         }
     }
+
     onAnimationStart () {
         if (this.state.shifting) {
         this.setState({shifted: false});
         }
     }
+
     onAnimationEnd () {
         if (this.state.shifting) {
         this.setState({
             shifted: true, anim: '', shifting: false,
-            showL: !(this.state.scroll === this.state.unq - (this.props.pyro === 0 ? 5 : 4) 
+            showL: !(this.state.scroll === this.state.unq - (this.props.pyro === 0 ? 5 : 4)
                 && this.state.rolling === 'right'),
             showR: !(this.state.scroll === 1 && this.state.rolling === 'left'),
             scroll: this.state.scroll + (this.state.rolling === 'right' ? 1 : -1)
         });
         }
     }
+
     right() {
         if (this.state.showR) {
             return <div id="left" className="arrowdiv-right" onClick={this.shift}>
@@ -74,6 +92,7 @@ class Related extends React.Component {
                 </div>;
         }
     }
+
     left() {
         if (this.state.showL) {
             return <div id="right" className="arrowdiv-left" onClick={this.shift}>
@@ -82,11 +101,13 @@ class Related extends React.Component {
                 </div>;
         }
     }
+
     hoverHandler(on, id = 0) {
         if (id >= 0) {
             this.setState({comparing: on, comparingId: id || this.state.comparingId});
         }
     }
+
     handleClick(e) {
         this.setState({comparing: false});
         if (e.target.className === 'related-item-star') {
@@ -108,6 +129,7 @@ class Related extends React.Component {
             this.props.handleRedirect(Number(node.id));
         }
     }
+
     comparison() {
         var max = 20;
         var detail = (vals) => {
@@ -137,7 +159,7 @@ class Related extends React.Component {
                 for (var j of item[1].features) {
                     if (i.feature === j.feature) {
                         max = i.value.length > max ? i.value.length :
-                            j.value.length > max ? j.value.length : max; 
+                            j.value.length > max ? j.value.length : max;
                         details.push([i.value, j.value, i.feature, details.length]);
                     }
                 }
@@ -165,6 +187,7 @@ class Related extends React.Component {
             );
         }
     }
+
     Add() {
         return (
             <li key="outfit" style={{float: 'left'}}>
@@ -183,51 +206,56 @@ class Related extends React.Component {
             [this.props.overview] : ['add'];
         return (
             <div className="related-container">
-            {this.state.XY[0] > window.innerHeight / 2  + 50 ? this.comparison() : null}
-            <div className="related">
-                <div className="related-title">{title[this.props.pyro]}</div>
-                <div className={`related-item-container ${this.state.anim}`}
-                    onAnimationStart={this.onAnimationStart}
-                    onAnimationEnd={this.onAnimationEnd}>
-                <ul className="related-list" onClick={this.handleClick}>
-                {_.map(add.concat(Object.values(this.state.products)).slice(this.state.scroll, this.state.scroll + 
-                        (this.state.rolling === 'right' || this.state.shifted ? 5 : 4)), 
-                    (product) => {
-                        if (product === 'add') {
-                            return this.Add();
-                        }
-                        index++;
-                        var srcs = [];
-                        for (var set of product.styles.results) {
-                            srcs = srcs.concat(set.photos || '');
-                        }
-                        if (!srcs.length) {
-                            srcs = ['','','','',''];
-                        }
-                        var anim = false;
-                        var shadow = '';
-                        if (this.state.comparing && this.state.comparingId === product.id) {
-                            anim = true;
-                            shadow = ' related-shadow';
-                        }
-                        return <li key={index} style={{float: 'left'}}
-                            onMouseEnter={(e) => {
-                                this.setState({XY: [e.clientY, e.clientX]});
-                                this.hoverHandler(true, product.id);
-                            }}
-                            onMouseLeave={() => this.hoverHandler(false)}>
-                            <ProductItem product={product} pyro={this.props.pyro}
-                                faveX={this.faveX} image={srcs} anim={anim} shadow={shadow}/>
-                            </li>;
-                })}
-                </ul>
+                {this.state.XY[0] > window.innerHeight / 2  + 50 ? this.comparison() : null}
+                <div className="related">
+                    <div className="related-title">{title[this.props.pyro]}</div>
+                    <div className={`related-item-container ${this.state.anim}`}
+                        onAnimationStart={this.onAnimationStart}
+                        onAnimationEnd={this.onAnimationEnd}
+                    >
+                        <ul className="related-list" onClick={this.handleClick}>
+                            {_.map(add.concat(Object.values(this.state.products)).slice(this.state.scroll, this.state.scroll + (this.state.rolling === 'right' || this.state.shifted ? 5 : 4)), (product) => {
+                                if (product === 'add') {
+                                    return this.Add();
+                                }
+                                index++;
+                                var srcs = [];
+                                for (var set of product.styles.results) {
+                                    srcs = srcs.concat(set.photos || '');
+                                }
+                                if (!srcs.length) {
+                                    srcs = ['','','','',''];
+                                }
+                                var anim = false;
+                                var shadow = '';
+                                if (this.state.comparing && this.state.comparingId === product.id) {
+                                    anim = true;
+                                    shadow = ' related-shadow';
+                                }
+                                return <li
+                                    key={index}
+                                    style={{float: 'left'}}
+                                    onMouseEnter={(e) => {
+                                        this.setState({XY: [e.clientY, e.clientX]});
+                                        this.hoverHandler(true, product.id);
+                                    }}
+                                    onMouseLeave={() => this.hoverHandler(false)}>
+                                    <ProductItem
+                                        product={product}
+                                        pyro={this.props.pyro}
+                                        faveX={this.faveX}
+                                        image={srcs}
+                                        anim={anim}
+                                        shadow={shadow}/>
+                                    </li>;
+                            })}
+                        </ul>
+                    </div>
+                    {this.right()}
+                    {this.left()}
                 </div>
-                {this.right()}
-                {this.left()}
-            </div>
                 {this.state.XY[0] < window.innerHeight / 2 + 50 ? this.comparison() : null}
             </div>
-
         );
     }
 }

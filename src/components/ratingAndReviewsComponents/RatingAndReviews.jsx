@@ -213,7 +213,7 @@ class RatingAndReviews extends React.Component {
       lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
       pageOffset = window.pageYOffset + window.innerHeight;
       if (pageOffset > lastDivOffset) {
-        setTimeout(() => this.handleMoreReviewsClick(this.state.filter), 500);
+        setTimeout(() => this.handleMoreReviewsClick(this.state.filter), 800);
       }
     }
   }
@@ -221,7 +221,6 @@ class RatingAndReviews extends React.Component {
   render() {
     return (
       <div className="ratingAndReviews">
-        {/* {console.log(this.state)} */}
         <div className="ratingAndReviewsTitle">ratings & reviews</div>
         <div className="ratingBody">
           <h1 className="averageRating">{this.state.average}</h1>

@@ -104,8 +104,6 @@ class ReviewListEntry extends React.Component {
 
     return (
       <React.Fragment>
-        {/* {console.log(review)} */}
-        {/* {console.log(this.state)} */}
         <div className="starRatingReviewerNameAndDate">
           {Stars(70, review.rating)}
           <div className="reviewerNameAndDate">

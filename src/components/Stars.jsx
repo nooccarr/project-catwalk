@@ -2,10 +2,21 @@ import React from 'react';
 import _ from 'underscore';
 
 const star = ({id, weight, width, key}) => {
-    var term = weight === 0 ? 'empty' : weight === 1 ?
-        'quarter' : weight === 2 ? 'half' : weight === 3 ? 'mostly' : 'full';
-    return <img id={id} src={`./images/${term}-star.png`}
-        style={{width: width, height: width}} key={key}></img>;
+  var term =
+    weight === 0 ? 'empty' :
+    weight === 1 ? 'quarter' :
+    weight === 2 ? 'half' :
+    weight === 3 ? 'mostly' :
+    'full';
+  return <img
+    key={key}
+    id={id}
+    src={`./images/${term}-star.png`}
+    style={{
+      width: width,
+      height: width
+    }}
+  />;
 };
 
 const Stars = (width, rating, dynamic = false) => {

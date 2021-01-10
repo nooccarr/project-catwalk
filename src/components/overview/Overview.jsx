@@ -196,9 +196,7 @@ class Overview extends React.Component {
           }}
         />
       )
-    }
-
-    else if (this.props.expandedView && !this.props.expandedViewZoom){
+    } else if (this.props.expandedView && !this.props.expandedViewZoom){
        return (
         <ExpandedView
           expandedView = {this.props.expandedView}
