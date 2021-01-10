@@ -96,7 +96,7 @@ class Overview extends React.Component {
   }
 
   getImageWidth(index) {
-    if (this.props.currentStyle!== undefined) {
+    if (this.props.currentStyle!== undefined && this.props.currentStyle.photos[index].url) {
       var x = this.props.currentStyle.photos[index].url.indexOf('&w=')
       var y = this.props.currentStyle.photos[index].url.indexOf('&q')
       var width = this.props.currentStyle.photos[index].url.slice(x+3,y);
@@ -110,7 +110,7 @@ class Overview extends React.Component {
         thumbnails: this.props.currentStyle.photos
       });
     }
-    if (this.state.mainImage !== prevState.mainImage) {
+    if (this.state.mainImage !== prevState.mainImage && this.props.currentStyle.photos[this.state.mainImage].url) {
       var x = this.props.currentStyle.photos[this.state.mainImage].url.indexOf('&w=')
       var y = this.props.currentStyle.photos[this.state.mainImage].url.indexOf('&q')
       var width = this.props.currentStyle.photos[this.state.mainImage].url.slice(x+3,y);
