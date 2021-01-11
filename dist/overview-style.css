@@ -1,11 +1,12 @@
 #Overview {
-  margin-top: 50px;
-  margin-bottom: 150px; 
+  margin-top: 30px;
+  /* margin-bottom: 150px; */
 }
+
 .overview-container {
-  width: 70%;
+  /* width: 70%;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
   height: 600px;
   /* border: 1px solid black; */
 
@@ -110,7 +111,7 @@
 }
 
 .star-reviews-wrapper {
-  /* width: 100%; 
+  /* width: 100%;
   change to 52 as long as stars are 50px
   */
   width: 52px;
@@ -456,14 +457,14 @@ li {
   padding-inline-start: 0px;
 
 
- 
+
 }
 
-/* Lost style for 
+/* Lost style for
 */
 .overviewThumbnailLI {
- 
-} 
+
+}
 
 
 #galleryThumbnail {
@@ -640,23 +641,23 @@ li {
     text-overflow: ellipsis;
     cursor: default;
     cursor: pointer;
-  
+
     border-bottom: 1px solid black;
     border-right: 1px solid black;
     border-left: 1px solid black;
-  
+
     /* border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px; */
-  
-  
+
+
     /* padding-left: 10px; */
     text-indent: 1em;
-  
+
     font-size: 10px;
     margin-top: 0px;
     text-transform: uppercase;
     font-weight: bold;
-  
+
     }
 
 #galleryThumbnailContainer.activeThumbnail {
@@ -853,4 +854,3 @@ li {
 
   }
 
- 

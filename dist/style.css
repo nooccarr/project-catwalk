@@ -24,6 +24,16 @@ body {
 }
 
 .app {
-  margin-left: 30px;
-  margin-right: 30px;
+  /* margin-left: 30px;
+  margin-right: 30px; */
+  width: 900px;
+  margin: 0 auto;
+}
+
+.overviewTitle {
+  font-size: medium;
+  font-family: Arial, Helvetica, sans-serif;
+  color: gray;
+  margin-top: 50px;
+  text-transform: uppercase;
 }

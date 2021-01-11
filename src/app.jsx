@@ -227,21 +227,25 @@ class App extends React.Component {
           <span className="logo">Donauwelle</span>
         </div>
         <div className="app">
+          <div className="overviewTitle">overview</div>
           <div id = 'Overview' onClick={(e) => this.clickTracker(e, 'Overview')}>
-          {this.state.currentStyle ?
+            {this.state.currentStyle ?
             <Overview
               product={this.state.productInfo}
-              currentStyle = {this.state.currentStyle}
-              toggleOutfit = {this.toggleOutfit}
-              setCurrentStyle = {this.setCurrentStyle}
-              expandedView = {this.state.expandedView}
-              expandedViewZoom = {this.state.expandedViewZoom}
-              toggleExpandedView = {this.toggleExpandedView}
-              toggleExpandedViewZoom = {this.toggleExpandedViewZoom}
+              currentStyle={this.state.currentStyle}
+              toggleOutfit={this.toggleOutfit}
+              setCurrentStyle={this.setCurrentStyle}
+              expandedView={this.state.expandedView}
+              expandedViewZoom={this.state.expandedViewZoom}
+              toggleExpandedView={this.toggleExpandedView}
+              toggleExpandedViewZoom={this.toggleExpandedViewZoom}
             /> : null}
           </div>
-          <div onClick={(e) => this.clickTracker(e, 'Related Products')}
-            className="listies" style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}>
+          <div
+            onClick={(e) => this.clickTracker(e, 'Related Products')}
+            className="listies"
+            style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
+          >
             <Related
               overview={this.state.productInfo}
               handleRedirect={this.handleRedirect}
@@ -261,7 +265,8 @@ class App extends React.Component {
             <div
               id= "RatingAndReviews"
               style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
-              onClick={(e) => this.clickTracker(e, 'Ratings and Reviews')}>
+              onClick={(e) => this.clickTracker(e, 'Ratings and Reviews')}
+            >
               <RatingAndReviews
                 productId={this.state.productId}
                 product={this.state.productInfo.name}
