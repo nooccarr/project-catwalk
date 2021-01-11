@@ -10,7 +10,7 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development --watch",
     "build-prod": "webpack --mode production",
-    "start": "nodemon index.js",
+    "start": "nodemon server/index.js",
     "test": "jest"
   },
   "jest": {

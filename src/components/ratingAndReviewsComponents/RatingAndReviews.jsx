@@ -40,9 +40,9 @@ class RatingAndReviews extends React.Component {
   componentDidMount() {
     this.getAllReviews();
     this.getRating();
-    this.scrollListener = window.addEventListener('scroll', e => {
-      this.handleScroll(e);
-    });
+    // this.scrollListener = window.addEventListener('scroll', e => {
+    //   this.handleScroll(e);
+    // });
   }
 
   getAllReviews(sort) {
@@ -213,7 +213,7 @@ class RatingAndReviews extends React.Component {
       lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight;
       pageOffset = window.pageYOffset + window.innerHeight;
       if (pageOffset > lastDivOffset) {
-        setTimeout(() => this.handleMoreReviewsClick(this.state.filter), 800);
+        setTimeout(() => this.handleMoreReviewsClick(this.state.filter), 500);
       }
     }
   }
