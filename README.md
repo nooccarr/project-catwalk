@@ -1,8 +1,8 @@
 # Project Catwalk
 
-About:
+This application was built by 3 front-end developers. It meets the specifications of a 26 pages business requirements document. The primary technologies used are React to render custom styled-components, Express to retrieve data from a headless API and CSS for general styling and custom component design.
 
-![Project Catwalk page demo](readme_assets/overview.gif)
+![Project Catwalk page demo](readme_assets/main.gif)
 
 ## Building and running environment
 
@@ -32,7 +32,7 @@ npm start
 
 ## Running
 
-Open the file `dist/index.html` in your browser
+Open `dist/index.html` in your browser
 
 # Tech Stack
 * [React](https://reactjs.org)
@@ -42,16 +42,16 @@ Open the file `dist/index.html` in your browser
 
 ## Components
 ### Product Overview
-About:
+The product overview section displays photos and descriptions of the selected product. It's designed to guide the user through making selections for style, size, and quantity.
 
 ![Product Overview Component](readme_assets/overview.gif)
 
 ### Related Products
-About:
+The related products section is divided into two components. The first of which displays products related to the product shown on the product overview, and makes comparisons to the abovementioned product. The second is the 'your outfit' creation part, which allows the user to add and remove products.
 
 ![Related Products Component](readme_assets/related.gif)
 
 ### Ratings and Reviews
-About:
+The ratings and reviews section consists of the ratings component to the left, and reviews component to the right. The ratings part displays user feedback related to the selected product, including user ratings and characteristics. The review part allows the user to sort reviews by options and rating. The new form component at the bottom allows the user to submit a new review.
 
 ![Ratings and Reviews Component](readme_assets/ratings-and-reviews.gif)
