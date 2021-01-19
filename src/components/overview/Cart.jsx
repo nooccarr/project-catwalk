@@ -167,11 +167,11 @@ class Dropdown extends React.Component {
           <span className="dd-header-title">{headerTitle} </span>
           <i className={listOpen ? "arrow up-cart" : "arrow down-cart"}> </i>
         </div>
-        {listOpen && <ul className="dd-list">
+        {listOpen && list ? <ul className="dd-list">
           {list.map((item, index) => (
             <li key = {index} className="dd-list-item" /*key={item.id}*/ onClick = {() => this.handleSelection(item, index)}>{item}</li>
           ))}
-        </ul>}
+        </ul> : null}
       </div>
     );
   };
