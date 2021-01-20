@@ -2,9 +2,9 @@
 
 This application was built by 3 front-end developers. It meets the specifications of a 26 pages business requirements document. The primary technologies used are React to render custom styled-components, Express to retrieve data from a headless API and CSS for general styling and custom component design.
 
-![Project Catwalk page demo](readme_assets/main.gif)
+![Project Catwalk Page Demo](readme_assets/main.gif)
 
-## Building and running environment
+## Building and Running Environment
 
 First install dependencies:
 
@@ -34,7 +34,7 @@ npm start
 
 Open `dist/index.html` in your browser
 
-# Tech Stack
+## Tech Stack
 * [React](https://reactjs.org)
 * [Node](https://nodejs.org/en)
 * [Express](https://expressjs.com)
