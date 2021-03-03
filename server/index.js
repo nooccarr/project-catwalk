@@ -1,13 +1,15 @@
 const express = require('express');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static('./dist'));
+app.use(compression());
 app.use(bodyParser.json());
+app.use(express.static('dist'));
 
 app.post('/clicks', (req, res) => {
   res.send();
 });
 
-app.listen(port, () => console.log(`Listening at port ${port}!`));
+app.listen(PORT, () => console.log(`Listening at port ${PORT}!`));
