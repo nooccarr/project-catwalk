@@ -47,7 +47,7 @@ class RatingAndReviews extends React.Component {
 
   getAllReviews(sort) {
     return axios
-      .get('http://3.21.164.220/reviews/', {
+      .get('http://3.21.164.220/reviews', {
         params: {
           product_id: this.state.productId,
           sort: sort,
@@ -73,7 +73,7 @@ class RatingAndReviews extends React.Component {
 
   getRating() {
     return axios
-      .get('http://3.21.164.220/reviews/meta/', {
+      .get('http://3.21.164.220/reviews/meta', {
         params: { product_id: this.state.productId }
       })
       .then(meta => this.setState({
@@ -85,7 +85,7 @@ class RatingAndReviews extends React.Component {
 
   getCurrentReviews(sort) {
     return axios
-      .get('http://3.21.164.220/reviews/', {
+      .get('http://3.21.164.220/reviews', {
         params: {
           product_id: this.state.productId,
           sort: sort,
@@ -103,7 +103,7 @@ class RatingAndReviews extends React.Component {
 
   getCurrentFiltered(reviewId, isHelpful) {
     return axios
-      .get('http://3.21.164.220/reviews/', {
+      .get('http://3.21.164.220/reviews', {
         params: {
           product_id: this.state.productId,
           count: 1000
