@@ -79,7 +79,7 @@ class NewReview extends React.Component {
 
   addNewReview() {
     return axios
-      .post('http://3.21.164.220/reviews', {
+      .post('http://3.21.164.220/reviews/', {
         product_id: this.props.productId,
         rating: this.state.rating,
         summary: this.state.summary,

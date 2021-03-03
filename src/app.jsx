@@ -60,12 +60,12 @@ class App extends React.Component {
   }
 
   getProduct(id, cb) {
-    axios.get(`http://3.21.164.220/products/${id}`)
+    axios.get(`http://3.21.164.220/products/${id}/`)
       .then((results) => {
         var product = results.data;
-        axios.get(`http://3.21.164.220/products/${id}/styles?product_id=${id}`)
+        axios.get(`http://3.21.164.220/products/${id}/styles?product_id=${id}/`)
         .then((styles) => {
-          axios.get(`http://3.21.164.220/reviews/meta?product_id=${id}`)
+          axios.get(`http://3.21.164.220/reviews/meta?product_id=${id}/`)
             .then((ratings) => {
               product.average = average(ratings.data);
               product.styles = styles.data;
@@ -79,7 +79,7 @@ class App extends React.Component {
   getRelatedProducts(id) {
     var count = 0;
     axios
-      .get(`http://3.21.164.220/products/${id}/related?product_id=${id}`)
+      .get(`http://3.21.164.220/products/${id}/related?product_id=${id}/`)
       .then((results) => {
         var products = [];
         _.each(results.data, (id) => {

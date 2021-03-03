@@ -45,7 +45,7 @@ class ReviewListEntry extends React.Component {
   clickHelpfulHandler(review_id) {
     if (this.props.reviewIds.indexOf(review_id) === -1) {
       return axios
-        .put(`http://3.21.164.220/reviews/${review_id}/helpful`, {
+        .put(`http://3.21.164.220/reviews/${review_id}/helpful/`, {
           params: { review_id: review_id }
         })
         .then(result1 => this.props.addClickedReviewId(review_id))
@@ -66,7 +66,7 @@ class ReviewListEntry extends React.Component {
 
   clickReportHandler(review_id) {
     return axios
-      .put(`http://3.21.164.220/reviews/${review_id}/report`, {
+      .put(`http://3.21.164.220/reviews/${review_id}/report/`, {
         params: { review_id: review_id }
       })
       .then(result1 => {

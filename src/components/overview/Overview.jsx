@@ -325,7 +325,9 @@ let ProductDescription = ({slogan, description, trackAction, moduleName}) => {
             <div data-href={window.location.href}>
               <a
                 target='_blank'
-                href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5501%2Fdist%2Findex.html%3Fid%3D8&amp;src=sdkpreparse' className='fb-xfbml-parse-ignore'>
+                href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5501%2Fdist%2Findex.html%3Fid%3D8&amp;src=sdkpreparse'
+                className='fb-xfbml-parse-ignore'
+              >
                 <img
                   src='./images/fb.png'
                   className='social-media-icon'
