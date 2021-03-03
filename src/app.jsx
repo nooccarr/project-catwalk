@@ -35,11 +35,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.onload = (() => {
-      if(window.location.protocol === 'https:')
-        window.location.protocol = 'http';
-      }
-    )();
+    // disable HTTPS on Heroku
+    if(window.location.protocol === 'https:')
+      window.location.protocol = 'http';
+    }
     var id = Number(window.location.search.split('?id=')[1]) || 1;
     this.setProduct(id);
   }
