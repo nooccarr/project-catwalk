@@ -33,7 +33,8 @@ body {
   color: #f2c3ea;
 }
 
-.header-search-bar:focus {
+.header-search-bar:focus,
+.navA:focus {
   outline: none;
 }
 
