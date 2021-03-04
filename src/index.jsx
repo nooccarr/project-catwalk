@@ -15,7 +15,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 
 // FIXME:
-
+// - nav bar (overview/related products/ratings and reviews)
 // - fix overviews (slide): by width (not height)
 
 // TODO:

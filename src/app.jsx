@@ -243,27 +243,40 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className='nav'>
+        <div className='header'>
           <img
             className='logo'
             src='/images/donauwelle.png'
           />
           <input
-            className='nav-search-bar'
+            className='header-search-bar'
             value={this.state.search}
             type='text'
             placeholder='Product No. 1 ~ 10011'
             onChange={(e) => this.handleSearchChange(e)}
           />
           <img
-            className='nav-search-cake'
+            className='header-search-cake'
             src='/images/cake.png'
             onClick={() => this.handleSearchClick(this.state.search)}
           />
         </div>
+        <nav className='nav'>
+          <ul className='navUl'>
+            <li className='navLi'>
+              <a className='navA' href='#Overviews'>Overview</a>
+            </li>
+            <li className='navLi'>
+              <a className='navA' href='#RelatedProducts'>Related Products</a>
+            </li>
+            <li className='navLi'>
+              <a className='navA' href='#RatingAndReviews'>Rating and Reviews</a>
+            </li>
+          </ul>
+        </nav>
         <div className='app'>
-          <div className='overviewTitle'>overview</div>
-          <div id = 'Overview' onClick={(e) => this.clickTracker(e, 'Overview')}>
+          <div id='Overviews' className='overviewTitle'>overview</div>
+          <div id='Overview' onClick={(e) => this.clickTracker(e, 'Overview')}>
             {this.state.currentStyle ?
             <Overview
               product={this.state.productInfo}
@@ -278,6 +291,7 @@ class App extends React.Component {
           </div>
           <div
             onClick={(e) => this.clickTracker(e, 'Related Products')}
+            id='RelatedProducts'
             className='listies'
             style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
           >
