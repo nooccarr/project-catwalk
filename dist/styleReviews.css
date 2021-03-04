@@ -279,6 +279,16 @@ figure, figcaption, section, summary, mark {
   margin-right: 15px;
 }
 
+.moreReviewButton:focus,
+.submitReviewButton:focus,
+.closeButton:focus,
+.newReviewUploadPhotosWindow,
+.uploadCloseButton:focus,
+.newReviewInputBox:focus,
+.writeNewReviewButton:focus {
+  outline: none;
+}
+
 .writeNewReviewButton {
   padding: 9px 15px 13px 15px;
 }
@@ -365,7 +375,7 @@ figure, figcaption, section, summary, mark {
   text-transform: uppercase;
   display: inline-block;
   border: 1px solid gray;
-  padding: 3px;
+  padding: 7px;
   border-radius: 3px;
 }
 
