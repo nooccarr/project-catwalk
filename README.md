@@ -30,15 +30,11 @@ To run node server:
 npm start
 ```
 
-## Running
-
-Open `dist/index.html` in your browser
-
 ## Tech Stack
 * [React](https://reactjs.org)
 * [Node](https://nodejs.org/en)
 * [Express](https://expressjs.com)
-* [AWS](https://aws.amazon.com)
+* [Heroku](https://www.heroku.com)
 
 ## Components
 ### Product Overview
@@ -55,3 +51,12 @@ The related products section is divided into two components. The first of which 
 The ratings and reviews section consists of the ratings component to the left, and reviews component to the right. The ratings part displays user feedback related to the selected product, including user ratings and characteristics. The review part allows the user to sort reviews by options and rating. The new form component at the bottom allows the user to submit a new review.
 
 ![Ratings and Reviews Component](readme_assets/ratings-and-reviews.gif)
+
+## Running
+
+Open [Project Catwalk](http://project-catwalk-donauwelle.herokuapp.com) in the browser.
+
+## Future Implementations
+
+* Redux
+* Server-Side Rendering
