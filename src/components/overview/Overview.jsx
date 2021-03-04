@@ -52,7 +52,6 @@ class Overview extends React.Component {
       mainImage: mainIndex,
       index: newIndex
     });
-    console.log(newIndex)
   }
 
   slideLeft() {
@@ -69,7 +68,6 @@ class Overview extends React.Component {
       mainImage: mainIndex,
       index: newIndex
     });
-    console.log(newIndex)
   }
 
   updateMainImage(index) {

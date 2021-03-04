@@ -74,7 +74,7 @@ class Gallery extends React.Component {
                 <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.handleSlideLeft}></i>
               </span>
                 <div className = 'galleryContainer'>
-{/*
+                {/*
                 <div className = 'galleryContainer' style = {{
                   //-30 for margin on app; -72 for padding in grid item 1; 3/5 is grid item 1's width of container; container is 70% of screen
                   transform: `translateX(-${this.props.mainImage*(((window.innerWidth*.7)*3/5)-72-30)}px)`
