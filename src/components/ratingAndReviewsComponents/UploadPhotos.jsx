@@ -4,7 +4,7 @@ const UploadPhotos = ({ showAddPhoto, handleFileAdd, thumbnails, deleteThumbnail
 
   return (<div className='newWindow'>
     <div className="newWindowTitle">
-      <h1 className="newWindowLogo">donauwelle</h1>
+      <img className="newWindowLogo" src="/images/donauwelle.png"/>
     </div>
     <div className="newWindowContainer">
       <label className="newReviewWindowTitle">Upload your photos</label>
