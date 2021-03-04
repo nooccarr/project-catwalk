@@ -20,6 +20,7 @@ class Overview extends React.Component {
       sale_price: '',
       styles: [],
       currentStyle: '',
+      index: 0
     };
     this.slideThumbnailsDown = this.slideThumbnailsDown.bind(this);
     this.slideThumbnailsUp = this.slideThumbnailsUp.bind(this);
@@ -38,34 +39,43 @@ class Overview extends React.Component {
 
   slideRight() {
     var mainIndex = this.state.mainImage + 1;
+    var newIndex = this.state.index + 1;
     if (mainIndex > this.state.endIndex) {
       var newStartIndex = this.state.startIndex > mainIndex - this.state.endIndex
       ? this.state.startIndex : mainIndex - this.state.endIndex;
       this.setState({
-        startIndex: newStartIndex
+        startIndex: newStartIndex,
+        index: newIndex
       });
     }
     this.setState({
-      mainImage: mainIndex
+      mainImage: mainIndex,
+      index: newIndex
     });
+    console.log(newIndex)
   }
 
   slideLeft() {
     var mainIndex = this.state.mainImage - 1;
+    var newIndex = this.state.index - 1;
     if (mainIndex < this.state.endIndex-1 && this.state.startIndex !== 0) {
       var newStartIndex = this.state.startIndex - 1
       this.setState({
-        startIndex: newStartIndex
+        startIndex: newStartIndex,
+        index: newIndex
       });
     }
     this.setState({
-      mainImage: mainIndex
+      mainImage: mainIndex,
+      index: newIndex
     });
+    console.log(newIndex)
   }
 
   updateMainImage(index) {
     this.setState({
-      mainImage: index
+      mainImage: index,
+      index: index
     });
   }
 
@@ -73,7 +83,8 @@ class Overview extends React.Component {
     if (this.state.startIndex >= this.state.thumbnails.length-this.state.endIndex-1) {
       return;
     }
-    var newStart = this.state.startIndex + 1
+    var newStart = this.state.startIndex + 1;
+    var newIndex = this.state.index + 1;
     this.setState({
       startIndex: newStart
     });
@@ -83,7 +94,8 @@ class Overview extends React.Component {
     if (this.state.startIndex <= 0) {
       return;
     }
-    var newStart = this.state.startIndex - 1
+    var newStart = this.state.startIndex - 1;
+    var newIndex = this.state.index - 1;
     this.setState({
       startIndex: newStart
     });
@@ -143,6 +155,7 @@ class Overview extends React.Component {
                     thumbnails={this.state.thumbnails}
                     startIndex={this.state.startIndex}
                     endIndex={this.state.endIndex}
+                    index={this.state.index}
                   />
                 </div>
                 <div className='item grid-item2'>
@@ -267,6 +280,8 @@ let ExpandedViewZoom = ({mainImageWidth, trackAction, moduleName, currentStyle, 
             onClick={()=> {toggleExpandedView(); toggleExpandedViewZoom()}}
             id='expandedImageZoom'
             style={{
+              cursor: 'pointer',
+              backgroundColor: 'black',
               objectPosition: Math.min(mainImageWidth, (window.innerWidth - 60)*.7) === mainImageWidth ?
                 `-${(0)}px -${(y)/1.5}px` :
                 `-${(x)/ (966/(mainImageWidth-((window.innerWidth - 60)*.7)))}px -${(y)/1.2}px`

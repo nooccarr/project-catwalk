@@ -73,13 +73,20 @@ class Gallery extends React.Component {
               <span className =  { this.props.mainImage === 0 ? null :  'arrowIconWrapperLeft'}>
                 <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.handleSlideLeft}></i>
               </span>
+                <div className = 'galleryContainer'>
+{/*
                 <div className = 'galleryContainer' style = {{
                   //-30 for margin on app; -72 for padding in grid item 1; 3/5 is grid item 1's width of container; container is 70% of screen
                   transform: `translateX(-${this.props.mainImage*(((window.innerWidth*.7)*3/5)-72-30)}px)`
-                  }}>
-                  {this.props.currentStyle.photos.map((x, index) => { return(
+                  }}> */}
+                  {/* {this.props.currentStyle.photos.map((x, index) => { return(
                     <img key = {index} src = {this.props.currentStyle.photos[index].url} id = 'galleryImage' onClick = {this.handleClick}/>
-                  )})}
+                  )})} */}
+                  <img
+                    src = {this.props.currentStyle.photos[this.props.index].url}
+                    id = 'galleryImage'
+                    onClick = {this.handleClick}
+                  />
                 </div>
                 <span className = { this.props.mainImage === this.props.thumbnails.length-1 ? null : 'arrowIconWrapperRight'}>
                   <i className= { this.props.mainImage === this.props.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.handleSlideRight}></i>

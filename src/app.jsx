@@ -1,10 +1,10 @@
 import React from 'react';
-import Overview from './components/overview/Overview.jsx';
 import axios from 'axios';
 import _ from 'underscore';
 import ls from 'local-storage';
-import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
+import Overview from './components/overview/Overview.jsx';
 import Related from './components/relatedProducts/Related.jsx';
+import RatingAndReviews from './components/ratingAndReviewsComponents/RatingAndReviews.jsx';
 import average from '../utils/average.js';
 
 class App extends React.Component {

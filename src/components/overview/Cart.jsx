@@ -12,24 +12,12 @@ class Cart extends React.Component {
       quantities: '',
       slectedSize: '',
       availableQuantity: 0,
-      selectedQuantity: ''
+      selectedQuantity: '',
+      cartMessage: 'add to bag'
     };
     this.setSizeQuantities = this.setSizeQuantities.bind(this);
     this.setQuantity = this.setQuantity.bind(this);
-  }
-
-  setQuantity(val) {
-    this.setState({
-      selectedQuantity: val
-    });
-  }
-
-  setSizeQuantities(index) {
-    this.setState({
-      selectedSize: this.state.sizes[index],
-      availableQuantity: this.state.quantities[index],
-      sku_id: this.state.skuKeys[index]
-    });
+    this.setCartMessage = this.setCartMessage.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -47,12 +35,34 @@ class Cart extends React.Component {
     }
   }
 
+  setQuantity(val) {
+    this.setState({
+      selectedQuantity: val
+    });
+    this.setCartMessage('add to bag');
+  }
+
+  setSizeQuantities(index) {
+    this.setState({
+      selectedSize: this.state.sizes[index],
+      availableQuantity: this.state.quantities[index],
+      sku_id: this.state.skuKeys[index]
+    });
+    this.setCartMessage('add to bag');
+  }
+
+  setCartMessage(message) {
+    this.setState({
+      cartMessage: message
+    });
+  }
+
   render () {
     return (
       <div onClick = {(e) => this.props.trackAction(e, this.props.moduleName)}>
         <EnhancedComponent title="SELECT SIZE" list={this.state.sizes} setSizeQuantities = {this.setSizeQuantities} sizes = {true}/>
         <EnhancedComponent title="0" list={  [...Array(this.state.availableQuantity).keys()].map((x) => (x+1)) } quantities = {true} setQuantity = {this.setQuantity}/>
-        <AddtoCart size = {this.state.selectedSize} quantity = {this.state.selectedQuantity}/>
+        <AddtoCart size = {this.state.selectedSize} quantity = {this.state.selectedQuantity} setCartMessage={this.setCartMessage} cartMessage={this.state.cartMessage}/>
         <Star toggleOutfit = {this.props.toggleOutfit} product = {this.props.product}/>
       </div>
     );
@@ -102,14 +112,18 @@ class AddtoCart extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    if (this.props.size && this.props.quantity) {
+      this.props.setCartMessage('added!')
+    }
+  }
 
   render() {
    return (
       <div style = {{display: 'inline'}}>
         <div className = 'add-to-cart-wrapper'>
           <div className = 'dd-header' onClick = {this.handleSubmit}>
-            <span className = 'dd-header-title'>{`Add to Bag`}</span>
+            <span className = 'dd-header-title'>{this.props.cartMessage}</span>
               <i className = 'plus-sign'></i>
           </div>
         </div>
@@ -148,7 +162,7 @@ class Dropdown extends React.Component {
         selectedSize: item,
         headerTitle: item
       }, () => this.toggleList());
-    this.props.setSizeQuantities(index);
+      this.props.setSizeQuantities(index);
     } else if (this.props.quantities) {
       this.setState({
         selectedQuantity: item,

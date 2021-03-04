@@ -7,7 +7,7 @@
   /* width: 70%;
   margin-left: auto;
   margin-right: auto; */
-  height: 600px;
+  /* height: 600px; */
   /* border: 1px solid black; */
 
   display: grid;
@@ -28,7 +28,7 @@
   position: relative;
   overflow: hidden;
   /* display: inline-block; */
-  padding-left: 72px;
+  /* padding-left: 72px; */
 }
 
 .grid-item2 {
@@ -142,7 +142,7 @@
 #social-media-wrapper {
   height: 15px;
   /* border: 1px solid black; */
-  padding-left: 149px;
+  /* padding-left: 72px; */
   padding-top: 10px;
 }
 
@@ -276,7 +276,7 @@
   object-fit: cover;
   object-position: 10% 30%;
   /* cursor: crosshair; */
-  cursor: url('../images/pngegg.png'), auto
+  cursor: zoom-in
 }
 
 
@@ -292,7 +292,7 @@
   font-size: 12px;
   padding-top: 15px;
 
-  padding-left: 150px;
+  /* padding-left: 72px; */
   font-weight: bold;
 }
 
@@ -300,7 +300,7 @@
   font-size: 10px;
   padding-top: 15px;
 
-  padding-left: 150px;
+  /* padding-left: 72px; */
 }
 
 .productFeatures {
@@ -346,17 +346,17 @@
 }
 
 .styleSelectorThumbnail {
-  height: 100%;
-  width: 100%;
+  height: 45px;
+  width: 45px;
   cursor: pointer;
-  /* object-fit: contain; */
+  object-fit: cover;
 }
 
 .galleryContainer {
   height: 100%;
-  display: flex;
-  transition: .4s cubic-bezier(0.6, -0.01, 0.46, 1.02);
-  width: 70%
+  /* display: flex;
+  transition: .4s cubic-bezier(0.6, -0.01, 0.46, 1.02); */
+  width: 100%
 
 }
 
@@ -374,20 +374,22 @@
 } */
 
 #galleryImage {
-  max-width: 125%;
-
+  /* max-width: 125%; */
+  margin: auto;
   /* max-height: 100%; */
-
   /* position: relative; */
   /* object-fit: contain;
   overflow: hidden; */
   /* position: absolute;
    z-index: 1;  */
-
    /* margin: auto; */
-   object-fit: cover;
-   object-position: 10% 30%;
-   cursor: zoom-in;
+   background-color: whitesmoke;
+   display: block;
+   object-fit: contain;
+   width: 100%;
+   height: 100%;
+   /* object-position: 10% 30%; */
+   cursor: pointer;
 }
 
 
@@ -426,7 +428,8 @@
 #galleryThumbnailColumn {
   position: absolute;
   top: 5%;
-  left: 15%;
+  /* left: 15%; */
+  left: 2%;
   width: 15%;
   height: 90%;
   overflow: hidden;
@@ -469,15 +472,10 @@ li {
 
 
 #galleryThumbnail {
-  max-width: 100%;
-  /* max-height: 100%; */
   position: absolute;
-  /* top: 5%;
-  left: 5%; */
-  /* z-index: 2;   */
   object-fit: cover;
-  /* object-fit: contain;
-  overflow: hidden; */
+  width: 50px;
+  height: 50px;
   cursor: pointer;
 }
 
@@ -581,7 +579,7 @@ li {
 
   }
 
-  .dd-list {
+.dd-list {
   margin: 0px;
   position: absolute;
   z-index: 10;
@@ -598,11 +596,9 @@ li {
   -webkit-overflow-scrolling: touch;
 
   padding-left: 0px;
+}
 
-
-  }
-
-  .dd-list-item {
+.dd-list-item {
   display: inline-block;
   overflow: hidden;
   width: 100%;
@@ -613,54 +609,20 @@ li {
   text-overflow: ellipsis;
   cursor: default;
   cursor: pointer;
-
   border-bottom: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
-
-  /* border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px; */
-
-
-  /* padding-left: 10px; */
   text-indent: 1em;
-
   font-size: 10px;
   margin-top: 0px;
   text-transform: uppercase;
   font-weight: bold;
+}
 
-  }
-
-  .dd-list-item {
-    display: inline-block;
-    overflow: hidden;
-    width: 100%;
-    padding: none;
-    font-size: 1.5rem;
-    line-height: 1.6rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    cursor: default;
-    cursor: pointer;
-
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-
-    /* border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px; */
-
-
-    /* padding-left: 10px; */
-    text-indent: 1em;
-
-    font-size: 10px;
-    margin-top: 0px;
-    text-transform: uppercase;
-    font-weight: bold;
-
-    }
+.dd-list-item:hover {
+  color: #d34788;
+  background-color: #f2c3ea;
+}
 
 #galleryThumbnailContainer.activeThumbnail {
   border: 1px solid gold;
@@ -677,7 +639,8 @@ li {
 .arrowIconWrapperRight {
   position: absolute;
   top: 50%;
-  left: 80%;
+  /* left: 80%; */
+  left: 92%;
   border: 1px solid white;
   height: 25px;
   width: 25px;
@@ -687,7 +650,8 @@ li {
 .arrowIconWrapperLeft {
   position: absolute;
   top: 50%;
-  left: 20%;
+  /* left: 20%; */
+  left: 15%;
   border: 1px solid white;
   height: 25px;
   width: 25px;

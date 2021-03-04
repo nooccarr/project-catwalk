@@ -16,10 +16,10 @@
   }
   .related-plus {
     position: absolute;
-    width: 150px;
-    height: 150px;
-    left: 41px;
-    top: 80px;
+    width: 100px;
+    height: 100px;
+    left: 65px;
+    top: 108px;
   }
   .related-item-container {
     position: absolute;
@@ -88,10 +88,12 @@
     width: 150px;
   }
   .related-item-image {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 0px; */
     width: 150px;
+    height: 128px;
+    object-fit: cover;
   }
   .related-item-star {
     height: 15px;
