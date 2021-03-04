@@ -326,7 +326,7 @@
 .styleSelectorCheck {
   position: absolute;
   width: 10px;
-  z-index: 10;
+  z-index: 1;
   border-radius: 100px;
   margin-left: 40px
 }
