@@ -270,7 +270,7 @@ class App extends React.Component {
               <a className='navA' href='#RelatedProducts'>Related Products</a>
             </li>
             <li className='navLi'>
-              <a className='navA' href='#RatingAndReviews'>Rating and Reviews</a>
+              <a className='navA' href='#RatingAndReviews'>Ratings and Reviews</a>
             </li>
           </ul>
         </nav>

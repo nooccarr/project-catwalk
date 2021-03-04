@@ -15,14 +15,9 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 
 // FIXME:
-// - nav bar (overview/related products/ratings and reviews)
 // - fix overviews (slide): by width (not height)
 
 // TODO:
-// - update readme (heroku)
-
-
-
 // - reduce api calls
 
 // - convert to react hooks (one component) : functional component
