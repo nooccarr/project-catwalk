@@ -19,7 +19,8 @@ class App extends React.Component {
       productInfo: { faved: false },
       relatedIndex: {},
       expandedViewZoom: false,
-      expandedView: false
+      expandedView: false,
+      search: ''
     };
     this.handleRedirect = this.handleRedirect.bind(this);
     this.toggleOutfit = this.toggleOutfit.bind(this);
@@ -32,6 +33,7 @@ class App extends React.Component {
     this.clickTracker = this.clickTracker.bind(this);
     this.toggleExpandedView = this.toggleExpandedView.bind(this);
     this.toggleExpandedViewZoom = this.toggleExpandedViewZoom.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
   componentDidMount() {
@@ -212,7 +214,7 @@ class App extends React.Component {
     }));
   }
 
-  clickTracker (e, module) {
+  clickTracker(e, module) {
     var date = new Date();
     var node = e.target;
     while (node.className.length === 0) {
@@ -226,14 +228,41 @@ class App extends React.Component {
     }});
   }
 
+  handleSearchChange(e) {
+    this.setState({
+      search: e.target.value
+    });
+  }
+
+  handleSearchClick(id) {
+    if (Number(id)) {
+      this.setProduct(id);
+    }
+  }
+
   render() {
     return (
       <div>
-        <div className="nav">
-          <span className="logo">Donauwelle</span>
+        <div className='nav'>
+          <img
+            className='logo'
+            src='/images/donauwelle.png'
+          />
+          <input
+            className='nav-search-bar'
+            value={this.state.search}
+            type='text'
+            placeholder='Product No. 1 ~ 10011'
+            onChange={(e) => this.handleSearchChange(e)}
+          />
+          <img
+            className='nav-search-cake'
+            src='/images/cake.png'
+            onClick={() => this.handleSearchClick(this.state.search)}
+          />
         </div>
-        <div className="app">
-          <div className="overviewTitle">overview</div>
+        <div className='app'>
+          <div className='overviewTitle'>overview</div>
           <div id = 'Overview' onClick={(e) => this.clickTracker(e, 'Overview')}>
             {this.state.currentStyle ?
             <Overview
@@ -249,7 +278,7 @@ class App extends React.Component {
           </div>
           <div
             onClick={(e) => this.clickTracker(e, 'Related Products')}
-            className="listies"
+            className='listies'
             style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
           >
             <Related
@@ -269,7 +298,7 @@ class App extends React.Component {
           </div>
           {this.state.productId && this.state.productInfo ?
             <div
-              id= "RatingAndReviews"
+              id= 'RatingAndReviews'
               style = {{display: this.state.expandedView || this.state.expandedViewZoom ? 'none' : null}}
               onClick={(e) => this.clickTracker(e, 'Ratings and Reviews')}
             >

@@ -7,20 +7,42 @@ body {
   font-weight: normal;
   color: #403b3b
 }
+
 .nav {
   background-color: #d34788;
   margin: 0px;
-  padding: 10px;
+  padding: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
+
 .logo {
-  font-weight: bold;
-  font-size: 1.9em;
+  margin-left: 10%;
   margin-right: auto;
-  margin-left: 10px;
-  color: #ffffff;
+}
+
+.nav-search-bar {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #f2c3ea;
+  color: #f2c3ea;
+  margin-top: 95px;
+  text-align: center;
+}
+
+.nav-search-bar::placeholder {
+  color: #f2c3ea;
+}
+
+.nav-search-bar:focus {
+  outline: none;
+}
+
+.nav-search-cake {
+  cursor: pointer;
+  vertical-align: baseline;
+  margin-top: 82px;
 }
 
 .app {

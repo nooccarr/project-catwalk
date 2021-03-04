@@ -14,7 +14,7 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "start-dev": "nodemon server/index.js",
     "heroku-postbuild": "npm install && npm run build",
     "test": "jest"
