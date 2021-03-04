@@ -206,7 +206,7 @@ class NewReview extends React.Component {
     return (
       <div className="newWindow">
         <div className="newWindowTitle">
-          <h1 className="newWindowLogo">donauwelle</h1>
+          <img className="newWindowLogo" src="/images/donauwelle.png"/>
         </div>
         <div className="newWindowContainer">
           {/* {console.log(this.state)} */}
