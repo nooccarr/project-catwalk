@@ -236,7 +236,7 @@ class App extends React.Component {
 
   handleSearchClick(id) {
     if (Number(id)) {
-      this.setProduct(id);
+      this.setProduct(Number(id));
     }
   }
 

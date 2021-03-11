@@ -92,7 +92,8 @@ class Star extends React.Component {
           </div>
         </div>
       );
-    } else {
+    // } else {
+    } else if (this.props.product.faved === true) {
       return (
         <div className = 'dd-wrapper-star'>
           <div className = 'dd-header-star'>

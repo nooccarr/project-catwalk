@@ -412,7 +412,8 @@
   position: absolute;
   top: 5%;
   width: 80%;
-  height: 58%;
+  /* height: 58%; */
+  height: 73%;
   /* border: 3px solid pink; */
   overflow: hidden;
 }
@@ -710,7 +711,8 @@ li {
   position: absolute;
   /* margin-left: 25px;
   margin-top: 30px; */
-  top: 63.5%;
+  /* top: 63.5%; */
+  top: 78.5%;
   left: 33%;
 
 }

@@ -13,15 +13,11 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 
 
-
-// FIXME:
-// - fix overviews (slide): by width (not height)
-
 // TODO:
+// - night mode
 // - reduce api calls
 
 // - convert to react hooks (one component) : functional component
 // - redux (multiple components)
 
-// - night mode
 // - server-side rendering

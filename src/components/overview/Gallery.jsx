@@ -42,54 +42,61 @@ class Gallery extends React.Component {
       return <div> null</div>
     } else {
       return (
-        <div onClick = {(e) => this.props.trackAction(e, this.props.moduleName)}>
-          <div id = 'galleryThumbnailColumn'>
-            <i className="arrow up" onClick = {this.handleSlideThumbnailsUp}></i>
-              <div className = 'thumbnailFrame'>
+        <div onClick={(e) => this.props.trackAction(e, this.props.moduleName)}>
+          <div id='galleryThumbnailColumn'>
+            <i className="arrow up" onClick={this.handleSlideThumbnailsUp}></i>
+              <div className='thumbnailFrame'>
                 <div
-                  className = 'thumbnailContainer'
-                  style = {this.props.startIndex > 0 ?
+                  className='thumbnailContainer'
+                  style={this.props.startIndex > 0 ?
                     { transform: `translateY(-${TN_SHIFT * (this.props.startIndex) }px)`} :
                     {}
                   }>
                   {this.props.currentStyle.photos.map((x, index) => {
                     return (
                       <div
-                        key = {index}
-                        id = 'galleryThumbnailContainer'
+                        key={index}
+                        id='galleryThumbnailContainer'
                         style= {{top: `${index*TN_SHIFT}px`}}
-                        className = { index === this.props.mainImage ? 'activeThumbnail' : ''}
-                        onClick = {() => this.handleUpdateMainImage(index)}
+                        className={ index === this.props.mainImage ? 'activeThumbnail' : ''}
+                        onClick={() => this.handleUpdateMainImage(index)}
                       >
-                        <img src = {x.thumbnail_url} id = 'galleryThumbnail'/>
+                        {/* {x.thumbnail_url ? <img */}
+                        <img
+                          src={x.thumbnail_url && x.thumbnail_url[0] !== 'h' ?
+                          x.thumbnail_url.slice(1) : x.thumbnail_url}
+                          id='galleryThumbnail'
+                        />
+                        {/* /> : null} */}
                       </div>
                     )}
                   )}
                 </div>
               </div>
-            <i className="arrow down" onClick = {this.handleSlideThumbnailsDown}></i>
+            <i className="arrow down" onClick={this.handleSlideThumbnailsDown}></i>
           </div>
-            <div className = 'frame'>
-              <span className =  { this.props.mainImage === 0 ? null :  'arrowIconWrapperLeft'}>
-                <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick = {this.handleSlideLeft}></i>
+            <div className='frame'>
+              <span className={ this.props.mainImage === 0 ? null :  'arrowIconWrapperLeft'}>
+                <i className={ this.props.mainImage === 0 ? "arrow left hidden" : "arrow left active"} onClick={this.handleSlideLeft}></i>
               </span>
-                <div className = 'galleryContainer'>
+                <div className='galleryContainer'>
                 {/*
-                <div className = 'galleryContainer' style = {{
+                <div className='galleryContainer' style={{
                   //-30 for margin on app; -72 for padding in grid item 1; 3/5 is grid item 1's width of container; container is 70% of screen
                   transform: `translateX(-${this.props.mainImage*(((window.innerWidth*.7)*3/5)-72-30)}px)`
                   }}> */}
                   {/* {this.props.currentStyle.photos.map((x, index) => { return(
-                    <img key = {index} src = {this.props.currentStyle.photos[index].url} id = 'galleryImage' onClick = {this.handleClick}/>
+                    <img key={index} src={this.props.currentStyle.photos[index].url} id='galleryImage' onClick={this.handleClick}/>
                   )})} */}
-                  <img
-                    src = {this.props.currentStyle.photos[this.props.index].url}
-                    id = 'galleryImage'
-                    onClick = {this.handleClick}
-                  />
+
+                  {this.props.currentStyle && this.props.currentStyle.photos[this.props.index] ? <img
+                    src={this.props.currentStyle.photos[this.props.index].url}
+                    id='galleryImage'
+                    onClick={this.handleClick}
+                  /> : null}
                 </div>
-                <span className = { this.props.mainImage === this.props.thumbnails.length-1 ? null : 'arrowIconWrapperRight'}>
-                  <i className= { this.props.mainImage === this.props.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick = {this.handleSlideRight}></i>
+                <span className={ this.props.mainImage === this.props.thumbnails.length-1 ? null : 'arrowIconWrapperRight'}>
+                  <i className={ this.props.mainImage === this.props.thumbnails.length-1 ? "arrow right hidden" : "arrow right active"} onClick={this.handleSlideRight}></i>
                 </span>
             </div>
         </div>

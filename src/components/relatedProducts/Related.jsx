@@ -134,18 +134,20 @@ class Related extends React.Component {
         var max = 20;
         var detail = (vals) => {
             return (
-                <div key={vals[2]} className="comparison-detail"
-                    style={{top: 50 + vals[3]*25, width: 135 + 10*max}}>
-                        <a className="comparison-value">
-                            {vals[0]}
-                        </a>
-                        <a className="comparison-center" style={{width: 140 + 10*max}}>
-                            {vals[2]}
-                        </a>
-                        <a className="comparison-value comparison-right">
-                            {vals[1]}
-                        </a>
-                    </div>
+                // <div key={vals[2]} className="comparison-detail"
+                <div key={vals} className="comparison-detail"
+                    style={{top: 50 + vals[3] * 25, width: 135 + 10 * max}}
+                >
+                    <a className="comparison-value">
+                        {vals[0]}
+                    </a>
+                    <a className="comparison-center" style={{width: 140 + 10 * max}}>
+                        {vals[2]}
+                    </a>
+                    <a className="comparison-value comparison-right">
+                        {vals[1]}
+                    </a>
+                </div>
             );
         }
         if (this.state.comparing && this.props.pyro === 0 &&

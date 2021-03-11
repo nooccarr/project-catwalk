@@ -34,7 +34,7 @@ body {
 }
 
 .header-search-bar::placeholder {
-  color: #f2c3ea;
+  color: whitesmoke;
 }
 
 .header-search-bar:focus,

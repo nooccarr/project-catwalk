@@ -58,7 +58,7 @@ class Overview extends React.Component {
     var mainIndex = this.state.mainImage - 1;
     var newIndex = this.state.index - 1;
     if (mainIndex < this.state.endIndex-1 && this.state.startIndex !== 0) {
-      var newStartIndex = this.state.startIndex - 1
+      var newStartIndex = this.state.startIndex - 1;
       this.setState({
         startIndex: newStartIndex,
         index: newIndex
@@ -106,7 +106,8 @@ class Overview extends React.Component {
   }
 
   getImageWidth(index) {
-    if (this.props.currentStyle!== undefined && this.props.currentStyle.photos[index].url) {
+    // if (this.props.currentStyle!== undefined && this.props.currentStyle.photos[index].url) {
+    if (this.props.currentStyle && this.props.currentStyle.photos[index].url) {
       var x = this.props.currentStyle.photos[index].url.indexOf('&w=')
       var y = this.props.currentStyle.photos[index].url.indexOf('&q')
       var width = this.props.currentStyle.photos[index].url.slice(x+3,y);
@@ -173,7 +174,6 @@ class Overview extends React.Component {
                   <StyleSelector
                     moduleName={'StyleSelector'}
                     trackAction={trackAction}
-
                     styles={this.props.product.styles}
                     setCurrentStyle={this.props.setCurrentStyle}
                     />
@@ -182,7 +182,6 @@ class Overview extends React.Component {
                   <Cart
                     moduleName={'Cart'}
                     trackAction={trackAction}
-
                     currentStyle={this.props.currentStyle}
                     toggleOutfit={this.props.toggleOutfit}
                     product={this.props.product}

@@ -6,12 +6,38 @@ const ProductItem = ({product, pyro, image, anim, shadow}) => {
     <div id={product.id} className={`related-item${shadow}`}>
       <div className="related-flipper">
         <div className={anim ? 'related-image-animation' : ''}>
-          <img className="related-item-image" src={image[0].thumbnail_url}/>
-          <img className="related-item-image" src={image[1].thumbnail_url} style={{left:150}}/>
-          <img className="related-item-image" src={image[2].thumbnail_url} style={{left:300}}/>
-          <img className="related-item-image" src={image[3].thumbnail_url} style={{left:450}}/>
-          <img className="related-item-image" src={image[0].thumbnail_url} style={{left:600}}/>
+          <img
+            className="related-item-image"
+            src={image[0].thumbnail_url && image[0].thumbnail_url[0] !== 'h' ?
+            image[0].thumbnail_url.slice(1) : image[0].thumbnail_url}
+
+/>
+          <img
+            className="related-item-image"
+            src={image[1].thumbnail_url && image[1].thumbnail_url[0] !== 'h' ?
+            image[1].thumbnail_url.slice(1) : image[1].thumbnail_url}
+            style={{left:150}}
+          />
+          <img
+            className="related-item-image"
+            src={image[2].thumbnail_url && image[2].thumbnail_url[0] !== 'h' ?
+            image[2].thumbnail_url.slice(1) : image[2].thumbnail_url}
+            style={{left:300}}
+          />
+          <img
+            className="related-item-image"
+            src={image[3].thumbnail_url && image[3].thumbnail_url[0] !== 'h' ?
+            image[3].thumbnail_url.slice(1) : image[3].thumbnail_url}
+            style={{left:450}}
+          />
+          <img
+            className="related-item-image"
+            src={image[0].thumbnail_url && image[0].thumbnail_url[0] !== 'h' ?
+            image[0].thumbnail_url.slice(1) : image[0].thumbnail_url}
+            style={{left:600}}
+          />
         </div>
+
       <div className="related-item-faveX">
         <img id={product.id} className="related-item-star"
           src={`./images/${pyro === 0 ?
